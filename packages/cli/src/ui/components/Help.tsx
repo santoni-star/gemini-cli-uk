@@ -67,32 +67,42 @@ export const Help: React.FC<Help> = ({ commands }) => (
     </Text>
     {commands
       .filter((command) => command.description && !command.hidden)
-      .map((command: SlashCommand) => (
-        <Box key={command.name} flexDirection="column">
-          <Text color={theme.text.primary}>
-            <Text bold color={theme.text.accent}>
-              {' '}
-              /{command.name}
+      .map((command: SlashCommand) => {
+        const description =
+          strings.commandDescriptions[command.name] || command.description;
+        return (
+          <Box key={command.name} flexDirection="column">
+            <Text color={theme.text.primary}>
+              <Text bold color={theme.text.accent}>
+                {' '}
+                /{command.name}
+              </Text>
+              {command.kind === CommandKind.MCP_PROMPT && (
+                <Text color={theme.text.secondary}> [MCP]</Text>
+              )}
+              {description && ' - ' + description}
             </Text>
-            {command.kind === CommandKind.MCP_PROMPT && (
-              <Text color={theme.text.secondary}> [MCP]</Text>
-            )}
-            {command.description && ' - ' + command.description}
-          </Text>
-          {command.subCommands &&
-            command.subCommands
-              .filter((subCommand) => !subCommand.hidden)
-              .map((subCommand) => (
-                <Text key={subCommand.name} color={theme.text.primary}>
-                  <Text bold color={theme.text.accent}>
-                    {'   '}
-                    {subCommand.name}
-                  </Text>
-                  {subCommand.description && ' - ' + subCommand.description}
-                </Text>
-              ))}
-        </Box>
-      ))}
+            {command.subCommands &&
+              command.subCommands
+                .filter((subCommand) => !subCommand.hidden)
+                .map((subCommand) => {
+                  const subDescription =
+                    strings.commandDescriptions[
+                      `${command.name} ${subCommand.name}`
+                    ] || subCommand.description;
+                  return (
+                    <Text key={subCommand.name} color={theme.text.primary}>
+                      <Text bold color={theme.text.accent}>
+                        {'   '}
+                        {subCommand.name}
+                      </Text>
+                      {subDescription && ' - ' + subDescription}
+                    </Text>
+                  );
+                })}
+          </Box>
+        );
+      })}
     <Text color={theme.text.primary}>
       <Text bold color={theme.text.accent}>
         {' '}

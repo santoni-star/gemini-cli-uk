@@ -13,6 +13,7 @@ import {
   type SlashCommand,
 } from '../commands/types.js';
 import { debugLogger } from '@google/gemini-cli-core';
+import { strings } from '../../i18n.js';
 
 // Type alias for improved type safety based on actual fzf result structure
 type FzfCommandResult = {
@@ -308,12 +309,20 @@ function useCommandSuggestions(
             return 0;
           });
 
-          const finalSuggestions = sortedSuggestions.map((cmd) => ({
-            label: cmd.name,
-            value: cmd.name,
-            description: cmd.description,
-            commandKind: cmd.kind,
-          }));
+          const finalSuggestions = sortedSuggestions.map((cmd) => {
+            const fullKey =
+              parserResult.commandPathParts.length > 0
+                ? `${parserResult.commandPathParts.join(' ')} ${cmd.name}`
+                : cmd.name;
+            const description =
+              strings.commandDescriptions[fullKey] || cmd.description;
+            return {
+              label: cmd.name,
+              value: cmd.name,
+              description,
+              commandKind: cmd.kind,
+            };
+          });
 
           setSuggestions(finalSuggestions);
         }

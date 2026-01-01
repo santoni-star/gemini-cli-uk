@@ -5,6 +5,33 @@
  */
 
 export interface TranslationStrings {
+  placeholder: string;
+  placeholderShell: string;
+  placeholderVim: string;
+  pressCtrlC: string;
+  pressCtrlD: string;
+  pressEsc: string;
+  queueErrorShell: string;
+  queueErrorSlash: string;
+  updateAvailable: string;
+  updateAvailableNightly: string;
+  warningHomeDirectory: string;
+  warningRootDirectory: string;
+  warningFileSystemError: string;
+  updateNpm: string;
+  updatePnpm: string;
+  updateYarn: string;
+  updateBun: string;
+  updateGit: string;
+  updateGeneric: string;
+  updateNpx: string;
+  updatePnpx: string;
+  updateBunx: string;
+  updateHomebrew: string;
+  updateLocal: string;
+  updatePleaseRun: string;
+  commandDescriptions: Record<string, string>;
+  tips: string[];
   help: {
     basics: string;
     addContext: string;
@@ -36,5 +63,13 @@ export interface TranslationStrings {
     shortcutAutoAccept: string;
     shortcutHistory: string;
     fullListLink: string;
+  };
+  gettingStarted: {
+    title: string;
+    tip1: string;
+    tip2: string;
+    tip3GeminiMd: string;
+    tip3GeminiMdPart2: string;
+    tipHelp: string;
   };
 }

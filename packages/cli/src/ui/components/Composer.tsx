@@ -29,6 +29,7 @@ import { ApprovalMode } from '@google/gemini-cli-core';
 import { StreamingState } from '../types.js';
 import { ConfigInitDisplay } from '../components/ConfigInitDisplay.js';
 import { TodoTray } from './messages/Todo.js';
+import { strings } from '../../i18n.js';
 
 export const Composer = () => {
   const config = useConfig();
@@ -96,17 +97,13 @@ export const Composer = () => {
             <Text color={theme.status.error}>|⌐■_■| </Text>
           )}
           {uiState.ctrlCPressedOnce ? (
-            <Text color={theme.status.warning}>
-              Press Ctrl+C again to exit.
-            </Text>
+            <Text color={theme.status.warning}>{strings.pressCtrlC}</Text>
           ) : uiState.warningMessage ? (
             <Text color={theme.status.warning}>{uiState.warningMessage}</Text>
           ) : uiState.ctrlDPressedOnce ? (
-            <Text color={theme.status.warning}>
-              Press Ctrl+D again to exit.
-            </Text>
+            <Text color={theme.status.warning}>{strings.pressCtrlD}</Text>
           ) : uiState.showEscapePrompt ? (
-            <Text color={theme.text.secondary}>Press Esc again to clear.</Text>
+            <Text color={theme.text.secondary}>{strings.pressEsc}</Text>
           ) : uiState.queueErrorMessage ? (
             <Text color={theme.status.error}>{uiState.queueErrorMessage}</Text>
           ) : (
@@ -172,10 +169,10 @@ export const Composer = () => {
           popAllMessages={uiActions.popAllMessages}
           placeholder={
             vimEnabled
-              ? "  Press 'i' for INSERT mode and 'Esc' for NORMAL mode."
+              ? strings.placeholderVim
               : uiState.shellModeActive
-                ? '  Type your shell command'
-                : '  Type your message or @path/to/file'
+                ? strings.placeholderShell
+                : strings.placeholder
           }
           setQueueErrorMessage={uiActions.setQueueErrorMessage}
           streamingState={uiState.streamingState}

@@ -47,6 +47,7 @@ import { StreamingState } from '../types.js';
 import { useMouseClick } from '../hooks/useMouseClick.js';
 import { useMouse, type MouseEvent } from '../contexts/MouseContext.js';
 import { useUIActions } from '../contexts/UIActionsContext.js';
+import { strings } from '../../i18n.js';
 
 /**
  * Returns if the terminal can be trusted to handle paste events atomically
@@ -112,7 +113,7 @@ export const InputPrompt: React.FC<InputPromptProps> = ({
   config,
   slashCommands,
   commandContext,
-  placeholder = '  Type your message or @path/to/file',
+  placeholder = strings.placeholder,
   focus = true,
   inputWidth,
   suggestionsWidth,
@@ -246,7 +247,7 @@ export const InputPrompt: React.FC<InputPromptProps> = ({
         streamingState === StreamingState.Responding
       ) {
         setQueueErrorMessage(
-          `${isShell ? 'Shell' : 'Slash'} commands cannot be queued`,
+          isShell ? strings.queueErrorShell : strings.queueErrorSlash,
         );
         return;
       }

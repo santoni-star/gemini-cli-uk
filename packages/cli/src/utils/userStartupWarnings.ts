@@ -7,6 +7,7 @@
 import fs from 'node:fs/promises';
 import * as os from 'node:os';
 import path from 'node:path';
+import { strings } from '../i18n.js';
 
 type WarningCheck = {
   id: string;
@@ -24,11 +25,11 @@ const homeDirectoryCheck: WarningCheck = {
       ]);
 
       if (workspaceRealPath === homeRealPath) {
-        return 'You are running Gemini CLI in your home directory. It is recommended to run in a project-specific directory.';
+        return strings.warningHomeDirectory;
       }
       return null;
     } catch (_err: unknown) {
-      return 'Could not verify the current directory due to a file system error.';
+      return strings.warningFileSystemError;
     }
   },
 };
@@ -38,8 +39,7 @@ const rootDirectoryCheck: WarningCheck = {
   check: async (workspaceRoot: string) => {
     try {
       const workspaceRealPath = await fs.realpath(workspaceRoot);
-      const errorMessage =
-        'Warning: You are running Gemini CLI in the root directory. Your entire folder structure will be used for context. It is strongly recommended to run in a project-specific directory.';
+      const errorMessage = strings.warningRootDirectory;
 
       // Check for Unix root directory
       if (path.dirname(workspaceRealPath) === workspaceRealPath) {
@@ -48,7 +48,7 @@ const rootDirectoryCheck: WarningCheck = {
 
       return null;
     } catch (_err: unknown) {
-      return 'Could not verify the current directory due to a file system error.';
+      return strings.warningFileSystemError;
     }
   },
 };
