@@ -1,37 +1,31 @@
-## Model routing
+## Маршрутизація моделей (Model routing)
 
-Gemini CLI includes a model routing feature that automatically switches to a
-fallback model in case of a model failure. This feature is enabled by default
-and provides resilience when the primary model is unavailable.
+Gemini CLI включає функцію маршрутизації моделей, яка автоматично перемикається
+на резервну модель у разі збою основної. Ця функція увімкнена за замовчуванням і
+забезпечує стабільність роботи, коли основна модель недоступна.
 
-## How it works
+## Як це працює
 
-Model routing is managed by the `ModelAvailabilityService`, which monitors model
-health and automatically routes requests to available models based on defined
-policies.
+Маршрутизація керується сервісом `ModelAvailabilityService`, який стежить за
+станом моделей і автоматично перенаправляє запити на основі визначених політик.
 
-1.  **Model failure:** If the currently selected model fails (e.g., due to quota
-    or server errors), the CLI will iniate the fallback process.
+1.  **Збій моделі:** Якщо обрана модель не спрацювала (наприклад, через
+    вичерпання квоти або помилки сервера), CLI запускає процес перемикання
+    (fallback).
+2.  **Згода користувача:** Залежно від причини збою, CLI може запитати вас про
+    перемикання на резервну модель (за замовчуванням запит з'являється завжди).
+3.  **Перемикання:** Після підтвердження CLI використовуватиме резервну модель
+    для поточного кроку або до кінця сесії.
 
-2.  **User consent:** Depending on the failure and the model's policy, the CLI
-    may prompt you to switch to a fallback model (by default always prompts
-    you).
+### Пріоритет вибору моделі
 
-3.  **Model switch:** If approved, or if the policy allows for silent fallback,
-    the CLI will use an available fallback model for the current turn or the
-    remainder of the session.
+Модель, яку використовує Gemini CLI, визначається в такому порядку (вищий номер
+перекриває нижчий):
 
-### Model selection precedence
-
-The model used by Gemini CLI is determined by the following order of precedence:
-
-1.  **`--model` command-line flag:** A model specified with the `--model` flag
-    when launching the CLI will always be used.
-2.  **`GEMINI_MODEL` environment variable:** If the `--model` flag is not used,
-    the CLI will use the model specified in the `GEMINI_MODEL` environment
-    variable.
-3.  **`model.name` in `settings.json`:** If neither of the above are set, the
-    model specified in the `model.name` property of your `settings.json` file
-    will be used.
-4.  **Default model:** If none of the above are set, the default model will be
-    used. The default model is `auto`
+1.  **Прапорець `--model`:** Модель, вказана при запуску, має найвищий
+    пріоритет.
+2.  **Змінна середовища `GEMINI_MODEL`:** Використовується, якщо немає прапорця.
+3.  **Параметр `model.name` у `settings.json`:** Використовується, якщо не
+    задано попередні пункти.
+4.  **Модель за замовчуванням:** Якщо нічого не налаштовано, використовується
+    режим `auto`.
