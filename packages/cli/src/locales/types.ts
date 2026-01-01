@@ -436,6 +436,26 @@ export interface TranslationStrings {
   compressionErrorToken: string;
   compressionNothing: string;
   commandDescriptions: Record<string, string>;
+  sessionBrowserLoading: string;
+  sessionBrowserError: string;
+  sessionBrowserPressQ: string;
+  sessionBrowserNoSessions: string;
+  sessionBrowserHeader: string;
+  sessionBrowserFiltered: string;
+  sessionBrowserSortedBy: string;
+  sessionBrowserHeaderIndex: string;
+  sessionBrowserHeaderMsgs: string;
+  sessionBrowserHeaderAge: string;
+  sessionBrowserHeaderMatch: string;
+  sessionBrowserHeaderName: string;
+  sessionBrowserNoMatches: string;
+  sessionBrowserYou: string;
+  sessionBrowserGemini: string;
+  sessionBrowserNoMessages: string;
+  sessionBrowserCurrent: string;
+  sessionBrowserMore: string;
+  sessionBrowserSearch: string;
+  sessionBrowserEscToCancel: string;
   tips: string[];
   help: {
     basics: string;
