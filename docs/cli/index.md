@@ -1,63 +1,66 @@
 # Gemini CLI
 
-Within Gemini CLI, `packages/cli` is the frontend for users to send and receive
-prompts with the Gemini AI model and its associated tools. For a general
-overview of Gemini CLI, see the [main documentation page](../index.md).
+У складі Gemini CLI пакет `packages/cli` є фронтендом для користувачів, який
+дозволяє надсилати та отримувати підказки (prompts) від моделі ШІ Gemini та її
+інструментів. Загальний огляд Gemini CLI дивіться на
+[головній сторінці документації](../index.md).
 
-## Basic features
+## Основні можливості
 
-- **[Commands](./commands.md):** A reference for all built-in slash commands
-- **[Custom commands](./custom-commands.md):** Create your own commands and
-  shortcuts for frequently used prompts.
-- **[Headless mode](./headless.md):** Use Gemini CLI programmatically for
-  scripting and automation.
-- **[Model selection](./model.md):** Configure the Gemini AI model used by the
+- **[Команди](./commands.md):** Довідник усіх вбудованих слеш-команд.
+- **[Власні команди](./custom-commands.md):** Створюйте власні команди та ярлики
+  для підказок, що часто використовуються.
+- **[Безголовий режим (Headless)](./headless.md):** Використовуйте Gemini CLI
+  програмно для сценаріїв та автоматизації.
+- **[Вибір моделі](./model.md):** Налаштуйте модель ШІ Gemini, яку використовує
   CLI.
-- **[Settings](./settings.md):** Configure various aspects of the CLI's behavior
-  and appearance.
-- **[Themes](./themes.md):** Customizing the CLI's appearance with different
-  themes.
-- **[Keyboard shortcuts](./keyboard-shortcuts.md):** A reference for all
-  keyboard shortcuts to improve your workflow.
-- **[Tutorials](./tutorials.md):** Step-by-step guides for common tasks.
+- **[Налаштування](./settings.md):** Конфігуруйте різні аспекти поведінки та
+  вигляду CLI.
+- **[Теми](./themes.md):** Налаштування вигляду CLI за допомогою різних тем.
+- **[Гарячі клавіші](./keyboard-shortcuts.md):** Довідник усіх комбінацій клавіш
+  для покращення вашого робочого процесу.
+- **[Навчальні посібники (Tutorials)](./tutorials.md):** Покрокові інструкції
+  для поширених завдань.
 
-## Advanced features
+## Додаткові можливості
 
-- **[Checkpointing](./checkpointing.md):** Automatically save and restore
-  snapshots of your session and files.
-- **[Enterprise configuration](./enterprise.md):** Deploying and manage Gemini
-  CLI in an enterprise environment.
-- **[Sandboxing](./sandbox.md):** Isolate tool execution in a secure,
-  containerized environment.
-- **[Telemetry](./telemetry.md):** Configure observability to monitor usage and
-  performance.
-- **[Token caching](./token-caching.md):** Optimize API costs by caching tokens.
-- **[Trusted folders](./trusted-folders.md):** A security feature to control
-  which projects can use the full capabilities of the CLI.
-- **[Ignoring files (.geminiignore)](./gemini-ignore.md):** Exclude specific
-  files and directories from being accessed by tools.
-- **[Context files (GEMINI.md)](./gemini-md.md):** Provide persistent,
-  hierarchical context to the model.
-- **[System prompt override](./system-prompt.md):** Replace the built‑in system
-  instructions using `GEMINI_SYSTEM_MD`.
+- **[Контрольні точки (Checkpointing)](./checkpointing.md):** Автоматичне
+  збереження та відновлення знімків сесії та файлів.
+- **[Корпоративна конфігурація](./enterprise.md):** Розгортання та керування
+  Gemini CLI у корпоративному середовищі.
+- **[Пісочниця (Sandbox)](./sandbox.md):** Ізолюйте виконання інструментів у
+  безпечному контейнеризованому середовищі.
+- **[Телеметрія](./telemetry.md):** Налаштуйте систему спостереження для
+  моніторингу використання та продуктивності.
+- **[Кешування токенів](./token-caching.md):** Оптимізуйте витрати на API шляхом
+  кешування токенів.
+- **[Довірені папки](./trusted-folders.md):** Функція безпеки для контролю того,
+  які проекти можуть використовувати повні можливості CLI.
+- **[Ігнорування файлів (.geminiignore)](./gemini-ignore.md):** Виключіть певні
+  файли та каталоги з доступу інструментів.
+- **[Файли контексту (GEMINI.md)](./gemini-md.md):** Надавайте постійний
+  ієрархічний контекст моделі.
+- **[Перевизначення системної підказки](./system-prompt.md):** Замініть
+  вбудовані системні інструкції за допомогою `GEMINI_SYSTEM_MD`.
 
-## Non-interactive mode
+## Неінтерактивний режим
 
-Gemini CLI can be run in a non-interactive mode, which is useful for scripting
-and automation. In this mode, you pipe input to the CLI, it executes the
-command, and then it exits.
+Gemini CLI можна запускати в неінтерактивному режимі, що корисно для сценаріїв
+та автоматизації. У цьому режимі ви передаєте вхідні дані в CLI, він виконує
+команду і виходить.
 
-The following example pipes a command to Gemini CLI from your terminal:
-
-```bash
-echo "What is fine tuning?" | gemini
-```
-
-You can also use the `--prompt` or `-p` flag:
+Наступний приклад передає команду в Gemini CLI через конвеєр (pipe):
 
 ```bash
-gemini -p "What is fine tuning?"
+echo "Що таке тонке налаштування (fine tuning)?" | gemini-uk
 ```
 
-For comprehensive documentation on headless usage, scripting, automation, and
-advanced examples, see the **[Headless mode](./headless.md)** guide.
+Ви також можете використовувати прапорець `--prompt` або `-p`:
+
+```bash
+gemini-uk -p "Що таке тонке налаштування (fine tuning)?"
+```
+
+Для отримання детальної документації щодо безголового режиму, написання
+сценаріїв, автоматизації та просунутих прикладів дивіться посібник
+**[Headless mode](./headless.md)**.

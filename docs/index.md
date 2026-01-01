@@ -1,147 +1,153 @@
-# Welcome to Gemini CLI documentation
+# Ласкаво просимо до документації Gemini CLI
 
-This documentation provides a comprehensive guide to installing, using, and
-developing Gemini CLI, a tool that lets you interact with Gemini models through
-a command-line interface.
+Ця документація надає вичерпний посібник із встановлення, використання та
+розробки Gemini CLI — інструменту, який дозволяє взаємодіяти з моделями Gemini
+через інтерфейс командного рядка.
 
-## Gemini CLI overview
+## Огляд Gemini CLI
 
-Gemini CLI brings the capabilities of Gemini models to your terminal in an
-interactive Read-Eval-Print Loop (REPL) environment. Gemini CLI consists of a
-client-side application (`packages/cli`) that communicates with a local server
-(`packages/core`), which in turn manages requests to the Gemini API and its AI
-models. Gemini CLI also contains a variety of tools for tasks such as performing
-file system operations, running shells, and web fetching, which are managed by
+Gemini CLI переносить можливості моделей Gemini у ваш термінал в інтерактивному
+середовищі REPL (Read-Eval-Print Loop). Gemini CLI складається з клієнтської
+програми (`packages/cli`), яка взаємодіє з локальним сервером (`packages/core`),
+що, у свою чергу, керує запитами до Gemini API та його моделей ШІ. Gemini CLI
+також містить різноманітні інструменти для таких завдань, як виконання операцій
+із файловою системою, запуск оболонок та отримання веб-вмісту, якими керує
 `packages/core`.
 
-## Navigating the documentation
+## Навігація по документації
 
-This documentation is organized into the following sections:
+Ця документація організована за наступними розділами:
 
-### Overview
+### Огляд
 
-- **[Architecture overview](./architecture.md):** Understand the high-level
-  design of Gemini CLI, including its components and how they interact.
-- **[Contribution guide](../CONTRIBUTING.md):** Information for contributors and
-  developers, including setup, building, testing, and coding conventions.
+- **[Огляд архітектури](./architecture.md):** Зрозумійте високорівневий дизайн
+  Gemini CLI, включаючи його компоненти та те, як вони взаємодіють.
+- **[Посібник для авторів](../CONTRIBUTING.md):** Інформація для авторів та
+  розробників, включаючи налаштування, збірку, тестування та стандарти
+  кодування.
 
-### Get started
+### Початок роботи
 
-- **[Gemini CLI quickstart](./get-started/index.md):** Let's get started with
+- **[Швидкий старт Gemini CLI](./get-started/index.md):** Почнемо роботу з
   Gemini CLI.
-- **[Gemini 3 Pro on Gemini CLI](./get-started/gemini-3.md):** Learn how to
-  enable and use Gemini 3.
-- **[Authentication](./get-started/authentication.md):** Authenticate to Gemini
+- **[Gemini 3 Pro у Gemini CLI](./get-started/gemini-3.md):** Дізнайтеся, як
+  увімкнути та використовувати Gemini 3.
+- **[Аутентифікація](./get-started/authentication.md):** Як пройти
+  аутентифікацію в Gemini CLI.
+- **[Налаштування](./get-started/configuration.md):** Дізнайтеся, як налаштувати
   CLI.
-- **[Configuration](./get-started/configuration.md):** Learn how to configure
-  the CLI.
-- **[Installation](./get-started/installation.md):** Install and run Gemini CLI.
-- **[Examples](./get-started/examples.md):** Example usage of Gemini CLI.
-
-### CLI
-
-- **[Introduction: Gemini CLI](./cli/index.md):** Overview of the command-line
-  interface.
-- **[Commands](./cli/commands.md):** Description of available CLI commands.
-- **[Checkpointing](./cli/checkpointing.md):** Documentation for the
-  checkpointing feature.
-- **[Custom commands](./cli/custom-commands.md):** Create your own commands and
-  shortcuts for frequently used prompts.
-- **[Enterprise](./cli/enterprise.md):** Gemini CLI for enterprise.
-- **[Headless mode](./cli/headless.md):** Use Gemini CLI programmatically for
-  scripting and automation.
-- **[Keyboard shortcuts](./cli/keyboard-shortcuts.md):** A reference for all
-  keyboard shortcuts to improve your workflow.
-- **[Model selection](./cli/model.md):** Select the model used to process your
-  commands with `/model`.
-- **[Sandbox](./cli/sandbox.md):** Isolate tool execution in a secure,
-  containerized environment.
-- **[Settings](./cli/settings.md):** Configure various aspects of the CLI's
-  behavior and appearance with `/settings`.
-- **[Telemetry](./cli/telemetry.md):** Overview of telemetry in the CLI.
-- **[Themes](./cli/themes.md):** Themes for Gemini CLI.
-- **[Token caching](./cli/token-caching.md):** Token caching and optimization.
-- **[Trusted Folders](./cli/trusted-folders.md):** An overview of the Trusted
-  Folders security feature.
-- **[Tutorials](./cli/tutorials.md):** Tutorials for Gemini CLI.
-- **[Uninstall](./cli/uninstall.md):** Methods for uninstalling the Gemini CLI.
-
-### Core
-
-- **[Introduction: Gemini CLI core](./core/index.md):** Information about Gemini
-  CLI core.
-- **[Memport](./core/memport.md):** Using the Memory Import Processor.
-- **[Tools API](./core/tools-api.md):** Information on how the core manages and
-  exposes tools.
-- **[System Prompt Override](./cli/system-prompt.md):** Replace built-in system
-  instructions using `GEMINI_SYSTEM_MD`.
-
-- **[Policy Engine](./core/policy-engine.md):** Use the Policy Engine for
-  fine-grained control over tool execution.
-
-### Tools
-
-- **[Introduction: Gemini CLI tools](./tools/index.md):** Information about
-  Gemini CLI's tools.
-- **[File system tools](./tools/file-system.md):** Documentation for the
-  `read_file` and `write_file` tools.
-- **[Shell tool](./tools/shell.md):** Documentation for the `run_shell_command`
-  tool.
-- **[Web fetch tool](./tools/web-fetch.md):** Documentation for the `web_fetch`
-  tool.
-- **[Web search tool](./tools/web-search.md):** Documentation for the
-  `google_web_search` tool.
-- **[Memory tool](./tools/memory.md):** Documentation for the `save_memory`
-  tool.
-- **[Todo tool](./tools/todos.md):** Documentation for the `write_todos` tool.
-- **[MCP servers](./tools/mcp-server.md):** Using MCP servers with Gemini CLI.
-
-### Extensions
-
-- **[Introduction: Extensions](./extensions/index.md):** How to extend the CLI
-  with new functionality.
-- **[Get Started with extensions](./extensions/getting-started-extensions.md):**
-  Learn how to build your own extension.
-- **[Extension releasing](./extensions/extension-releasing.md):** How to release
-  Gemini CLI extensions.
-
-### Hooks
-
-- **[Hooks](./hooks/index.md):** Intercept and customize Gemini CLI behavior at
-  key lifecycle points.
-- **[Writing Hooks](./hooks/writing-hooks.md):** Learn how to create your first
-  hook with a comprehensive example.
-- **[Best Practices](./hooks/best-practices.md):** Security, performance, and
-  debugging guidelines for hooks.
-
-### IDE integration
-
-- **[Introduction to IDE integration](./ide-integration/index.md):** Connect the
-  CLI to your editor.
-- **[IDE companion extension spec](./ide-integration/ide-companion-spec.md):**
-  Spec for building IDE companion extensions.
-
-### Development
-
-- **[NPM](./npm.md):** Details on how the project's packages are structured.
-- **[Releases](./releases.md):** Information on the project's releases and
-  deployment cadence.
-- **[Changelog](./changelogs/index.md):** Highlights and notable changes to
+- **[Встановлення](./get-started/installation.md):** Встановлення та запуск
   Gemini CLI.
-- **[Integration tests](./integration-tests.md):** Information about the
-  integration testing framework used in this project.
-- **[Issue and PR automation](./issue-and-pr-automation.md):** A detailed
-  overview of the automated processes we use to manage and triage issues and
-  pull requests.
+- **[Приклади](./get-started/examples.md):** Приклади використання Gemini CLI.
 
-### Support
+### CLI (Командний інтерфейс)
 
-- **[FAQ](./faq.md):** Frequently asked questions.
-- **[Troubleshooting guide](./troubleshooting.md):** Find solutions to common
-  problems.
-- **[Quota and pricing](./quota-and-pricing.md):** Learn about the free tier and
-  paid options.
-- **[Terms of service and privacy notice](./tos-privacy.md):** Information on
-  the terms of service and privacy notices applicable to your use of Gemini CLI.
+- **[Вступ: Gemini CLI](./cli/index.md):** Огляд командного інтерфейсу.
+- **[Команди](./cli/commands.md):** Опис доступних команд CLI.
+- **[Контрольні точки (Checkpointing)](./cli/checkpointing.md):** Документація
+  функції контрольних точок.
+- **[Власні команди](./cli/custom-commands.md):** Створюйте власні команди та
+  ярлики для підказок, що часто використовуються.
+- **[Корпоративне використання](./cli/enterprise.md):** Gemini CLI для
+  підприємств.
+- **[Безголовий режим (Headless)](./cli/headless.md):** Використовуйте Gemini
+  CLI програмно для сценаріїв та автоматизації.
+- **[Гарячі клавіші](./cli/keyboard-shortcuts.md):** Довідник усіх комбінацій
+  клавіш для покращення вашого робочого процесу.
+- **[Вибір моделі](./cli/model.md):** Виберіть модель, що використовується для
+  обробки ваших команд, за допомогою `/model`.
+- **[Пісочниця (Sandbox)](./cli/sandbox.md):** Ізолюйте виконання інструментів у
+  безпечному контейнеризованому середовищі.
+- **[Налаштування](./cli/settings.md):** Конфігуруйте різні аспекти поведінки та
+  вигляду CLI за допомогою `/settings`.
+- **[Телеметрія](./cli/telemetry.md):** Огляд телеметрії в CLI.
+- **[Теми](./cli/themes.md):** Теми для Gemini CLI.
+- **[Кешування токенів](./cli/token-caching.md):** Кешування та оптимізація
+  токенів.
+- **[Довірені папки](./cli/trusted-folders.md):** Огляд функції безпеки
+  "Довірені папки".
+- **[Навчальні посібники](./cli/tutorials.md):** Туторіали для Gemini CLI.
+- **[Видалення](./cli/uninstall.md):** Методи видалення Gemini CLI.
 
-We hope this documentation helps you make the most of Gemini CLI!
+### Core (Ядро)
+
+- **[Вступ: Ядро Gemini CLI](./core/index.md):** Інформація про ядро Gemini CLI.
+- **[Memport](./core/memport.md):** Використання процесора імпорту пам'яті.
+- **[API інструментів](./core/tools-api.md):** Інформація про те, як ядро керує
+  інструментами та надає до них доступ.
+- **[Перевизначення системної підказки](./cli/system-prompt.md):** Замініть
+  вбудовані системні інструкції за допомогою `GEMINI_SYSTEM_MD`.
+- **[Механізм політик (Policy Engine)](./core/policy-engine.md):**
+  Використовуйте механізм політик для точного контролю над виконанням
+  інструментів.
+
+### Інструменти
+
+- **[Вступ: Інструменти Gemini CLI](./tools/index.md):** Інформація про
+  інструменти Gemini CLI.
+- **[Інструменти файлової системи](./tools/file-system.md):** Документація
+  інструментів `read_file` та `write_file`.
+- **[Інструмент оболонки](./tools/shell.md):** Документація інструменту
+  `run_shell_command`.
+- **[Інструмент веб-запитів](./tools/web-fetch.md):** Документація інструменту
+  `web_fetch`.
+- **[Інструмент веб-пошуку](./tools/web-search.md):** Документація інструменту
+  `google_web_search`.
+- **[Інструмент пам'яті](./tools/memory.md):** Документація інструменту
+  `save_memory`.
+- **[Інструмент завдань (Todo)](./tools/todos.md):** Документація інструменту
+  `write_todos`.
+- **[Сервери MCP](./tools/mcp-server.md):** Використання серверів MCP із Gemini
+  CLI.
+
+### Розширення (Extensions)
+
+- **[Вступ: Розширення](./extensions/index.md):** Як розширити CLI новими
+  функціями.
+- **[Початок роботи з розширеннями](./extensions/getting-started-extensions.md):**
+  Дізнайтеся, як створити власне розширення.
+- **[Публікація розширень](./extensions/extension-releasing.md):** Як випускати
+  розширення Gemini CLI.
+
+### Хуки (Hooks)
+
+- **[Хуки](./hooks/index.md):** Перехоплюйте та налаштовуйте поведінку Gemini
+  CLI у ключові моменти життєвого циклу.
+- **[Написання хуків](./hooks/writing-hooks.md):** Дізнайтеся, як створити свій
+  перший хук на детальному прикладі.
+- **[Найкращі практики](./hooks/best-practices.md):** Рекомендації щодо безпеки,
+  продуктивності та налагодження хуків.
+
+### Інтеграція з IDE
+
+- **[Вступ до інтеграції з IDE](./ide-integration/index.md):** Підключіть CLI до
+  свого редактора.
+- **[Специфікація супутнього розширення IDE](./ide-integration/ide-companion-spec.md):**
+  Специфікація для створення супутніх розширень IDE.
+
+### Розробка
+
+- **[NPM](./npm.md):** Подробиці про структуру пакунків проекту.
+- **[Релізи](./releases.md):** Інформація про випуски проекту та цикл
+  розгортання.
+- **[Список змін (Changelog)](./changelogs/index.md):** Основні та помітні зміни
+  у Gemini CLI.
+- **[Інтеграційні тести](./integration-tests.md):** Інформація про фреймворк
+  інтеграційного тестування, що використовується в цьому проекті.
+- **[Автоматизація Issue та PR](./issue-and-pr-automation.md):** Детальний огляд
+  автоматизованих процесів, які ми використовуємо для керування та сортування
+  проблем та запитів на злиття.
+
+### Підтримка
+
+- **[FAQ](./faq.md):** Часті запитання.
+- **[Посібник з усунення несправностей](./troubleshooting.md):** Пошук рішень
+  для поширених проблем.
+- **[Квоти та ціни](./quota-and-pricing.md):** Дізнайтеся про безкоштовний
+  рівень та платні варіанти.
+- **[Умови використання та політика конфіденційності](./tos-privacy.md):**
+  Інформація про умови використання та повідомлення про конфіденційність, що
+  стосуються використання вами Gemini CLI.
+
+Ми сподіваємося, що ця документація допоможе вам максимально ефективно
+використовувати Gemini CLI!

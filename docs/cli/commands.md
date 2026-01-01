@@ -1,354 +1,357 @@
-# CLI commands
+# Команди CLI
 
-Gemini CLI supports several built-in commands to help you manage your session,
-customize the interface, and control its behavior. These commands are prefixed
-with a forward slash (`/`), an at symbol (`@`), or an exclamation mark (`!`).
+Gemini CLI підтримує кілька вбудованих команд, які допоможуть вам керувати
+сесією, налаштовувати інтерфейс і контролювати його поведінку. Ці команди мають
+префікс у вигляді косої риски (`/`), символу "собачки" (`@`) або знака оклику
+(`!`).
 
-## Slash commands (`/`)
+## Слеш-команди (`/`)
 
-Slash commands provide meta-level control over the CLI itself.
+Слеш-команди забезпечують контроль мета-рівня над самим CLI.
 
-### Built-in Commands
+### Вбудовані команди
 
 - **`/bug`**
-  - **Description:** File an issue about Gemini CLI. By default, the issue is
-    filed within the GitHub repository for Gemini CLI. The string you enter
-    after `/bug` will become the headline for the bug being filed. The default
-    `/bug` behavior can be modified using the `advanced.bugCommand` setting in
-    your `.gemini/settings.json` files.
+  - **Опис:** Створити звіт про проблему (issue) щодо Gemini CLI. За
+    замовчуванням проблема реєструється в репозиторії GitHub для Gemini CLI.
+    Рядок, який ви введете після `/bug`, стане заголовком для звіту про помилку.
+    Поведінку `/bug` за замовчуванням можна змінити за допомогою параметра
+    `advanced.bugCommand` у ваших файлах `.gemini/settings.json`.
 
 - **`/chat`**
-  - **Description:** Save and resume conversation history for branching
-    conversation state interactively, or resuming a previous state from a later
-    session.
-  - **Sub-commands:**
+  - **Опис:** Зберігайте та відновлюйте історію розмов для інтерактивного
+    розгалуження стану розмови або відновлення попереднього стану в пізнішій
+    сесії.
+  - **Підкоманди:**
     - **`save`**
-      - **Description:** Saves the current conversation history. You must add a
-        `<tag>` for identifying the conversation state.
-      - **Usage:** `/chat save <tag>`
-      - **Details on checkpoint location:** The default locations for saved chat
-        checkpoints are:
+      - **Опис:** Зберігає поточну історію розмови. Ви повинні додати `<tag>`
+        (тег) для ідентифікації стану розмови.
+      - **Використання:** `/chat save <tag>`
+      - **Подробиці про місцезнаходження:** Місця за замовчуванням для
+        збережених розмов:
         - Linux/macOS: `~/.gemini/tmp/<project_hash>/`
-        - Windows: `C:\Users\<YourUsername>\.gemini\tmp\<project_hash>\`
-        - **Behavior:** Chats are saved into a project-specific directory,
-          determined by where you run the CLI. Consequently, saved chats are
-          only accessible when working within that same project.
-        - **Note:** These checkpoints are for manually saving and resuming
-          conversation states. For automatic checkpoints created before file
-          modifications, see the
-          [Checkpointing documentation](../cli/checkpointing.md).
+        - Windows: `C:\Users\<ВашеІм'яКористувача>\.gemini\tmp\<project_hash>\`
+        - **Поведінка:** Чати зберігаються в каталозі конкретного проекту, який
+          визначається місцем запуску CLI. Отже, збережені чати доступні лише
+          під час роботи в тому самому проекті.
+        - **Примітка:** Ці контрольні точки призначені для ручного збереження та
+          відновлення станів розмови. Про автоматичні контрольні точки, створені
+          перед зміною файлів, дивіться у
+          [документації з контрольних точок](../cli/checkpointing.md).
     - **`resume`**
-      - **Description:** Resumes a conversation from a previous save.
-      - **Usage:** `/chat resume <tag>`
-      - **Note:** You can only resume chats that were saved within the current
-        project. To resume a chat from a different project, you must run the
-        Gemini CLI from that project's directory.
+      - **Опис:** Відновлює розмову з попереднього збереження.
+      - **Використання:** `/chat resume <tag>`
+      - **Примітка:** Ви можете відновлювати лише чати, збережені в поточному
+        проекті. Щоб відновити чат з іншого проекту, ви повинні запустити Gemini
+        CLI з каталогу цього проекту.
     - **`list`**
-      - **Description:** Lists available tags for chat state resumption.
-      - **Note:** This command only lists chats saved within the current
-        project. Because chat history is project-scoped, chats saved in other
-        project directories will not be displayed.
+      - **Опис:** Список доступних тегів для відновлення стану чату.
+      - **Примітка:** Ця команда виводить лише чати, збережені в поточному
+        проекті. Оскільки історія чату обмежена проектом, чати, збережені в
+        інших каталогах проектів, не відображатимуться.
     - **`delete`**
-      - **Description:** Deletes a saved conversation checkpoint.
-      - **Usage:** `/chat delete <tag>`
+      - **Опис:** Видаляє збережену контрольну точку розмови.
+      - **Використання:** `/chat delete <tag>`
     - **`share`**
-      - **Description** Writes the current conversation to a provided Markdown
-        or JSON file.
-      - **Usage** `/chat share file.md` or `/chat share file.json`. If no
-        filename is provided, then the CLI will generate one.
+      - **Опис:** Записує поточну розмову у наданий файл Markdown або JSON.
+      - **Використання:** `/chat share file.md` або `/chat share file.json`.
+        Якщо ім'я файлу не вказано, CLI згенерує його автоматично.
 
 - **`/clear`**
-  - **Description:** Clear the terminal screen, including the visible session
-    history and scrollback within the CLI. The underlying session data (for
-    history recall) might be preserved depending on the exact implementation,
-    but the visual display is cleared.
-  - **Keyboard shortcut:** Press **Ctrl+L** at any time to perform a clear
-    action.
+  - **Опис:** Очистити екран терміналу, включаючи видиму історію сеансу та
+    прокрутку в CLI. Дані сеансу (для виклику історії) можуть бути збережені
+    залежно від реалізації, але візуальний вміст очищається.
+  - **Гаряча клавіша:** Натисніть **Ctrl+L** у будь-який час, щоб виконати
+    очищення.
 
 - **`/compress`**
-  - **Description:** Replace the entire chat context with a summary. This saves
-    on tokens used for future tasks while retaining a high level summary of what
-    has happened.
+  - **Опис:** Замінити весь контекст чату підсумком. Це заощаджує токени для
+    майбутніх завдань, зберігаючи високорівневий опис того, що сталося.
 
 - **`/copy`**
-  - **Description:** Copies the last output produced by Gemini CLI to your
-    clipboard, for easy sharing or reuse.
-  - **Note:** This command requires platform-specific clipboard tools to be
-    installed.
-    - On Linux, it requires `xclip` or `xsel`. You can typically install them
-      using your system's package manager.
-    - On macOS, it requires `pbcopy`, and on Windows, it requires `clip`. These
-      tools are typically pre-installed on their respective systems.
+  - **Опис:** Копіює останній вивід Gemini CLI у буфер обміну для зручного
+    обміну або повторного використання.
+  - **Примітка:** Ця команда вимагає встановлення інструментів буфера обміну для
+    конкретної платформи.
+    - На Linux потрібні `xclip` або `xsel`. Зазвичай їх можна встановити за
+      допомогою менеджера пакетів вашої системи.
+    - На macOS потрібен `pbcopy`, а на Windows — `clip`. Ці інструменти зазвичай
+      попередньо встановлені у відповідних системах.
 
-- **`/directory`** (or **`/dir`**)
-  - **Description:** Manage workspace directories for multi-directory support.
-  - **Sub-commands:**
+- **`/directory`** (або **`/dir`**)
+  - **Опис:** Керування каталогами робочого простору для підтримки кількох
+    каталогів.
+  - **Підкоманди:**
     - **`add`**:
-      - **Description:** Add a directory to the workspace. The path can be
-        absolute or relative to the current working directory. Moreover, the
-        reference from home directory is supported as well.
-      - **Usage:** `/directory add <path1>,<path2>`
-      - **Note:** Disabled in restrictive sandbox profiles. If you're using
-        that, use `--include-directories` when starting the session instead.
+      - **Опис:** Додати каталог до робочого простору. Шлях може бути абсолютним
+        або відносним до поточного робочого каталогу. Також підтримується
+        посилання від домашнього каталогу.
+      - **Використання:** `/directory add <шлях1>,<шлях2>`
+      - **Примітка:** Вимкнено в обмежувальних профілях пісочниці. Якщо ви
+        використовуєте їх, використовуйте `--include-directories` під час
+        запуску сеансу.
     - **`show`**:
-      - **Description:** Display all directories added by `/directory add` and
-        `--include-directories`.
-      - **Usage:** `/directory show`
+      - **Опис:** Відобразити всі каталоги, додані за допомогою `/directory add`
+        та `--include-directories`.
+      - **Використання:** `/directory show`
 
 - **`/editor`**
-  - **Description:** Open a dialog for selecting supported editors.
+  - **Опис:** Відкрити діалогове вікно для вибору підтримуваних редакторів.
 
 - **`/extensions`**
-  - **Description:** Lists all active extensions in the current Gemini CLI
-    session. See [Gemini CLI Extensions](../extensions/index.md).
+  - **Опис:** Список усіх активних розширень у поточному сеансі Gemini CLI.
+    Дивіться [Розширення Gemini CLI](../extensions/index.md).
 
-- **`/help`** (or **`/?`**)
-  - **Description:** Display help information about Gemini CLI, including
-    available commands and their usage.
+- **`/help`** (або **`/?`**)
+  - **Опис:** Відобразити довідку про Gemini CLI, включаючи доступні команди та
+    їх використання.
 
 - **`/mcp`**
-  - **Description:** Manage configured Model Context Protocol (MCP) servers.
-  - **Sub-commands:**
-    - **`list`** or **`ls`**:
-      - **Description:** List configured MCP servers and tools. This is the
-        default action if no subcommand is specified.
+  - **Опис:** Керування налаштованими серверами Model Context Protocol (MCP).
+  - **Підкоманди:**
+    - **`list`** або **`ls`**:
+      - **Опис:** Список налаштованих серверів та інструментів MCP. Це дія за
+        замовчуванням, якщо підкоманду не вказано.
     - **`desc`**
-      - **Description:** List configured MCP servers and tools with
-        descriptions.
+      - **Опис:** Список налаштованих серверів та інструментів MCP з описами.
     - **`schema`**:
-      - **Description:** List configured MCP servers and tools with descriptions
-        and schemas.
+      - **Опис:** Список налаштованих серверів та інструментів MCP з описами та
+        схемами.
     - **`auth`**:
-      - **Description:** Authenticate with an OAuth-enabled MCP server.
-      - **Usage:** `/mcp auth <server-name>`
-      - **Details:** If `<server-name>` is provided, it initiates the OAuth flow
-        for that server. If no server name is provided, it lists all configured
-        servers that support OAuth authentication.
+      - **Опис:** Аутентифікація на сервері MCP з підтримкою OAuth.
+      - **Використання:** `/mcp auth <server-name>`
+      - **Подробиці:** Якщо вказано `<server-name>`, запускається процес OAuth
+        для цього сервера. Якщо ім'я сервера не вказано, виводиться список усіх
+        налаштованих серверів, які підтримують аутентифікацію OAuth.
     - **`refresh`**:
-      - **Description:** Restarts all MCP servers and re-discovers their
-        available tools.
+      - **Опис:** Перезапускає всі сервери MCP та повторно виявляє їхні доступні
+        інструменти.
 
 - [**`/model`**](./model.md)
-  - **Description:** Opens a dialog to choose your Gemini model.
+  - **Опис:** Відкриває діалогове вікно для вибору моделі Gemini.
 
 - **`/memory`**
-  - **Description:** Manage the AI's instructional context (hierarchical memory
-    loaded from `GEMINI.md` files).
-  - **Sub-commands:**
+  - **Опис:** Керування інструкційним контекстом ШІ (ієрархічна пам'ять,
+    завантажена з файлів `GEMINI.md`).
+  - **Підкоманди:**
     - **`add`**:
-      - **Description:** Adds the following text to the AI's memory. Usage:
-        `/memory add <text to remember>`
+      - **Опис:** Додає вказаний текст до пам'яті ШІ. Використання:
+        `/memory add <текст для запам'ятовування>`
     - **`show`**:
-      - **Description:** Display the full, concatenated content of the current
-        hierarchical memory that has been loaded from all `GEMINI.md` files.
-        This lets you inspect the instructional context being provided to the
-        Gemini model.
+      - **Опис:** Відобразити повний об'єднаний вміст поточної ієрархічної
+        пам'яті, завантаженої з усіх файлів `GEMINI.md`. Це дозволяє перевірити
+        інструкційний контекст, що надається моделі Gemini.
     - **`refresh`**:
-      - **Description:** Reload the hierarchical instructional memory from all
-        `GEMINI.md` files found in the configured locations (global,
-        project/ancestors, and sub-directories). This command updates the model
-        with the latest `GEMINI.md` content.
+      - **Опис:** Перезавантажити ієрархічну інструкційну пам'ять з усіх файлів
+        `GEMINI.md`, знайдених у налаштованих місцях (глобальних, проектних та
+        підкаталогах). Ця команда оновлює модель найсвіжішим вмістом
+        `GEMINI.md`.
     - **`list`**:
-      - **Description:** Lists the paths of the GEMINI.md files in use for
-        hierarchical memory.
-    - **Note:** For more details on how `GEMINI.md` files contribute to
-      hierarchical memory, see the
-      [CLI Configuration documentation](../get-started/configuration.md).
+      - **Опис:** Список шляхів до файлів GEMINI.md, що використовуються для
+        ієрархічної пам'яті.
+    - **Примітка:** Докладніше про те, як файли `GEMINI.md` наповнюють
+      ієрархічну пам'ять, дивіться у
+      [документації з конфігурації CLI](../get-started/configuration.md).
 
 - **`/restore`**
-  - **Description:** Restores the project files to the state they were in just
-    before a tool was executed. This is particularly useful for undoing file
-    edits made by a tool. If run without a tool call ID, it will list available
-    checkpoints to restore from.
-  - **Usage:** `/restore [tool_call_id]`
-  - **Note:** Only available if checkpointing is configured via
-    [settings](../get-started/configuration.md). See
-    [Checkpointing documentation](../cli/checkpointing.md) for more details.
+  - **Опис:** Відновлює файли проекту до стану, в якому вони були безпосередньо
+    перед виконанням інструменту. Це особливо корисно для скасування правок
+    файлів, зроблених інструментом. Якщо запустити без ID виклику інструменту,
+    виведеться список доступних контрольних точок для відновлення.
+  - **Використання:** `/restore [tool_call_id]`
+  - **Примітка:** Доступно лише якщо створення контрольних точок налаштовано
+    через [налаштування](../get-started/configuration.md). Дивіться
+    [документацію з контрольних точок](../cli/checkpointing.md) для отримання
+    детальної інформації.
+
 - **`/resume`**
-  - **Description:** Browse and resume previous conversation sessions. Opens an
-    interactive session browser where you can search, filter, and select from
-    automatically saved conversations.
-  - **Features:**
-    - **Session Browser:** Interactive interface showing all saved sessions with
-      timestamps, message counts, and first user message for context
-    - **Search:** Use `/` to search through conversation content across all
-      sessions
-    - **Sorting:** Sort sessions by date or message count
-    - **Management:** Delete unwanted sessions directly from the browser
-    - **Resume:** Select any session to resume and continue the conversation
-  - **Note:** All conversations are automatically saved as you chat - no manual
-    saving required. See [Session Management](../cli/session-management.md) for
-    complete details.
+  - **Опис:** Перегляд та відновлення попередніх сеансів розмови. Відкриває
+    інтерактивний браузер сесій, де можна шукати, фільтрувати та вибирати з
+    автоматично збережених розмов.
+  - **Можливості:**
+    - **Браузер сесій:** Інтерактивний інтерфейс, що показує всі збережені сесії
+      з мітками часу, кількістю повідомлень та першим повідомленням користувача
+      для контексту.
+    - **Пошук:** Використовуйте `/` для пошуку у вмісті розмов у всіх сесіях.
+    - **Сортування:** Сортування сесій за датою або кількістю повідомлень.
+    - **Керування:** Видалення небажаних сесій безпосередньо з браузера.
+    - **Відновлення:** Виберіть будь-яку сесію, щоб відновити та продовжити
+      розмову.
+  - **Примітка:** Усі розмови автоматично зберігаються під час чату — ручне
+    збереження не потрібне. Дивіться
+    [Керування сесіями](../cli/session-management.md) для повної інформації.
 
 - [**`/settings`**](./settings.md)
-  - **Description:** Open the settings editor to view and modify Gemini CLI
-    settings.
-  - **Details:** This command provides a user-friendly interface for changing
-    settings that control the behavior and appearance of Gemini CLI. It is
-    equivalent to manually editing the `.gemini/settings.json` file, but with
-    validation and guidance to prevent errors. See the
-    [settings documentation](./settings.md) for a full list of available
-    settings.
-  - **Usage:** Simply run `/settings` and the editor will open. You can then
-    browse or search for specific settings, view their current values, and
-    modify them as desired. Changes to some settings are applied immediately,
-    while others require a restart.
+  - **Опис:** Відкрити редактор налаштувань для перегляду та зміни параметрів
+    Gemini CLI.
+  - **Подробиці:** Ця команда надає зручний інтерфейс для зміни налаштувань, що
+    керують поведінкою та виглядом Gemini CLI. Це еквівалентно ручному
+    редагуванню файлу `.gemini/settings.json`, але з валідацією та підказками
+    для запобігання помилкам. Дивіться
+    [документацію з налаштувань](./settings.md) для повного списку доступних
+    параметрів.
+  - **Використання:** Просто запустіть `/settings`, і відкриється редактор. Ви
+    можете переглядати або шукати певні налаштування, бачити їхні поточні
+    значення та змінювати їх за бажанням. Зміни в деяких налаштуваннях
+    застосовуються негайно, тоді як інші вимагають перезапуску.
 
 - **`/stats`**
-  - **Description:** Display detailed statistics for the current Gemini CLI
-    session, including token usage, cached token savings (when available), and
-    session duration. Note: Cached token information is only displayed when
-    cached tokens are being used, which occurs with API key authentication but
-    not with OAuth authentication at this time.
+  - **Опис:** Відобразити детальну статистику для поточної сесії Gemini CLI,
+    включаючи використання токенів, економію кешованих токенів (якщо доступно)
+    та тривалість сесії. Примітка: Інформація про кешовані токени відображається
+    лише при використанні кешування, що наразі відбувається при аутентифікації
+    за ключем API, але не через OAuth.
 
 - [**`/theme`**](./themes.md)
-  - **Description:** Open a dialog that lets you change the visual theme of
+  - **Опис:** Відкрити діалогове вікно, яке дозволяє змінити візуальну тему
     Gemini CLI.
 
 - **`/auth`**
-  - **Description:** Open a dialog that lets you change the authentication
-    method.
+  - **Опис:** Відкрити діалогове вікно для зміни методу аутентифікації.
 
 - **`/about`**
-  - **Description:** Show version info. Please share this information when
-    filing issues.
+  - **Опис:** Показати інформацію про версію. Будь ласка, надавайте цю
+    інформацію при поданні звітів про помилки.
 
 - [**`/tools`**](../tools/index.md)
-  - **Description:** Display a list of tools that are currently available within
-    Gemini CLI.
-  - **Usage:** `/tools [desc]`
-  - **Sub-commands:**
-    - **`desc`** or **`descriptions`**:
-      - **Description:** Show detailed descriptions of each tool, including each
-        tool's name with its full description as provided to the model.
-    - **`nodesc`** or **`nodescriptions`**:
-      - **Description:** Hide tool descriptions, showing only the tool names.
+  - **Опис:** Відобразити список інструментів, які наразі доступні в Gemini CLI.
+  - **Використання:** `/tools [desc]`
+  - **Підкоманди:**
+    - **`desc`** або **`descriptions`**:
+      - **Опис:** Показати детальні описи кожного інструменту, включаючи назву
+        кожного інструменту з його повним описом, як він надається моделі.
+    - **`nodesc`** або **`nodescriptions`**:
+      - **Опис:** Приховати описи інструментів, показуючи лише їхні назви.
 
 - **`/privacy`**
-  - **Description:** Display the Privacy Notice and allow users to select
-    whether they consent to the collection of their data for service improvement
-    purposes.
+  - **Опис:** Відобразити повідомлення про конфіденційність та дозволити
+    користувачам вибрати, чи згодні вони на збір своїх даних для покращення
+    сервісу.
 
-- **`/quit`** (or **`/exit`**)
-  - **Description:** Exit Gemini CLI.
+- **`/quit`** (або **`/exit`**)
+  - **Опис:** Вийти з Gemini CLI.
 
 - **`/vim`**
-  - **Description:** Toggle vim mode on or off. When vim mode is enabled, the
-    input area supports vim-style navigation and editing commands in both NORMAL
-    and INSERT modes.
-  - **Features:**
-    - **NORMAL mode:** Navigate with `h`, `j`, `k`, `l`; jump by words with `w`,
-      `b`, `e`; go to line start/end with `0`, `$`, `^`; go to specific lines
-      with `G` (or `gg` for first line)
-    - **INSERT mode:** Standard text input with escape to return to NORMAL mode
-    - **Editing commands:** Delete with `x`, change with `c`, insert with `i`,
-      `a`, `o`, `O`; complex operations like `dd`, `cc`, `dw`, `cw`
-    - **Count support:** Prefix commands with numbers (e.g., `3h`, `5w`, `10G`)
-    - **Repeat last command:** Use `.` to repeat the last editing operation
-    - **Persistent setting:** Vim mode preference is saved to
-      `~/.gemini/settings.json` and restored between sessions
-  - **Status indicator:** When enabled, shows `[NORMAL]` or `[INSERT]` in the
-    footer
+  - **Опис:** Увімкнути або вимкнути режим vim. Коли режим vim увімкнено,
+    область введення підтримує навігацію та команди редагування у стилі vim в
+    режимах NORMAL та INSERT.
+  - **Можливості:**
+    - **Режим NORMAL:** Навігація за допомогою `h`, `j`, `k`, `l`; перехід за
+      словами з `w`, `b`, `e`; перехід на початок/кінець рядка з `0`, `$`, `^`;
+      перехід на конкретні рядки з `G` (або `gg` для першого рядка).
+    - **Режим INSERT:** Стандартне введення тексту; натисніть escape, щоб
+      повернутися в режим NORMAL.
+    - **Команди редагування:** Видалення з `x`, заміна з `c`, вставка з `i`,
+      `a`, `o`, `O`; складні операції, такі як `dd`, `cc`, `dw`, `cw`.
+    - **Підтримка лічильників:** Додавайте цифри перед командами (наприклад,
+      `3h`, `5w`, `10G`).
+    - **Повтор останньої команди:** Використовуйте `.` для повторення останньої
+      операції редагування.
+    - **Постійне налаштування:** Перевага режиму Vim зберігається у
+      `~/.gemini/settings.json` і відновлюється між сеансами.
+  - **Індикатор статусу:** Коли увімкнено, показує `[NORMAL]` або `[INSERT]` у
+    футері.
 
 - **`/init`**
-  - **Description:** To help users easily create a `GEMINI.md` file, this
-    command analyzes the current directory and generates a tailored context
-    file, making it simpler for them to provide project-specific instructions to
-    the Gemini agent.
+  - **Опис:** Щоб допомогти користувачам легко створити файл `GEMINI.md`, ця
+    команда аналізує поточний каталог і генерує адаптований файл контексту,
+    спрощуючи надання специфічних для проекту інструкцій агенту Gemini.
 
-### Custom commands
+### Власні команди
 
-Custom commands allow you to create personalized shortcuts for your most-used
-prompts. For detailed instructions on how to create, manage, and use them,
-please see the dedicated [Custom Commands documentation](./custom-commands.md).
+Власні команди дозволяють створювати персоналізовані ярлики для підказок, що
+найчастіше використовуються. Для отримання детальних інструкцій щодо їх
+створення, керування та використання, дивіться окрему
+[документацію з власних команд](./custom-commands.md).
 
-## Input prompt shortcuts
+## Гарячі клавіші поля вводу
 
-These shortcuts apply directly to the input prompt for text manipulation.
+Ці скорочення застосовуються безпосередньо до поля введення для маніпуляцій з
+текстом.
 
-- **Undo:**
-  - **Keyboard shortcut:** Press **Ctrl+z** to undo the last action in the input
-    prompt.
+- **Скасувати (Undo):**
+  - **Гаряча клавіша:** Натисніть **Ctrl+z**, щоб скасувати останню дію в полі
+    введення.
 
-- **Redo:**
-  - **Keyboard shortcut:** Press **Ctrl+Shift+Z** to redo the last undone action
-    in the input prompt.
+- **Повторити (Redo):**
+  - **Гаряча клавіша:** Натисніть **Ctrl+Shift+Z**, щоб повторити останню
+    скасовану дію в полі введення.
 
-## At commands (`@`)
+## At-команди (`@`)
 
-At commands are used to include the content of files or directories as part of
-your prompt to Gemini. These commands include git-aware filtering.
+At-команди використовуються для включення вмісту файлів або каталогів у вашу
+підказку для Gemini. Ці команди включають фільтрацію з урахуванням git.
 
-- **`@<path_to_file_or_directory>`**
-  - **Description:** Inject the content of the specified file or files into your
-    current prompt. This is useful for asking questions about specific code,
-    text, or collections of files.
-  - **Examples:**
-    - `@path/to/your/file.txt Explain this text.`
-    - `@src/my_project/ Summarize the code in this directory.`
-    - `What is this file about? @README.md`
-  - **Details:**
-    - If a path to a single file is provided, the content of that file is read.
-    - If a path to a directory is provided, the command attempts to read the
-      content of files within that directory and any subdirectories.
-    - Spaces in paths should be escaped with a backslash (e.g.,
+- **`@<шлях_до_файлу_або_каталогу>`**
+  - **Опис:** Вставити вміст вказаного файлу або файлів у вашу поточну підказку.
+    Це корисно для запитань щодо конкретного коду, тексту або колекцій файлів.
+  - **Приклади:**
+    - `@path/to/your/file.txt Поясни цей текст.`
+    - `@src/my_project/ Зроби огляд коду в цьому каталозі.`
+    - `Про що цей файл? @README.md`
+  - **Подробиці:**
+    - Якщо вказано шлях до одного файлу, зчитується вміст цього файлу.
+    - Якщо вказано шлях до каталогу, команда намагається зчитати вміст файлів у
+      цьому каталозі та будь-яких підкаталогах.
+    - Пробіли в шляхах слід екранувати зворотною косою рискою (наприклад,
       `@My\ Documents/file.txt`).
-    - The command uses the `read_many_files` tool internally. The content is
-      fetched and then inserted into your query before being sent to the Gemini
-      model.
-    - **Git-aware filtering:** By default, git-ignored files (like
-      `node_modules/`, `dist/`, `.env`, `.git/`) are excluded. This behavior can
-      be changed via the `context.fileFiltering` settings.
-    - **File types:** The command is intended for text-based files. While it
-      might attempt to read any file, binary files or very large files might be
-      skipped or truncated by the underlying `read_many_files` tool to ensure
-      performance and relevance. The tool indicates if files were skipped.
-  - **Output:** The CLI will show a tool call message indicating that
-    `read_many_files` was used, along with a message detailing the status and
-    the path(s) that were processed.
+    - Команда використовує інструмент `read_many_files` внутрішньо. Вміст
+      отримується і вставляється у ваш запит перед відправкою моделі Gemini.
+    - **Фільтрація з урахуванням Git:** За замовчуванням файли, що ігноруються
+      git (наприклад, `node_modules/`, `dist/`, `.env`, `.git/`), виключаються.
+      Цю поведінку можна змінити через налаштування `context.fileFiltering`.
+    - **Типи файлів:** Команда призначена для текстових файлів. Хоча вона може
+      спробувати прочитати будь-який файл, бінарні файли або дуже великі файли
+      можуть бути пропущені або обрізані інструментом `read_many_files` для
+      забезпечення продуктивності та релевантності. Інструмент вказує, чи були
+      файли пропущені.
+  - **Вивід:** CLI покаже повідомлення про виклик інструменту, що вказує на
+    використання `read_many_files`, разом із повідомленням про статус та
+    оброблені шляхи.
 
-- **`@` (Lone at symbol)**
-  - **Description:** If you type a lone `@` symbol without a path, the query is
-    passed as-is to the Gemini model. This might be useful if you are
-    specifically talking _about_ the `@` symbol in your prompt.
+- **`@` (Символ "собачки" окремо)**
+  - **Опис:** Якщо ви введете символ `@` без шляху, запит буде передано моделі
+    Gemini як є. Це може бути корисно, якщо ви спеціально говорите _про_ символ
+    `@` у вашій підказці.
 
-### Error handling for `@` commands
+### Обробка помилок для команд `@`
 
-- If the path specified after `@` is not found or is invalid, an error message
-  will be displayed, and the query might not be sent to the Gemini model, or it
-  will be sent without the file content.
-- If the `read_many_files` tool encounters an error (e.g., permission issues),
-  this will also be reported.
+- Якщо шлях, вказаний після `@`, не знайдено або він недійсний, відобразиться
+  повідомлення про помилку, і запит може не бути надісланий моделі Gemini або
+  буде надісланий без вмісту файлу.
+- Якщо інструмент `read_many_files` стикається з помилкою (наприклад, проблеми з
+  правами доступу), про це також буде повідомлено.
 
-## Shell mode and passthrough commands (`!`)
+## Режим оболонки та наскрізні команди (`!`)
 
-The `!` prefix lets you interact with your system's shell directly from within
+Префікс `!` дозволяє взаємодіяти з оболонкою вашої системи безпосередньо з
 Gemini CLI.
 
-- **`!<shell_command>`**
-  - **Description:** Execute the given `<shell_command>` using `bash` on
-    Linux/macOS or `powershell.exe -NoProfile -Command` on Windows (unless you
-    override `ComSpec`). Any output or errors from the command are displayed in
-    the terminal.
-  - **Examples:**
-    - `!ls -la` (executes `ls -la` and returns to Gemini CLI)
-    - `!git status` (executes `git status` and returns to Gemini CLI)
+- **`!<команда_оболонки>`**
+  - **Опис:** Виконати вказану `<команда_оболонки>`, використовуючи `bash` на
+    Linux/macOS або `powershell.exe -NoProfile -Command` on Windows (якщо ви не
+    змінили `ComSpec`). Будь-який вивід або помилки команди відображаються в
+    терміналі.
+  - **Приклади:**
+    - `!ls -la` (виконує `ls -la` і повертається до Gemini CLI)
+    - `!git status` (виконує `git status` і повертається до Gemini CLI)
 
-- **`!` (Toggle shell mode)**
-  - **Description:** Typing `!` on its own toggles shell mode.
-    - **Entering shell mode:**
-      - When active, shell mode uses a different coloring and a "Shell Mode
-        Indicator".
-      - While in shell mode, text you type is interpreted directly as a shell
-        command.
-    - **Exiting shell mode:**
-      - When exited, the UI reverts to its standard appearance and normal Gemini
-        CLI behavior resumes.
+- **`!` (Перемикання режиму оболонки)**
+  - **Опис:** Введення `!` самого по собі перемикає режим оболонки.
+    - **Вхід у режим оболонки:**
+      - Коли активний, режим оболонки використовує інше забарвлення та
+        "Індикатор режиму оболонки".
+      - У режимі оболонки текст, який ви вводите, інтерпретується безпосередньо
+        як команда оболонки.
+    - **Вихід з режиму оболонки:**
+      - Після виходу інтерфейс повертається до свого стандартного вигляду, і
+        відновлюється звичайна поведінка Gemini CLI.
 
-- **Caution for all `!` usage:** Commands you execute in shell mode have the
-  same permissions and impact as if you ran them directly in your terminal.
+- **Застереження для використання `!`:** Команди, які ви виконуєте в режимі
+  оболонки, мають ті самі права та вплив, що і при безпосередньому запуску у
+  вашому терміналі.
 
-- **Environment variable:** When a command is executed via `!` or in shell mode,
-  the `GEMINI_CLI=1` environment variable is set in the subprocess's
-  environment. This allows scripts or tools to detect if they are being run from
-  within the Gemini CLI.
+- **Змінна середовища:** Коли команда виконується через `!` або в режимі
+  оболонки, у середовищі підпроцесу встановлюється змінна середовища
+  `GEMINI_CLI=1`. Це дозволяє сценаріям або інструментам виявляти, що вони
+  запускаються зсередини Gemini CLI.

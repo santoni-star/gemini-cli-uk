@@ -1,71 +1,76 @@
-# Get started with Gemini CLI
+# Початок роботи з Gemini CLI
 
-Welcome to Gemini CLI! This guide will help you install, configure, and start
-using the Gemini CLI to enhance your workflow right from your terminal.
+Ласкаво просимо до Gemini CLI! Цей посібник допоможе вам встановити, налаштувати
+та почати використовувати Gemini CLI, щоб покращити свій робочий процес
+безпосередньо з терміналу.
 
-## Quickstart: Install, authenticate, configure, and use Gemini CLI
+## Швидкий старт: Встановлення, аутентифікація, налаштування та використання Gemini CLI
 
-Gemini CLI brings the power of advanced language models directly to your command
-line interface. As an AI-powered assistant, Gemini CLI can help you with a
-variety of tasks, from understanding and generating code to reviewing and
-editing documents.
+Gemini CLI переносить потужність передових мовних моделей безпосередньо у ваш
+інтерфейс командного рядка. Як асистент на основі ШІ, Gemini CLI може допомогти
+вам у виконанні різноманітних завдань — від розуміння та генерації коду до
+перегляду та редагування документів.
 
-## Install
+## Встановлення
 
-The standard method to install and run Gemini CLI uses `npm`:
-
-```bash
-npm install -g @google/gemini-cli
-```
-
-Once Gemini CLI is installed, run Gemini CLI from your command line:
+Стандартний метод встановлення та запуску Gemini CLI використовує `npm`:
 
 ```bash
-gemini
+npm install -g santoni-star/gemini-cli-uk
 ```
 
-For more installation options, see [Gemini CLI Installation](./installation.md).
+Після встановлення запустіть Gemini CLI з командного рядка:
 
-## Authenticate
+```bash
+gemini-uk
+```
 
-To begin using Gemini CLI, you must authenticate with a Google service. In most
-cases, you can log in with your existing Google account:
+Для отримання додаткових варіантів встановлення дивіться
+[Встановлення Gemini CLI](./installation.md).
 
-1. Run Gemini CLI after installation:
+## Аутентифікація
+
+Щоб почати використовувати Gemini CLI, ви повинні пройти аутентифікацію в
+сервісі Google. У більшості випадків ви можете увійти за допомогою свого
+існуючого облікового запису Google:
+
+1. Запустіть Gemini CLI після встановлення:
 
    ```bash
-   gemini
+   gemini-uk
    ```
 
-2. When asked "How would you like to authenticate for this project?" select **1.
-   Login with Google**.
+2. Коли з'явиться запитання "How would you like to authenticate for this
+   project?" (Як ви бажаєте пройти аутентифікацію?), виберіть **1. Login with
+   Google**.
 
-3. Select your Google account.
+3. Оберіть свій обліковий запис Google.
 
-4. Click on **Sign in**.
+4. Натисніть **Увійти**.
 
-Certain account types may require you to configure a Google Cloud project. For
-more information, including other authentication methods, see
-[Gemini CLI Authentication Setup](./authentication.md).
+Певні типи облікових записів можуть вимагати налаштування проекту Google Cloud.
+Для отримання додаткової інформації, включаючи інші методи аутентифікації,
+дивіться [Налаштування аутентифікації Gemini CLI](./authentication.md).
 
-## Configure
+## Налаштування
 
-Gemini CLI offers several ways to configure its behavior, including environment
-variables, command-line arguments, and settings files.
+Gemini CLI пропонує кілька способів налаштування своєї поведінки, включаючи
+змінні середовища, аргументи командного рядка та файли налаштувань.
 
-To explore your configuration options, see
-[Gemini CLI Configuration](./configuration.md).
+Щоб вивчити параметри конфігурації, дивіться
+[Налаштування Gemini CLI](./configuration.md).
 
-## Use
+## Використання
 
-Once installed and authenticated, you can start using Gemini CLI by issuing
-commands and prompts in your terminal. Ask it to generate code, explain files,
-and more.
+Після встановлення та проходження аутентифікації ви можете почати
+використовувати Gemini CLI, вводячи команди та підказки у своєму терміналі.
+Попросіть його згенерувати код, пояснити файли та багато іншого.
 
-To explore the power of Gemini CLI, see [Gemini CLI examples](./examples.md).
+Щоб вивчити можливості Gemini CLI, дивіться
+[Приклади Gemini CLI](./examples.md).
 
-## What's next?
+## Що далі?
 
-- Find out more about [Gemini CLI's tools](../tools/index.md).
-- Review [Gemini CLI's commands](../cli/commands.md).
-- Learn how to [get started with Gemini 3](./gemini-3.md).
+- Дізнайтеся більше про [інструменти Gemini CLI](../tools/index.md).
+- Ознайомтеся з [командами Gemini CLI](../cli/commands.md).
+- Дізнайтеся, як [почати роботу з Gemini 3](./gemini-3.md).
