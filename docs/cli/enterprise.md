@@ -1,43 +1,46 @@
-# Gemini CLI for the enterprise
+# Gemini CLI для підприємств
 
-This document outlines configuration patterns and best practices for deploying
-and managing Gemini CLI in an enterprise environment. By leveraging system-level
-settings, administrators can enforce security policies, manage tool access, and
-ensure a consistent experience for all users.
+Цей документ описує патерни налаштування та найкращі практики розгортання й
+керування Gemini CLI в корпоративному середовищі. Використовуючи налаштування
+системного рівня, адміністратори можуть впроваджувати політики безпеки, керувати
+доступом до інструментів та забезпечувати однаковий досвід для всіх
+користувачів.
 
-> **A note on security:** The patterns described in this document are intended
-> to help administrators create a more controlled and secure environment for
-> using Gemini CLI. However, they should not be considered a foolproof security
-> boundary. A determined user with sufficient privileges on their local machine
-> may still be able to circumvent these configurations. These measures are
-> designed to prevent accidental misuse and enforce corporate policy in a
-> managed environment, not to defend against a malicious actor with local
-> administrative rights.
+> **Примітка щодо безпеки:** Патерни, описані в цьому документі, призначені
+> допомогти адміністраторам створити більш контрольоване та безпечне середовище
+> для використання Gemini CLI. Проте їх не слід розглядати як абсолютно надійну
+> межу безпеки. Рішучий користувач із достатніми правами на локальній машині все
+> одно зможе обійти ці налаштування. Ці заходи призначені для запобігання
+> випадковому неправильному використанню та забезпечення дотримання
+> корпоративної політики в керованому середовищі, а не для захисту від
+> зловмисника з правами локального адміністратора.
 
-## Centralized configuration: The system settings file
+## Централізоване налаштування: файл системних налаштувань
 
-The most powerful tools for enterprise administration are the system-wide
-settings files. These files allow you to define a baseline configuration
-(`system-defaults.json`) and a set of overrides (`settings.json`) that apply to
-all users on a machine. For a complete overview of configuration options, see
-the [Configuration documentation](../get-started/configuration.md).
+Найпотужнішими інструментами для корпоративного адміністрування є
+загальносистемні файли налаштувань. Ці файли дозволяють визначити базову
+конфігурацію (`system-defaults.json`) та набір перевизначень (`settings.json`),
+які застосовуються до всіх користувачів на машині. Повний огляд параметрів
+конфігурації дивіться у
+[документації з налаштування](../get-started/configuration.md).
 
-Settings are merged from four files. The precedence order for single-value
-settings (like `theme`) is:
+Налаштування об'єднуються з чотирьох файлів. Порядок пріоритетності для
+поодиноких значень (наприклад, `theme`):
 
-1. System Defaults (`system-defaults.json`)
-2. User Settings (`~/.gemini/settings.json`)
-3. Workspace Settings (`<project>/.gemini/settings.json`)
-4. System Overrides (`settings.json`)
+1. Системні значення за замовчуванням (`system-defaults.json`)
+2. Налаштування користувача (`~/.gemini/settings.json`)
+3. Налаштування робочого простору (`<project>/.gemini/settings.json`)
+4. Системні перевизначення (`settings.json`)
 
-This means the System Overrides file has the final say. For settings that are
-arrays (`includeDirectories`) or objects (`mcpServers`), the values are merged.
+Це означає, що файл системних перевизначень має останнє слово. Для налаштувань,
+які є масивами (`includeDirectories`) або об'єктами (`mcpServers`), значення
+об'єднуються.
 
-**Example of merging and precedence:**
+**Приклад об'єднання та пріоритетності:**
 
-Here is how settings from different levels are combined.
+Ось як поєднуються налаштування різних рівнів.
 
-- **System defaults `system-defaults.json`:**
+- **Системні значення за замовчуванням `system-defaults.json`:**
 
   ```json
   {
@@ -50,7 +53,7 @@ Here is how settings from different levels are combined.
   }
   ```
 
-- **User `settings.json` (`~/.gemini/settings.json`):**
+- **Користувач `settings.json` (`~/.gemini/settings.json`):**
 
   ```json
   {
@@ -71,7 +74,7 @@ Here is how settings from different levels are combined.
   }
   ```
 
-- **Workspace `settings.json` (`<project>/.gemini/settings.json`):**
+- **Робочий простір `settings.json` (`<project>/.gemini/settings.json`):**
 
   ```json
   {
@@ -89,7 +92,7 @@ Here is how settings from different levels are combined.
   }
   ```
 
-- **System overrides `settings.json`:**
+- **Системні перевизначення `settings.json`:**
   ```json
   {
     "ui": {
@@ -106,9 +109,9 @@ Here is how settings from different levels are combined.
   }
   ```
 
-This results in the following merged configuration:
+Це призводить до такої об'єднаної конфігурації:
 
-- **Final merged configuration:**
+- **Фінальна об'єднана конфігурація:**
   ```json
   {
     "ui": {
@@ -136,87 +139,87 @@ This results in the following merged configuration:
   }
   ```
 
-**Why:**
+**Чому так:**
 
-- **`theme`**: The value from the system overrides (`system-enforced-theme`) is
-  used, as it has the highest precedence.
-- **`mcpServers`**: The objects are merged. The `corp-server` definition from
-  the system overrides takes precedence over the user's definition. The unique
-  `user-tool` and `project-tool` are included.
-- **`includeDirectories`**: The arrays are concatenated in the order of System
-  Defaults, User, Workspace, and then System Overrides.
+- **`theme`**: Використовується значення з системних перевизначень
+  (`system-enforced-theme`), оскільки воно має найвищий пріоритет.
+- **`mcpServers`**: Об'єкти об'єднуються. Визначення `corp-server` із системних
+  перевизначень має пріоритет над визначенням користувача. Унікальні `user-tool`
+  та `project-tool` також включені.
+- **`includeDirectories`**: Масиви об'єднуються в порядку: Системні за
+  замовчуванням, Користувач, Робочий простір, а потім Системні перевизначення.
 
-- **Location**:
+- **Розташування**:
   - **Linux**: `/etc/gemini-cli/settings.json`
   - **Windows**: `C:\ProgramData\gemini-cli\settings.json`
   - **macOS**: `/Library/Application Support/GeminiCli/settings.json`
-  - The path can be overridden using the `GEMINI_CLI_SYSTEM_SETTINGS_PATH`
-    environment variable.
-- **Control**: This file should be managed by system administrators and
-  protected with appropriate file permissions to prevent unauthorized
-  modification by users.
+  - Шлях можна змінити за допомогою змінної середовища
+    `GEMINI_CLI_SYSTEM_SETTINGS_PATH`.
+- **Контроль**: Цей файл має керуватися системними адміністраторами та бути
+  захищеним відповідними дозволами файлової системи, щоб запобігти
+  несанкціонованим змінам з боку користувачів.
 
-By using the system settings file, you can enforce the security and
-configuration patterns described below.
+Використовуючи файл системних налаштувань, ви можете впроваджувати патерни
+безпеки та конфігурації, описані нижче.
 
-### Enforcing system settings with a wrapper script
+### Застосування системних налаштувань за допомогою сценарію-обгортки
 
-While the `GEMINI_CLI_SYSTEM_SETTINGS_PATH` environment variable provides
-flexibility, a user could potentially override it to point to a different
-settings file, bypassing the centrally managed configuration. To mitigate this,
-enterprises can deploy a wrapper script or alias that ensures the environment
-variable is always set to the corporate-controlled path.
+Хоча змінна середовища `GEMINI_CLI_SYSTEM_SETTINGS_PATH` забезпечує гнучкість,
+користувач потенційно може змінити її, щоб вона вказувала на інший файл
+налаштувань, обходячи централізовану конфігурацію. Щоб запобігти цьому,
+підприємства можуть розгорнути сценарій-обгортку (wrapper) або аліас, який
+гарантує, що змінна середовища завжди вказує на шлях, контрольований компанією.
 
-This approach ensures that no matter how the user calls the `gemini` command,
-the enterprise settings are always loaded with the highest precedence.
+Цей підхід гарантує, що незалежно від того, як користувач викликає команду
+`gemini-ua`, корпоративні налаштування завжди будуть завантажені з найвищим
+пріоритетом.
 
-**Example wrapper script:**
+**Приклад сценарію-обгортки:**
 
-Administrators can create a script named `gemini` and place it in a directory
-that appears earlier in the user's `PATH` than the actual Gemini CLI binary
-(e.g., `/usr/local/bin/gemini`).
+Адміністратори можуть створити скрипт з назвою `gemini-ua` і помістити його в
+каталог, який з'являється в `PATH` користувача раніше, ніж справжній бінарний
+файл Gemini CLI (наприклад, `/usr/local/bin/gemini-ua`).
 
 ```bash
 #!/bin/bash
 
-# Enforce the path to the corporate system settings file.
-# This ensures that the company's configuration is always applied.
+# Примусово встановлюємо шлях до файлу корпоративних системних налаштувань.
+# Це гарантує, що конфігурація компанії завжди застосовується.
 export GEMINI_CLI_SYSTEM_SETTINGS_PATH="/etc/gemini-cli/settings.json"
 
-# Find the original gemini executable.
-# This is a simple example; a more robust solution might be needed
-# depending on the installation method.
-REAL_GEMINI_PATH=$(type -aP gemini | grep -v "^$(type -P gemini)$" | head -n 1)
+# Знаходимо оригінальний виконуваний файл gemini-ua.
+# Це простий приклад; може знадобитися більш надійне рішення
+# залежно від методу встановлення.
+REAL_GEMINI_PATH=$(type -aP gemini-ua | grep -v "^$(type -P gemini-ua)$" | head -n 1)
 
 if [ -z "$REAL_GEMINI_PATH" ]; then
-  echo "Error: The original 'gemini' executable was not found." >&2
+  echo "Помилка: Оригінальний виконуваний файл 'gemini-ua' не знайдено." >&2
   exit 1
 fi
 
-# Pass all arguments to the real Gemini CLI executable.
+# Передаємо всі аргументи справжньому виконуваному файлу Gemini CLI.
 exec "$REAL_GEMINI_PATH" "$@"
 ```
 
-By deploying this script, the `GEMINI_CLI_SYSTEM_SETTINGS_PATH` is set within
-the script's environment, and the `exec` command replaces the script process
-with the actual Gemini CLI process, which inherits the environment variable.
-This makes it significantly more difficult for a user to bypass the enforced
-settings.
+Завдяки цьому сценарію `GEMINI_CLI_SYSTEM_SETTINGS_PATH` встановлюється
+всередині середовища скрипта, а команда `exec` замінює процес скрипта реальним
+процесом Gemini CLI, який успадковує цю змінну. Це значно ускладнює для
+користувача обхід встановлених налаштувань.
 
-## Restricting tool access
+## Обмеження доступу до інструментів
 
-You can significantly enhance security by controlling which tools the Gemini
-model can use. This is achieved through the `tools.core` and `tools.exclude`
-settings. For a list of available tools, see the
-[Tools documentation](../tools/index.md).
+Ви можете значно підвищити безпеку, контролюючи, які інструменти може
+використовувати модель Gemini. Це досягається за допомогою налаштувань
+`tools.core` та `tools.exclude`. Список доступних інструментів дивіться у
+[документації з інструментів](../tools/index.md).
 
-### Allowlisting with `coreTools`
+### Створення "білого списку" (allowlisting) за допомогою `coreTools`
 
-The most secure approach is to explicitly add the tools and commands that users
-are permitted to execute to an allowlist. This prevents the use of any tool not
-on the approved list.
+Найбезпечнішим підходом є явне додавання дозволених інструментів та команд до
+білого списку. Це запобігає використанню будь-якого інструменту, якого немає в
+затвердженому списку.
 
-**Example:** Allow only safe, read-only file operations and listing files.
+**Приклад:** Дозволити лише безпечні операції з файлами (читання та список).
 
 ```json
 {
@@ -226,12 +229,12 @@ on the approved list.
 }
 ```
 
-### Blocklisting with `excludeTools`
+### Створення "чорного списку" (blocklisting) за допомогою `excludeTools`
 
-Alternatively, you can add specific tools that are considered dangerous in your
-environment to a blocklist.
+Альтернативно ви можете додати конкретні інструменти, які вважаються
+небезпечними у вашому середовищі, до чорного списку.
 
-**Example:** Prevent the use of the shell tool for removing files.
+**Приклад:** Заборонити використання інструменту оболонки для видалення файлів.
 
 ```json
 {
@@ -241,19 +244,20 @@ environment to a blocklist.
 }
 ```
 
-**Security note:** Blocklisting with `excludeTools` is less secure than
-allowlisting with `coreTools`, as it relies on blocking known-bad commands, and
-clever users may find ways to bypass simple string-based blocks. **Allowlisting
-is the recommended approach.**
+**Примітка з безпеки:** Чорний список (`excludeTools`) менш безпечний, ніж білий
+список (`coreTools`), оскільки він покладається на блокування відомих шкідливих
+комад, і винахідливі користувачі можуть знайти способи обійти прості текстові
+блоки. **Рекомендованим підходом є створення білого списку.**
 
-### Disabling YOLO mode
+### Вимкнення режиму YOLO
 
-To ensure that users cannot bypass the confirmation prompt for tool execution,
-you can disable YOLO mode at the policy level. This adds a critical layer of
-safety, as it prevents the model from executing tools without explicit user
-approval.
+Щоб гарантувати, що користувачі не можуть обійти запит на підтвердження
+виконання інструменту, ви можете вимкнути режим YOLO на рівні політики. Це додає
+критично важливий рівень безпеки, оскільки запобігає виконанню інструментів
+моделлю без явного схвалення користувача.
 
-**Example:** Force all tool executions to require user confirmation.
+**Приклад:** Змусити всі виконання інструментів потребувати підтвердження
+користувача.
 
 ```json
 {
@@ -263,51 +267,51 @@ approval.
 }
 ```
 
-This setting is highly recommended in an enterprise environment to prevent
-unintended tool execution.
+Це налаштування настійно рекомендується в корпоративному середовищі для
+запобігання ненавмисному виконанню інструментів.
 
-## Managing custom tools (MCP servers)
+## Керування власними інструментами (сервери MCP)
 
-If your organization uses custom tools via
-[Model-Context Protocol (MCP) servers](../core/tools-api.md), it is crucial to
-understand how server configurations are managed to apply security policies
-effectively.
+Якщо ваша організація використовує власні інструменти через
+[сервери Model-Context Protocol (MCP)](../core/tools-api.md), важливо розуміти,
+як керувати їхніми конфігураціями для ефективного застосування політик безпеки.
 
-### How MCP server configurations are merged
+### Як об'єднуються конфігурації серверів MCP
 
-Gemini CLI loads `settings.json` files from three levels: System, Workspace, and
-User. When it comes to the `mcpServers` object, these configurations are
-**merged**:
+Gemini CLI завантажує файли `settings.json` з трьох рівнів: Системний, Робочий
+простір та Користувач. Що стосується об'єкта `mcpServers`, ці конфігурації
+**об'єднуються**:
 
-1.  **Merging:** The lists of servers from all three levels are combined into a
-    single list.
-2.  **Precedence:** If a server with the **same name** is defined at multiple
-    levels (e.g., a server named `corp-api` exists in both system and user
-    settings), the definition from the highest-precedence level is used. The
-    order of precedence is: **System > Workspace > User**.
+1.  **Об'єднання:** Списки серверів з усіх трьох рівнів об'єднуються в єдиний
+    список.
+2.  **Пріоритетність:** Якщо сервер з **однаковою назвою** визначений на кількох
+    рівнях (наприклад, сервер `corp-api` існує і в системних, і в користувацьких
+    налаштуваннях), використовується визначення з найвищого рівня пріоритету.
+    Порядок пріоритету: **Система > Робочий простір > Користувач**.
 
-This means a user **cannot** override the definition of a server that is already
-defined in the system-level settings. However, they **can** add new servers with
-unique names.
+Це означає, що користувач **не може** перевизначити конфігурацію сервера, який
+вже визначено в системних налаштуваннях. Проте вони **можуть** додавати нові
+сервери з унікальними назвами.
 
-### Enforcing a catalog of tools
+### Впровадження каталогу інструментів
 
-The security of your MCP tool ecosystem depends on a combination of defining the
-canonical servers and adding their names to an allowlist.
+Безпека вашої екосистеми інструментів MCP залежить від поєднання визначення
+канонічних серверів та додавання їхніх назв до білого списку.
 
-### Restricting tools within an MCP server
+### Обмеження інструментів у межах сервера MCP
 
-For even greater security, especially when dealing with third-party MCP servers,
-you can restrict which specific tools from a server are exposed to the model.
-This is done using the `includeTools` and `excludeTools` properties within a
-server's definition. This allows you to use a subset of tools from a server
-without allowing potentially dangerous ones.
+Для ще більшої безпеки, особливо при роботі зі сторонніми серверами MCP, ви
+можете обмежити, які саме інструменти сервера будуть доступні моделі. Це
+робиться за допомогою властивостей `includeTools` та `excludeTools` у визначенні
+сервера. Це дозволяє використовувати лише підмножину інструментів сервера,
+забороняючи потенційно небезпечні.
 
-Following the principle of least privilege, it is highly recommended to use
-`includeTools` to create an allowlist of only the necessary tools.
+Дотримуючись принципу найменших привілеїв, настійно рекомендується
+використовувати `includeTools` для створення білого списку лише необхідних
+інструментів.
 
-**Example:** Only allow the `code-search` and `get-ticket-details` tools from a
-third-party MCP server, even if the server offers other tools like
+**Приклад:** Дозволити лише інструменти `code-search` та `get-ticket-details` зі
+стороннього MCP сервера, навіть якщо сервер пропонує інші інструменти, як-от
 `delete-ticket`.
 
 ```json
@@ -324,25 +328,27 @@ third-party MCP server, even if the server offers other tools like
 }
 ```
 
-#### More secure pattern: Define and add to allowlist in system settings
+#### Більш безпечний патерн: визначення та додавання до білого списку в системних налаштуваннях
 
-To create a secure, centrally-managed catalog of tools, the system administrator
-**must** do both of the following in the system-level `settings.json` file:
+Щоб створити безпечний, централізовано керований каталог інструментів, системний
+адміністратор **має** зробити обидва наступні кроки у системному файлі
+`settings.json`:
 
-1.  **Define the full configuration** for every approved server in the
-    `mcpServers` object. This ensures that even if a user defines a server with
-    the same name, the secure system-level definition will take precedence.
-2.  **Add the names** of those servers to an allowlist using the `mcp.allowed`
-    setting. This is a critical security step that prevents users from running
-    any servers that are not on this list. If this setting is omitted, the CLI
-    will merge and allow any server defined by the user.
+1.  **Визначити повну конфігурацію** для кожного затвердженого сервера в об'єкті
+    `mcpServers`. Це гарантує, що навіть якщо користувач визначить сервер з
+    такою ж назвою, безпечне системне визначення матиме пріоритет.
+2.  **Додати назви** цих серверів до білого списку за допомогою налаштування
+    `mcp.allowed`. Це критичний крок безпеки, який заважає користувачам
+    запускати будь-які сервери, яких немає в цьому списку. Якщо пропустити це
+    налаштування, CLI об'єднає та дозволить будь-який сервер, визначений
+    користувачем.
 
-**Example system `settings.json`:**
+**Приклад системного `settings.json`:**
 
-1. Add the _names_ of all approved servers to an allowlist. This will prevent
-   users from adding their own servers.
+1. Додайте _назви_ всіх затверджених серверів до білого списку. Це завадить
+   користувачам додавати власні сервери.
 
-2. Provide the canonical _definition_ for each server on the allowlist.
+2. Надайте канонічне _визначення_ для кожного сервера з білого списку.
 
 ```json
 {
@@ -361,20 +367,20 @@ To create a secure, centrally-managed catalog of tools, the system administrator
 }
 ```
 
-This pattern is more secure because it uses both definition and an allowlist.
-Any server a user defines will either be overridden by the system definition (if
-it has the same name) or blocked because its name is not in the `mcp.allowed`
-list.
+Цей патерн є безпечнішим, оскільки використовує і визначення, і білий список.
+Будь-який сервер, який визначить користувач, буде або перевизначений системною
+конфігурацією (якщо назви збігаються), або заблокований, оскільки його назви
+немає у списку `mcp.allowed`.
 
-### Less secure pattern: Omitting the allowlist
+### Менш безпечний патерн: пропуск білого списку
 
-If the administrator defines the `mcpServers` object but fails to also specify
-the `mcp.allowed` allowlist, users may add their own servers.
+Якщо адміністратор визначить об'єкт `mcpServers`, але не вкаже білий список
+`mcp.allowed`, користувачі зможуть додавати власні сервери.
 
-**Example system `settings.json`:**
+**Приклад системного `settings.json`:**
 
-This configuration defines servers but does not enforce the allowlist. The
-administrator has NOT included the "mcp.allowed" setting.
+Ця конфігурація визначає сервери, але не обмежує білий список. Адміністратор НЕ
+включив параметр "mcp.allowed".
 
 ```json
 {
@@ -386,18 +392,18 @@ administrator has NOT included the "mcp.allowed" setting.
 }
 ```
 
-In this scenario, a user can add their own server in their local
-`settings.json`. Because there is no `mcp.allowed` list to filter the merged
-results, the user's server will be added to the list of available tools and
-allowed to run.
+У цьому сценарії користувач може додати власний сервер у свій локальний
+`settings.json`. Оскільки списку `mcp.allowed` для фільтрації результатів немає,
+сервер користувача буде додано до списку доступних інструментів і дозволено до
+запуску.
 
-## Enforcing sandboxing for security
+## Впровадження пісочниці для безпеки
 
-To mitigate the risk of potentially harmful operations, you can enforce the use
-of sandboxing for all tool execution. The sandbox isolates tool execution in a
-containerized environment.
+Щоб знизити ризик від потенційно шкідливих операцій, ви можете змусити всіх
+користувачів використовувати пісочницю (sandboxing) для виконання інструментів.
+Пісочниця ізолює виконання інструментів у контейнеризованому середовищі.
 
-**Example:** Force all tool execution to happen within a Docker sandbox.
+**Приклад:** Змусити всі інструменти виконуватися всередині пісочниці Docker.
 
 ```json
 {
@@ -407,18 +413,18 @@ containerized environment.
 }
 ```
 
-You can also specify a custom, hardened Docker image for the sandbox by building
-a custom `sandbox.Dockerfile` as described in the
-[Sandboxing documentation](./sandbox.md).
+Ви також можете вказати власний, захищений образ Docker для пісочниці,
+побудувавши власний `sandbox.Dockerfile`, як описано в
+[документації з пісочниці](./sandbox.md).
 
-## Controlling network access via proxy
+## Контроль мережевого доступу через проксі
 
-In corporate environments with strict network policies, you can configure Gemini
-CLI to route all outbound traffic through a corporate proxy. This can be set via
-an environment variable, but it can also be enforced for custom tools via the
-`mcpServers` configuration.
+У корпоративних середовищах із суворими мережевими політиками ви можете
+налаштувати Gemini CLI на маршрутизацію всього вихідного трафіку через
+корпоративний проксі. Це можна встановити через змінну середовища, але також це
+можна примусово задати для власних інструментів через конфігурацію `mcpServers`.
 
-**Example (for an MCP server):**
+**Приклад (для сервера MCP):**
 
 ```json
 {
@@ -435,15 +441,15 @@ an environment variable, but it can also be enforced for custom tools via the
 }
 ```
 
-## Telemetry and auditing
+## Телеметрія та аудит
 
-For auditing and monitoring purposes, you can configure Gemini CLI to send
-telemetry data to a central location. This allows you to track tool usage and
-other events. For more information, see the
-[telemetry documentation](./telemetry.md).
+Для цілей аудиту та моніторингу ви можете налаштувати Gemini CLI на надсилання
+даних телеметрії в центральне місце. Це дозволяє відстежувати використання
+інструментів та інші події. Докладніше дивіться у
+[документації з телеметрії](./telemetry.md).
 
-**Example:** Enable telemetry and send it to a local OTLP collector. If
-`otlpEndpoint` is not specified, it defaults to `http://localhost:4317`.
+**Приклад:** Увімкнути телеметрію та надсилати її в локальний колектор OTLP.
+Якщо `otlpEndpoint` не вказано, типовим значенням є `http://localhost:4317`.
 
 ```json
 {
@@ -455,17 +461,19 @@ other events. For more information, see the
 }
 ```
 
-**Note:** Ensure that `logPrompts` is set to `false` in an enterprise setting to
-avoid collecting potentially sensitive information from user prompts.
+**Примітка:** Переконайтеся, що `logPrompts` встановлено у `false` в
+корпоративних налаштуваннях, щоб уникнути збору потенційно конфіденційної
+інформації з підказок користувачів.
 
-## Authentication
+## Аутентифікація
 
-You can enforce a specific authentication method for all users by setting the
-`enforcedAuthType` in the system-level `settings.json` file. This prevents users
-from choosing a different authentication method. See the
-[Authentication docs](./authentication.md) for more details.
+Ви можете встановити конкретний метод аутентифікації для всіх користувачів,
+задавши `enforcedAuthType` у системному файлі `settings.json`. Це завадить
+користувачам обирати інший метод. Дивіться
+[документацію з аутентифікації](./authentication.md) для отримання детальної
+інформації.
 
-**Example:** Enforce the use of Google login for all users.
+**Приклад:** Примусово використовувати вхід через Google для всіх користувачів.
 
 ```json
 {
@@ -473,48 +481,48 @@ from choosing a different authentication method. See the
 }
 ```
 
-If a user has a different authentication method configured, they will be
-prompted to switch to the enforced method. In non-interactive mode, the CLI will
-exit with an error if the configured authentication method does not match the
-enforced one.
+Якщо у користувача налаштований інший метод, йому буде запропоновано перейти на
+встановлений. У неінтерактивному режимі CLI завершить роботу з помилкою, якщо
+налаштований метод не збігається з примусово встановленим.
 
-### Restricting logins to corporate domains
+### Обмеження входу корпоративними доменами
 
-For enterprises using Google Workspace, you can enforce that users only
-authenticate with their corporate Google accounts. This is a network-level
-control that is configured on a proxy server, not within Gemini CLI itself. It
-works by intercepting authentication requests to Google and adding a special
-HTTP header.
+Для підприємств, що використовують Google Workspace, ви можете встановити
+правило, згідно з яким користувачі можуть авторизуватися лише зі своїх
+корпоративних облікових записів Google. Це контроль на рівні мережі, який
+налаштовується на проксі-сервері, а не в самому Gemini CLI. Він працює шляхом
+перехоплення запитів на аутентифікацію до Google та додавання спеціального
+HTTP-заголовка.
 
-This policy prevents users from logging in with personal Gmail accounts or other
-non-corporate Google accounts.
+Ця політика заважає користувачам входити з особистих акаунтів Gmail або інших
+некорпоративних облікових записів.
 
-For detailed instructions, see the Google Workspace Admin Help article on
-[blocking access to consumer accounts](https://support.google.com/a/answer/1668854?hl=en#zippy=%2Cstep-choose-a-web-proxy-server%2Cstep-configure-the-network-to-block-certain-accounts).
+Детальні інструкції дивіться у довідці адміністратора Google Workspace у статті
+про
+[блокування доступу до споживчих акаунтів](https://support.google.com/a/answer/1668854?hl=en#zippy=%2Cstep-choose-a-web-proxy-server%2Cstep-configure-the-network-to-block-certain-accounts).
 
-The general steps are as follows:
+Загальні кроки такі:
 
-1.  **Intercept Requests**: Configure your web proxy to intercept all requests
-    to `google.com`.
-2.  **Add HTTP Header**: For each intercepted request, add the
-    `X-GoogApps-Allowed-Domains` HTTP header.
-3.  **Specify Domains**: The value of the header should be a comma-separated
-    list of your approved Google Workspace domain names.
+1.  **Перехоплення запитів**: Налаштуйте ваш веб-проксі на перехоплення всіх
+    запитів до `google.com`.
+2.  **Додавання HTTP-заголовка**: Для кожного перехопленого запиту додавайте
+    заголовок `X-GoogApps-Allowed-Domains`.
+3.  **Вказання доменів**: Значенням заголовка має бути список доменних імен
+    вашої організації Google Workspace, розділених комами.
 
-**Example header:**
+**Приклад заголовка:**
 
 ```
 X-GoogApps-Allowed-Domains: my-corporate-domain.com, secondary-domain.com
 ```
 
-When this header is present, Google's authentication service will only allow
-logins from accounts belonging to the specified domains.
+Коли цей заголовок присутній, служба аутентифікації Google дозволить вхід лише з
+облікових записів, що належать до вказаних доменів.
 
-## Putting it all together: example system `settings.json`
+## Підсумок: приклад системного `settings.json`
 
-Here is an example of a system `settings.json` file that combines several of the
-patterns discussed above to create a secure, controlled environment for Gemini
-CLI.
+Ось приклад системного файлу `settings.json`, який поєднує кілька обговорених
+вище патернів для створення безпечного, контрольованого середовища Gemini CLI.
 
 ```json
 {
@@ -554,12 +562,12 @@ CLI.
 }
 ```
 
-This configuration:
+Ця конфігурація:
 
-- Forces all tool execution into a Docker sandbox.
-- Strictly uses an allowlist for a small set of safe shell commands and file
-  tools.
-- Defines and allows a single corporate MCP server for custom tools.
-- Enables telemetry for auditing, without logging prompt content.
-- Redirects the `/bug` command to an internal ticketing system.
-- Disables general usage statistics collection.
+- Примусово виконує всі інструменти в пісочниці Docker.
+- Суворо використовує білий список для невеликого набору безпечних команд
+  оболонки та інструментів роботи з файлами.
+- Визначає та дозволяє єдиний корпоративний сервер MCP для власних інструментів.
+- Вмикає телеметрію для аудиту без логування вмісту підказок.
+- Перенаправляє команду `/bug` на внутрішню систему тікетів.
+- Вимикає загальний збір статистики використання.

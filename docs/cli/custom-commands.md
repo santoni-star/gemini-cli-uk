@@ -1,315 +1,320 @@
-# Custom commands
+# Власні команди
 
-Custom commands let you save and reuse your favorite or most frequently used
-prompts as personal shortcuts within Gemini CLI. You can create commands that
-are specific to a single project or commands that are available globally across
-all your projects, streamlining your workflow and ensuring consistency.
+Власні команди дозволяють зберігати та повторно використовувати ваші улюблені
+або найчастіше вживані підказки як персональні ярлики всередині Gemini CLI. Ви
+можете створювати команди, специфічні для одного проекту, або глобальні команди,
+доступні у всіх ваших проектах, що оптимізує ваш робочий процес та забезпечує
+послідовність.
 
-## File locations and precedence
+## Розташування файлів та пріоритетність
 
-Gemini CLI discovers commands from two locations, loaded in a specific order:
+Gemini CLI виявляє команди у двох місцях, завантажуючи їх у певному порядку:
 
-1.  **User commands (global):** Located in `~/.gemini/commands/`. These commands
-    are available in any project you are working on.
-2.  **Project commands (local):** Located in
-    `<your-project-root>/.gemini/commands/`. These commands are specific to the
-    current project and can be checked into version control to be shared with
-    your team.
+1.  **Команди користувача (глобальні):** Знаходяться у `~/.gemini/commands/`. Ці
+    команди доступні у будь-якому проекті, над яким ви працюєте.
+2.  **Команди проекту (локальні):** Знаходяться у
+    `<корінь-вашого-проекту>/.gemini/commands/`. Ці команди специфічні для
+    поточного проекту і можуть бути додані до системи контролю версій для
+    спільного використання вашою командою.
 
-If a command in the project directory has the same name as a command in the user
-directory, the **project command will always be used.** This allows projects to
-override global commands with project-specific versions.
+Якщо команда в каталозі проекту має таку ж назву, як і команда в каталозі
+користувача, **завжди буде використовуватися команда проекту.** Це дозволяє
+проектам перевизначати глобальні команди версіями, специфічними для проекту.
 
-## Naming and namespacing
+## Іменування та простори назв
 
-The name of a command is determined by its file path relative to its `commands`
-directory. Subdirectories are used to create namespaced commands, with the path
-separator (`/` or `\`) being converted to a colon (`:`).
+Назва команди визначається шляхом до її файлу відносно каталогу `commands`.
+Підкаталоги використовуються для створення команд у просторах назв, причому
+роздільник шляху (`/` або `\`) перетворюється на двокрапку (`:`).
 
-- A file at `~/.gemini/commands/test.toml` becomes the command `/test`.
-- A file at `<project>/.gemini/commands/git/commit.toml` becomes the namespaced
-  command `/git:commit`.
+- Файл у `~/.gemini/commands/test.toml` стає командою `/test`.
+- Файл у `<project>/.gemini/commands/git/commit.toml` стає командою у просторі
+  назв `/git:commit`.
 
-## TOML file format (v1)
+## Формат файлу TOML (v1)
 
-Your command definition files must be written in the TOML format and use the
-`.toml` file extension.
+Файли визначення команд мають бути написані у форматі TOML та використовувати
+розширення `.toml`.
 
-### Required fields
+### Обов'язкові поля
 
-- `prompt` (String): The prompt that will be sent to the Gemini model when the
-  command is executed. This can be a single-line or multi-line string.
+- `prompt` (String): Підказка, яка буде надіслана моделі Gemini при виконанні
+  команди. Це може бути однорядковий або багаторядковий рядок.
 
-### Optional fields
+### Додаткові поля
 
-- `description` (String): A brief, one-line description of what the command
-  does. This text will be displayed next to your command in the `/help` menu.
-  **If you omit this field, a generic description will be generated from the
-  filename.**
+- `description` (String): Короткий однорядковий опис того, що робить команда.
+  Цей текст буде відображатися поруч із вашою командою у меню `/help`. **Якщо ви
+  пропустите це поле, загальний опис буде згенеровано з імені файлу.**
 
-## Handling arguments
+## Обробка аргументів
 
-Custom commands support two powerful methods for handling arguments. The CLI
-automatically chooses the correct method based on the content of your command's
-`prompt`.
+Власні команди підтримують два потужні методи обробки аргументів. CLI
+автоматично обирає правильний метод на основі вмісту `prompt` вашої команди.
 
-### 1. Context-aware injection with `{{args}}`
+### 1. Підстановка з урахуванням контексту за допомогою `{{args}}`
 
-If your `prompt` contains the special placeholder `{{args}}`, the CLI will
-replace that placeholder with the text the user typed after the command name.
+Якщо ваш `prompt` містить спеціальний заповнювач `{{args}}`, CLI замінить його
+текстом, який користувач ввів після назви команди.
 
-The behavior of this injection depends on where it is used:
+Поведінка цієї підстановки залежить від того, де вона використовується:
 
-**A. Raw injection (outside shell commands)**
+**A. Пряма підстановка (поза командами оболонки)**
 
-When used in the main body of the prompt, the arguments are injected exactly as
-the user typed them.
+При використанні в основному тілі підказки, аргументи вставляються саме так, як
+їх ввів користувач.
 
-**Example (`git/fix.toml`):**
+**Приклад (`git/fix.toml`):**
 
 ```toml
-# Invoked via: /git:fix "Button is misaligned"
+# Викликається через: /git:fix "Кнопка зміщена"
 
-description = "Generates a fix for a given issue."
-prompt = "Please provide a code fix for the issue described here: {{args}}."
+description = "Генерує виправлення для заданої проблеми."
+prompt = "Будь ласка, надайте виправлення коду для проблеми, описаної тут: {{args}}."
 ```
 
-The model receives:
-`Please provide a code fix for the issue described here: "Button is misaligned".`
+Модель отримує:
+`Будь ласка, надайте виправлення коду для проблеми, описаної тут: "Кнопка зміщена".`
 
-**B. Using arguments in shell commands (inside `!{...}` blocks)**
+**B. Використання аргументів у командах оболонки (всередині блоків `!{...}`)**
 
-When you use `{{args}}` inside a shell injection block (`!{...}`), the arguments
-are automatically **shell-escaped** before replacement. This allows you to
-safely pass arguments to shell commands, ensuring the resulting command is
-syntactically correct and secure while preventing command injection
-vulnerabilities.
+Коли ви використовуєте `{{args}}` всередині блоку підстановки оболонки
+(`!{...}`), аргументи автоматично **екрануються для оболонки** перед заміною. Це
+дозволяє безпечно передавати аргументи командам оболонки, гарантуючи, що
+результуюча команда буде синтаксично правильною та безпечною, запобігаючи
+вразливостям до ін'єкцій команд.
 
-**Example (`/grep-code.toml`):**
+**Приклад (`/grep-code.toml`):**
 
 ```toml
 prompt = """
-Please summarize the findings for the pattern `{{args}}`.
+Будь ласка, підсумуй результати для шаблону `{{args}}`.
 
-Search Results:
+Результати пошуку:
 !{grep -r {{args}} .}
 """
 ```
 
-When you run `/grep-code It's complicated`:
+Коли ви запускаєте `/grep-code "складний випадок"`:
 
-1. The CLI sees `{{args}}` used both outside and inside `!{...}`.
-2. Outside: The first `{{args}}` is replaced raw with `It's complicated`.
-3. Inside: The second `{{args}}` is replaced with the escaped version (e.g., on
-   Linux: `"It's complicated"`).
-4. The command executed is `grep -r "It's complicated" .`.
-5. The CLI prompts you to confirm this exact, secure command before execution.
-6. The final prompt is sent.
+1. CLI бачить `{{args}}`, що використовується як зовні, так і всередині
+   `!{...}`.
+2. Зовні: Перший `{{args}}` замінюється безпосередньо на `складний випадок`.
+3. Всередині: Другий `{{args}}` замінюється на екрановану версію (наприклад, на
+   Linux: `"складний випадок"`).
+4. Виконується команда `grep -r "складний випадок" .`.
+5. CLI просить вас підтвердити цю точну, безпечну команду перед виконанням.
+6. Остаточна підказка надсилається моделі.
 
-### 2. Default argument handling
+### 2. Обробка аргументів за замовчуванням
 
-If your `prompt` does **not** contain the special placeholder `{{args}}`, the
-CLI uses a default behavior for handling arguments.
+Якщо ваш `prompt` **не містить** спеціального заповнювача `{{args}}`, CLI
+використовує стандартну поведінку для обробки аргументів.
 
-If you provide arguments to the command (e.g., `/mycommand arg1`), the CLI will
-append the full command you typed to the end of the prompt, separated by two
-newlines. This allows the model to see both the original instructions and the
-specific arguments you just provided.
+Якщо ви надаєте аргументи команді (наприклад, `/mycommand arg1`), CLI додасть
+повну команду, яку ви ввели, в кінець підказки, розділивши їх двома новими
+рядками. Це дозволяє моделі бачити як оригінальні інструкції, так і специфічні
+аргументи, які ви щойно надали.
 
-If you do **not** provide any arguments (e.g., `/mycommand`), the prompt is sent
-to the model exactly as it is, with nothing appended.
+Якщо ви **не надаєте** жодних аргументів (наприклад, `/mycommand`), підказка
+надсилається моделі саме так, як вона є, нічого не додаючи.
 
-**Example (`changelog.toml`):**
+**Приклад (`changelog.toml`):**
 
-This example shows how to create a robust command by defining a role for the
-model, explaining where to find the user's input, and specifying the expected
-format and behavior.
+Цей приклад показує, як створити надійну команду, визначивши роль для моделі,
+пояснивши, де знайти ввід користувача, та вказавши очікуваний формат і
+поведінку.
 
 ```toml
-# In: <project>/.gemini/commands/changelog.toml
-# Invoked via: /changelog 1.2.0 added "Support for default argument parsing."
+# У: <project>/.gemini/commands/changelog.toml
+# Викликається через: /changelog 1.2.0 added "Підтримка парсингу аргументів за замовчуванням."
 
-description = "Adds a new entry to the project's CHANGELOG.md file."
+description = "Додає новий запис у файл CHANGELOG.md проекту."
 prompt = """
-# Task: Update Changelog
+# Завдання: Оновити Changelog
 
-You are an expert maintainer of this software project. A user has invoked a command to add a new entry to the changelog.
+Ви — експерт-супроводжувач цього програмного проекту. Користувач викликав команду, щоб додати новий запис у список змін (changelog).
 
-**The user's raw command is appended below your instructions.**
+**Пряма команда користувача додана нижче ваших інструкцій.**
 
-Your task is to parse the `<version>`, `<change_type>`, and `<message>` from their input and use the `write_file` tool to correctly update the `CHANGELOG.md` file.
+Ваше завдання — розібрати `<version>`, `<change_type>` та `<message>` з їхнього вводу та використовувати інструмент `write_file` для коректного оновлення файлу `CHANGELOG.md`.
 
-## Expected Format
-The command follows this format: `/changelog <version> <type> <message>`
-- `<type>` must be one of: "added", "changed", "fixed", "removed".
+## Очікуваний формат
+Команда має такий формат: `/changelog <version> <type> <message>`
+- `<type>` має бути одним із: "added", "changed", "fixed", "removed".
 
-## Behavior
-1. Read the `CHANGELOG.md` file.
-2. Find the section for the specified `<version>`.
-3. Add the `<message>` under the correct `<type>` heading.
-4. If the version or type section doesn't exist, create it.
-5. Adhere strictly to the "Keep a Changelog" format.
+## Поведінка
+1. Прочитайте файл `CHANGELOG.md`.
+2. Знайдіть розділ для вказаної версії `<version>`.
+3. Додайте `<message>` під відповідним заголовком `<type>`.
+4. Якщо розділ версії або типу не існує, створіть його.
+5. Суворо дотримуйтеся формату "Keep a Changelog".
 """
 ```
 
-When you run `/changelog 1.2.0 added "New feature"`, the final text sent to the
-model will be the original prompt followed by two newlines and the command you
-typed.
+Коли ви запустите `/changelog 1.2.0 added "Нова функція"`, остаточний текст,
+надісланий моделі, буде оригінальною підказкою, за якою слідують два нові рядки
+та введена вами команда.
 
-### 3. Executing shell commands with `!{...}`
+### 3. Виконання команд оболонки за допомогою `!{...}`
 
-You can make your commands dynamic by executing shell commands directly within
-your `prompt` and injecting their output. This is ideal for gathering context
-from your local environment, like reading file content or checking the status of
-Git.
+Ви можете зробити свої команди динамічними, виконуючи команди оболонки
+безпосередньо у вашому `prompt` та вставляючи їхній вивід. Це ідеально підходить
+для збору контексту з вашого локального середовища, наприклад, читання вмісту
+файлів або перевірки статусу Git.
 
-When a custom command attempts to execute a shell command, Gemini CLI will now
-prompt you for confirmation before proceeding. This is a security measure to
-ensure that only intended commands can be run.
+Коли власна команда намагається виконати команду оболонки, Gemini CLI тепер
+запитає у вас підтвердження перед продовженням. Це захід безпеки, щоб
+гарантувати виконання лише запланованих команд.
 
-**How it works:**
+**Як це працює:**
 
-1.  **Inject commands:** Use the `!{...}` syntax.
-2.  **Argument substitution:** If `{{args}}` is present inside the block, it is
-    automatically shell-escaped (see
-    [Context-Aware Injection](#1-context-aware-injection-with-args) above).
-3.  **Robust parsing:** The parser correctly handles complex shell commands that
-    include nested braces, such as JSON payloads. **Note:** The content inside
-    `!{...}` must have balanced braces (`{` and `}`). If you need to execute a
-    command containing unbalanced braces, consider wrapping it in an external
-    script file and calling the script within the `!{...}` block.
-4.  **Security check and confirmation:** The CLI performs a security check on
-    the final, resolved command (after arguments are escaped and substituted). A
-    dialog will appear showing the exact command(s) to be executed.
-5.  **Execution and error reporting:** The command is executed. If the command
-    fails, the output injected into the prompt will include the error messages
-    (stderr) followed by a status line, e.g.,
-    `[Shell command exited with code 1]`. This helps the model understand the
-    context of the failure.
+1.  **Вставка команд:** Використовуйте синтаксис `!{...}`.
+2.  **Заміна аргументів:** Якщо `{{args}}` присутній всередині блоку, він
+    автоматично екранується для оболонки (див.
+    [Підстановка з урахуванням контексту](#1-підстановка-з-урахуванням-контексту-за-допомогою-args)
+    вище).
+3.  **Надійний парсинг:** Парсер коректно обробляє складні команди оболонки, які
+    містять вкладені фігурні дужки, наприклад, корисні навантаження JSON.
+    **Примітка:** Вміст всередині `!{...}` повинен мати збалансовані фігурні
+    дужки (`{` та `}`). Якщо вам потрібно виконати команду, що містить
+    незбалансовані дужки, розгляньте можливість її винесення у зовнішній файл
+    сценарію та виклику цього сценарію всередині блоку `!{...}`.
+4.  **Перевірка безпеки та підтвердження:** CLI виконує перевірку безпеки
+    остаточної, вирішеної команди (після екранування та заміни аргументів).
+    З'явиться діалогове вікно з точними командами, що будуть виконані.
+5.  **Виконання та звіт про помилки:** Команда виконується. Якщо команда
+    завершується невдало, вивід, вставлений у підказку, включатиме повідомлення
+    про помилки (stderr), за якими слідуватиме рядок статусу, наприклад,
+    `[Команда оболонки завершилася з кодом 1]`.
 
-**Example (`git/commit.toml`):**
+**Приклад (`git/commit.toml`):**
 
-This command gets the staged git diff and uses it to ask the model to write a
-commit message.
+Ця команда отримує підготовлені (staged) зміни git і використовує їх, щоб
+попросити модель написати повідомлення коміту.
 
 ````toml
-# In: <project>/.gemini/commands/git/commit.toml
-# Invoked via: /git:commit
+# У: <project>/.gemini/commands/git/commit.toml
+# Викликається через: /git:commit
 
-description = "Generates a Git commit message based on staged changes."
+description = "Генерує повідомлення коміту Git на основі підготовлених змін."
 
-# The prompt uses !{...} to execute the command and inject its output.
+# Підказка використовує !{...} для виконання команди та вставки її виводу.
 prompt = """
-Please generate a Conventional Commit message based on the following git diff:
+Будь ласка, згенеруй повідомлення Conventional Commit на основі наступного git diff:
 
 ```diff
 !{git diff --staged}
 ```
 
 """
-
 ````
 
-When you run `/git:commit`, the CLI first executes `git diff --staged`, then
-replaces `!{git diff --staged}` with the output of that command before sending
-the final, complete prompt to the model.
+Коли ви запускаєте `/git:commit`, CLI спочатку виконує `git diff --staged`,
+потім замінює `!{git diff --staged}` виводом цієї команди перед відправкою
+остаточної, повної підказки моделі.
 
-### 4. Injecting file content with `@{...}`
+### 4. Вставка вмісту файлів за допомогою `@{...}`
 
-You can directly embed the content of a file or a directory listing into your
-prompt using the `@{...}` syntax. This is useful for creating commands that
-operate on specific files.
+Ви можете безпосередньо вбудовувати вміст файлу або список файлів каталогу у
+вашу підказку за допомогою синтаксису `@{...}`. Це корисно для створення команд,
+які працюють з конкретними файлами.
 
-**How it works:**
+**Як це працює:**
 
-- **File injection**: `@{path/to/file.txt}` is replaced by the content of
-  `file.txt`.
-- **Multimodal support**: If the path points to a supported image (e.g., PNG,
-  JPEG), PDF, audio, or video file, it will be correctly encoded and injected as
-  multimodal input. Other binary files are handled gracefully and skipped.
-- **Directory listing**: `@{path/to/dir}` is traversed and each file present
-  within the directory and all subdirectories is inserted into the prompt. This
-  respects `.gitignore` and `.geminiignore` if enabled.
-- **Workspace-aware**: The command searches for the path in the current
-  directory and any other workspace directories. Absolute paths are allowed if
-  they are within the workspace.
-- **Processing order**: File content injection with `@{...}` is processed
-  _before_ shell commands (`!{...}`) and argument substitution (`{{args}}`).
-- **Parsing**: The parser requires the content inside `@{...}` (the path) to
-  have balanced braces (`{` and `}`).
+- **Вставка файлу**: `@{path/to/file.txt}` замінюється вмістом `file.txt`.
+- **Мультимодальна підтримка**: Якщо шлях вказує на підтримуване зображення
+  (наприклад, PNG, JPEG), PDF, аудіо або відеофайл, він буде коректно кодований
+  та вставлений як мультимодальний ввід. Інші бінарні файли обробляються
+  коректно і пропускаються.
+- **Список каталогу**: `@{path/to/dir}` проходить по каталогу, і кожен файл у
+  цьому каталозі та всіх підкаталогах вставляється у підказку. Це враховує
+  `.gitignore` та `.geminiignore`, якщо вони увімкнені.
+- **Врахування робочого простору**: Команда шукає шлях у поточному каталозі та
+  будь-яких інших каталогах робочого простору. Абсолютні шляхи дозволені, якщо
+  вони знаходяться в межах робочого простору.
+- **Порядок обробки**: Вставка вмісту файлів за допомогою `@{...}` обробляється
+  _перед_ командами оболонки (`!{...}`) та заміною аргументів (`{{args}}`).
+- **Парсинг**: Парсер вимагає, щоб вміст всередині `@{...}` (шлях) мав
+  збалансовані фігурні дужки (`{` та `}`).
 
-**Example (`review.toml`):**
+**Приклад (`review.toml`):**
 
-This command injects the content of a _fixed_ best practices file
-(`docs/best-practices.md`) and uses the user's arguments to provide context for
-the review.
+Ця команда вставляє вміст _фіксованого_ файлу з кращими практиками
+(`docs/best-practices.md`) і використовує аргументи користувача для надання
+контексту для огляду.
 
 ```toml
-# In: <project>/.gemini/commands/review.toml
-# Invoked via: /review FileCommandLoader.ts
+# У: <project>/.gemini/commands/review.toml
+# Викликається через: /review FileCommandLoader.ts
 
-description = "Reviews the provided context using a best practice guide."
+description = "Переглядає наданий контекст, використовуючи посібник з кращих практик."
 prompt = """
-You are an expert code reviewer.
+Ви — експертний рецензент коду.
 
-Your task is to review {{args}}.
+Ваше завдання — переглянути {{args}}.
 
-Use the following best practices when providing your review:
+Використовуйте наступні кращі практики при проведенні огляду:
 
 @{docs/best-practices.md}
 """
 ```
 
-When you run `/review FileCommandLoader.ts`, the `@{docs/best-practices.md}`
-placeholder is replaced by the content of that file, and `{{args}}` is replaced
-by the text you provided, before the final prompt is sent to the model.
+Коли ви запускаєте `/review FileCommandLoader.ts`, заповнювач
+`@{docs/best-practices.md}` замінюється вмістом цього файлу, а `{{args}}`
+замінюється наданим вами текстом, перш ніж остаточна підказка буде надіслана
+моделі.
 
 ---
 
-## Example: A "Pure Function" refactoring command
+## Приклад: Команда рефакторингу "Чиста функція"
 
-Let's create a global command that asks the model to refactor a piece of code.
+Давайте створимо глобальну команду, яка просить модель рефакторити фрагмент
+коду.
 
-**1. Create the file and directories:**
+**1. Створіть файл та каталоги:**
 
-First, ensure the user commands directory exists, then create a `refactor`
-subdirectory for organization and the final TOML file.
+Спочатку переконайтеся, що каталог команд користувача існує, потім створіть
+підкаталог `refactor` для організації та фінальний файл TOML.
 
 ```bash
 mkdir -p ~/.gemini/commands/refactor
 touch ~/.gemini/commands/refactor/pure.toml
 ```
 
-**2. Add the content to the file:**
+**2. Додайте вміст у файл:**
 
-Open `~/.gemini/commands/refactor/pure.toml` in your editor and add the
-following content. We are including the optional `description` for best
-practice.
+Відкрийте `~/.gemini/commands/refactor/pure.toml` у вашому редакторі та додайте
+наступний вміст. Ми включаємо необов'язковий `description` як кращу практику.
 
 ```toml
-# In: ~/.gemini/commands/refactor/pure.toml
-# This command will be invoked via: /refactor:pure
+# У: ~/.gemini/commands/refactor/pure.toml
+# Ця команда буде викликатися через: /refactor:pure
 
-description = "Asks the model to refactor the current context into a pure function."
+description = "Просить модель рефакторити поточний контекст у чисту функцію."
 
 prompt = """
-Please analyze the code I've provided in the current context.
-Refactor it into a pure function.
+Будь ласка, проаналізуй код, який я надав у поточному контексті.
+Рефактори його у чисту функцію (pure function).
 
-Your response should include:
-1. The refactored, pure function code block.
-2. A brief explanation of the key changes you made and why they contribute to purity.
+Твоя відповідь має містити:
+1. Блок коду з рефактореною чистою функцією.
+2. Коротке пояснення основних змін, які ти вніс, і чому вони сприяють чистоті функції.
 """
 ```
 
-**3. Run the command:**
+**3. Запустіть команду:**
 
-That's it! You can now run your command in the CLI. First, you might add a file
-to the context, and then invoke your command:
+Це все! Тепер ви можете запустити свою команду в CLI. Спочатку ви можете додати
+файл до контексту, а потім викликати свою команду:
 
 ```
 > @my-messy-function.js
 > /refactor:pure
 ```
 
-Gemini CLI will then execute the multi-line prompt defined in your TOML file.
+Gemini CLI виконає багаторядкову підказку, визначену у вашому TOML-файлі.
+
+```
+
+```

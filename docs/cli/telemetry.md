@@ -1,128 +1,130 @@
-# Observability with OpenTelemetry
+# Спостережуваність за допомогою OpenTelemetry
 
-Learn how to enable and setup OpenTelemetry for Gemini CLI.
+Дізнайтеся, як увімкнути та налаштувати OpenTelemetry для Gemini CLI.
 
-- [Observability with OpenTelemetry](#observability-with-opentelemetry)
-  - [Key benefits](#key-benefits)
-  - [OpenTelemetry integration](#opentelemetry-integration)
-  - [Configuration](#configuration)
-  - [Google Cloud telemetry](#google-cloud-telemetry)
-    - [Prerequisites](#prerequisites)
-    - [Direct export (recommended)](#direct-export-recommended)
-    - [Collector-based export (advanced)](#collector-based-export-advanced)
-  - [Local telemetry](#local-telemetry)
-    - [File-based output (recommended)](#file-based-output-recommended)
-    - [Collector-based export (advanced)](#collector-based-export-advanced-1)
-  - [Logs and metrics](#logs-and-metrics)
-    - [Logs](#logs)
-      - [Sessions](#sessions)
-      - [Tools](#tools)
-      - [Files](#files)
+- [Спостережуваність за допомогою OpenTelemetry](#спостережуваність-за-допомогою-opentelemetry)
+  - [Ключові переваги](#ключові-переваги)
+  - [Інтеграція OpenTelemetry](#інтеграція-opentelemetry)
+  - [Конфігурація](#конфігурація)
+  - [Телеметрія Google Cloud](#телеметрія-google-cloud)
+    - [Попередні вимоги](#попередні-вимоги)
+    - [Прямий експорт (рекомендовано)](#прямий-експорт-рекомендовано)
+    - [Експорт через колектор (просунутий)](#експорт-через-колектор-просунутий)
+  - [Локальна телеметрія](#локальна-телеметрія)
+    - [Вивід у файл (рекомендовано)](#вивід-у-файл-рекомендовано)
+    - [Експорт через колектор (просунутий)](#експорт-через-колектор-просунутий-1)
+  - [Логи та метрики](#логи-та-метрики)
+    - [Логи (Журнали подій)](#логи)
+      - [Сесії](#сесії)
+      - [Інструменти](#інструменти)
+      - [Файли](#файли)
       - [API](#api)
-      - [Model routing](#model-routing)
-      - [Chat and streaming](#chat-and-streaming)
-      - [Resilience](#resilience)
-      - [Extensions](#extensions)
-      - [Agent runs](#agent-runs)
+      - [Маршрутизація моделей](#маршрутизація-моделей)
+      - [Чат та стрімінг](#чат-та-стрімінг)
+      - [Стійкість](#стійкість)
+      - [Розширення](#розширення)
+      - [Запуски агентів](#запуски-агентів)
       - [IDE](#ide)
       - [UI](#ui)
-    - [Metrics](#metrics)
-      - [Custom](#custom)
-        - [Sessions](#sessions-1)
-        - [Tools](#tools-1)
+    - [Метрики](#метрики)
+      - [Власні](#власні)
+        - [Сесії](#сесії-1)
+        - [Інструменти](#інструменти-1)
         - [API](#api-1)
-        - [Token usage](#token-usage)
-        - [Files](#files-1)
-        - [Chat and streaming](#chat-and-streaming-1)
-        - [Model routing](#model-routing-1)
-        - [Agent runs](#agent-runs-1)
+        - [Використання токенів](#використання-токенів)
+        - [Файли](#файли-1)
+        - [Чат та стрімінг](#чат-та-стрімінг-1)
+        - [Маршрутизація моделей](#маршрутизація-моделей-1)
+        - [Запуски агентів](#запуски-агентів-1)
         - [UI](#ui-1)
-        - [Performance](#performance)
-      - [GenAI semantic convention](#genai-semantic-convention)
+        - [Продуктивність](#продуктивність)
+      - [Семантичні конвенції GenAI](#семантичні-конвенції-genai)
 
-## Key benefits
+## Ключові переваги
 
-- **🔍 Usage analytics**: Understand interaction patterns and feature adoption
-  across your team
-- **⚡ Performance monitoring**: Track response times, token consumption, and
-  resource utilization
-- **🐛 Real-time debugging**: Identify bottlenecks, failures, and error patterns
-  as they occur
-- **📊 Workflow optimization**: Make informed decisions to improve
-  configurations and processes
-- **🏢 Enterprise governance**: Monitor usage across teams, track costs, ensure
-  compliance, and integrate with existing monitoring infrastructure
+- **🔍 Аналітика використання**: Розуміння патернів взаємодії та прийняття
+  функцій вашою командою.
+- **⚡ Моніторинг продуктивності**: Відстеження часу відповіді, споживання
+  токенів та використання ресурсів.
+- **🐛 Налагодження в реальному часі**: Ідентифікація вузьких місць, збоїв та
+  патернів помилок у міру їх виникнення.
+- **📊 Оптимізація робочого процесу**: Прийняття обґрунтованих рішень для
+  покращення конфігурацій та процесів.
+- **🏢 Корпоративне управління**: Моніторинг використання між командами,
+  відстеження витрат, забезпечення відповідності стандартам та інтеграція з
+  існуючою інфраструктурою моніторингу.
 
-## OpenTelemetry integration
+## Інтеграція OpenTelemetry
 
-Built on **[OpenTelemetry]** — the vendor-neutral, industry-standard
-observability framework — Gemini CLI's observability system provides:
+Побудована на **[OpenTelemetry]** — вендор-нейтральному галузевому стандарті
+спостережуваності — система спостережуваності Gemini CLI забезпечує:
 
-- **Universal compatibility**: Export to any OpenTelemetry backend (Google
-  Cloud, Jaeger, Prometheus, Datadog, etc.)
-- **Standardized data**: Use consistent formats and collection methods across
-  your toolchain
-- **Future-proof integration**: Connect with existing and future observability
-  infrastructure
-- **No vendor lock-in**: Switch between backends without changing your
-  instrumentation
+- **Універсальна сумісність**: Експорт у будь-який бекенд OpenTelemetry (Google
+  Cloud, Jaeger, Prometheus, Datadog тощо).
+- **Стандартизовані дані**: Використання узгоджених форматів та методів збору у
+  всьому стеку інструментів.
+- **Майбутня інтеграція**: Підключення до існуючої та майбутньої інфраструктури
+  спостережуваності.
+- **Відсутність прив'язки до вендора**: Перемикання між бекендами без зміни
+  інструментарію коду.
 
 [OpenTelemetry]: https://opentelemetry.io/
 
-## Configuration
+## Конфігурація
 
-All telemetry behavior is controlled through your `.gemini/settings.json` file.
-Environment variables can be used to override the settings in the file.
+Вся поведінка телеметрії контролюється через файл `.gemini/settings.json`.
+Змінні середовища можуть використовуватися для перевизначення налаштувань у
+файлі.
 
-| Setting        | Environment Variable             | Description                                         | Values            | Default                 |
-| -------------- | -------------------------------- | --------------------------------------------------- | ----------------- | ----------------------- |
-| `enabled`      | `GEMINI_TELEMETRY_ENABLED`       | Enable or disable telemetry                         | `true`/`false`    | `false`                 |
-| `target`       | `GEMINI_TELEMETRY_TARGET`        | Where to send telemetry data                        | `"gcp"`/`"local"` | `"local"`               |
-| `otlpEndpoint` | `GEMINI_TELEMETRY_OTLP_ENDPOINT` | OTLP collector endpoint                             | URL string        | `http://localhost:4317` |
-| `otlpProtocol` | `GEMINI_TELEMETRY_OTLP_PROTOCOL` | OTLP transport protocol                             | `"grpc"`/`"http"` | `"grpc"`                |
-| `outfile`      | `GEMINI_TELEMETRY_OUTFILE`       | Save telemetry to file (overrides `otlpEndpoint`)   | file path         | -                       |
-| `logPrompts`   | `GEMINI_TELEMETRY_LOG_PROMPTS`   | Include prompts in telemetry logs                   | `true`/`false`    | `true`                  |
-| `useCollector` | `GEMINI_TELEMETRY_USE_COLLECTOR` | Use external OTLP collector (advanced)              | `true`/`false`    | `false`                 |
-| `useCliAuth`   | `GEMINI_TELEMETRY_USE_CLI_AUTH`  | Use CLI credentials for telemetry (GCP target only) | `true`/`false`    | `false`                 |
+| Налаштування   | Змінна середовища                | Опис                                                   | Значення          | За замовчуванням        |
+| -------------- | -------------------------------- | ------------------------------------------------------ | ----------------- | ----------------------- |
+| `enabled`      | `GEMINI_TELEMETRY_ENABLED`       | Увімкнути або вимкнути телеметрію                      | `true`/`false`    | `false`                 |
+| `target`       | `GEMINI_TELEMETRY_TARGET`        | Куди надсилати дані телеметрії                         | `"gcp"`/`"local"` | `"local"`               |
+| `otlpEndpoint` | `GEMINI_TELEMETRY_OTLP_ENDPOINT` | Кінцева точка колектора OTLP                           | URL string        | `http://localhost:4317` |
+| `otlpProtocol` | `GEMINI_TELEMETRY_OTLP_PROTOCOL` | Протокол транспорту OTLP                               | `"grpc"`/`"http"` | `"grpc"`                |
+| `outfile`      | `GEMINI_TELEMETRY_OUTFILE`       | Зберегти телеметрію у файл (перекриває `otlpEndpoint`) | шлях до файлу     | -                       |
+| `logPrompts`   | `GEMINI_TELEMETRY_LOG_PROMPTS`   | Включати підказки в логи телеметрії                    | `true`/`false`    | `true`                  |
+| `useCollector` | `GEMINI_TELEMETRY_USE_COLLECTOR` | Використовувати зовнішній колектор OTLP (просунуто)    | `true`/`false`    | `false`                 |
+| `useCliAuth`   | `GEMINI_TELEMETRY_USE_CLI_AUTH`  | Облікові дані CLI для телеметрії (тільки для GCP)      | `true`/`false`    | `false`                 |
 
-**Note on boolean environment variables:** For the boolean settings (`enabled`,
-`logPrompts`, `useCollector`), setting the corresponding environment variable to
-`true` or `1` will enable the feature. Any other value will disable it.
+**Примітка щодо логічних змінних середовища:** Для параметрів (`enabled`,
+`logPrompts`, `useCollector`) встановлення змінної у `true` або `1` увімкне
+функцію. Будь-яке інше значення її вимкне.
 
-For detailed information about all configuration options, see the
-[Configuration guide](../get-started/configuration.md).
+Для детальної інформації про всі параметри конфігурації дивіться
+[Посібник з налаштування](../get-started/configuration.md).
 
 ## Google Cloud telemetry
 
-### Prerequisites
+### Попередні вимоги
 
-Before using either method below, complete these steps:
+Перед використанням будь-якого з методів нижче, виконайте ці кроки:
 
-1. Set your Google Cloud project ID:
-   - For telemetry in a separate project from inference:
+1. Встановіть ID вашого проекту Google Cloud:
+   - Для телеметрії в окремому проекті від викликів ШІ:
      ```bash
-     export OTLP_GOOGLE_CLOUD_PROJECT="your-telemetry-project-id"
+     export OTLP_GOOGLE_CLOUD_PROJECT="vash-telemetry-project-id"
      ```
-   - For telemetry in the same project as inference:
+   - Для телеметрії в тому ж проекті, що і виклики ШІ:
      ```bash
-     export GOOGLE_CLOUD_PROJECT="your-project-id"
+     export GOOGLE_CLOUD_PROJECT="vash-project-id"
      ```
 
-2. Authenticate with Google Cloud:
-   - If using a user account:
+2. Авторизуйтесь у Google Cloud:
+   - Якщо використовуєте обліковий запис користувача:
      ```bash
      gcloud auth application-default login
      ```
-   - If using a service account:
+   - Якщо використовуєте сервісний обліковий запис:
      ```bash
-     export GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/service-account.json"
+     export GOOGLE_APPLICATION_CREDENTIALS="/шлях/до/vash-service-account.json"
      ```
-3. Make sure your account or service account has these IAM roles:
+3. Переконайтеся, що ваш обліковий запис має такі ролі IAM:
    - Cloud Trace Agent
    - Monitoring Metric Writer
    - Logs Writer
 
-4. Enable the required Google Cloud APIs (if not already enabled):
+4. Увімкніть необхідні API Google Cloud (якщо ще не увімкнені):
    ```bash
    gcloud services enable \
      cloudtrace.googleapis.com \
@@ -131,14 +133,14 @@ Before using either method below, complete these steps:
      --project="$OTLP_GOOGLE_CLOUD_PROJECT"
    ```
 
-### Authenticating with CLI Credentials
+### Аутентифікація за допомогою облікових даних CLI
 
-By default, the telemetry collector for Google Cloud uses Application Default
-Credentials (ADC). However, you can configure it to use the same OAuth
-credentials that you use to log in to the Gemini CLI. This is useful in
-environments where you don't have ADC set up.
+За замовчуванням колектор телеметрії для Google Cloud використовує стандартні
+облікові дані програми (ADC). Проте ви можете налаштувати його на використання
+тих самих облікових даних OAuth, які ви використовуєте для входу в Gemini CLI.
+Це корисно в середовищах, де ADC не налаштовано.
 
-To enable this, set the `useCliAuth` property in your `telemetry` settings to
+Щоб увімкнути це, встановіть параметр `useCliAuth` у налаштуваннях `telemetry` у
 `true`:
 
 ```json
@@ -151,19 +153,20 @@ To enable this, set the `useCliAuth` property in your `telemetry` settings to
 }
 ```
 
-**Important:**
+**Важливо:**
 
-- This setting requires the use of **Direct Export** (in-process exporters).
-- It **cannot** be used with `useCollector: true`. If you enable both, telemetry
-  will be disabled and an error will be logged.
-- The CLI will automatically use your credentials to authenticate with Google
-  Cloud Trace, Metrics, and Logging APIs.
+- Це налаштування вимагає використання **прямого експорту** (in-process
+  exporters).
+- Його **не можна** використовувати разом із `useCollector: true`. Якщо
+  увімкнути обидва, телеметрія буде вимкнена, а помилка занесена в журнал.
+- CLI автоматично використовуватиме ваші облікові дані для аутентифікації в API
+  Google Cloud Trace, Metrics та Logging.
 
-### Direct export (recommended)
+### Прямий експорт (рекомендовано)
 
-Sends telemetry directly to Google Cloud services. No collector needed.
+Надсилає телеметрію безпосередньо в сервіси Google Cloud. Колектор не потрібен.
 
-1. Enable telemetry in your `.gemini/settings.json`:
+1. Увімкніть телеметрію у вашому `.gemini/settings.json`:
    ```json
    {
      "telemetry": {
@@ -172,19 +175,18 @@ Sends telemetry directly to Google Cloud services. No collector needed.
      }
    }
    ```
-2. Run Gemini CLI and send prompts.
-3. View logs and metrics:
-   - Open the Google Cloud Console in your browser after sending prompts:
-     - Logs: https://console.cloud.google.com/logs/
-     - Metrics: https://console.cloud.google.com/monitoring/metrics-explorer
-     - Traces: https://console.cloud.google.com/traces/list
+2. Запустіть Gemini CLI та надсилайте підказки.
+3. Перегляньте логи та метрики у Google Cloud Console:
+   - Логи: https://console.cloud.google.com/logs/
+   - Метрики: https://console.cloud.google.com/monitoring/metrics-explorer
+   - Траси: https://console.cloud.google.com/traces/list
 
-### Collector-based export (advanced)
+### Експорт через колектор (просунутий)
 
-For custom processing, filtering, or routing, use an OpenTelemetry collector to
-forward data to Google Cloud.
+Для спеціальної обробки, фільтрації або маршрутизації використовуйте колектор
+OpenTelemetry для пересилання даних у Google Cloud.
 
-1. Configure your `.gemini/settings.json`:
+1. Налаштуйте ваш `.gemini/settings.json`:
    ```json
    {
      "telemetry": {
@@ -194,32 +196,29 @@ forward data to Google Cloud.
      }
    }
    ```
-2. Run the automation script:
+2. Запустіть сценарій автоматизації:
    ```bash
    npm run telemetry -- --target=gcp
    ```
-   This will:
-   - Start a local OTEL collector that forwards to Google Cloud
-   - Configure your workspace
-   - Provide links to view traces, metrics, and logs in Google Cloud Console
-   - Save collector logs to `~/.gemini/tmp/<projectHash>/otel/collector-gcp.log`
-   - Stop collector on exit (e.g. `Ctrl+C`)
-3. Run Gemini CLI and send prompts.
-4. View logs and metrics:
-   - Open the Google Cloud Console in your browser after sending prompts:
-     - Logs: https://console.cloud.google.com/logs/
-     - Metrics: https://console.cloud.google.com/monitoring/metrics-explorer
-     - Traces: https://console.cloud.google.com/traces/list
-   - Open `~/.gemini/tmp/<projectHash>/otel/collector-gcp.log` to view local
-     collector logs.
+   Це дозволить:
+   - Запустити локальний колектор OTEL, який пересилає дані в Google Cloud.
+   - Налаштувати ваш робочий простір.
+   - Надати посилання для перегляду трас, метрик та логів у Google Cloud
+     Console.
+   - Зберегти логи колектора у
+     `~/.gemini/tmp/<projectHash>/otel/collector-gcp.log`.
+   - Зупинити колектор при виході (наприклад, `Ctrl+C`).
+3. Запустіть Gemini CLI та надсилайте підказки.
+4. Перегляньте логи та метрики у консолі Google Cloud та локальному файлі логів.
 
-## Local telemetry
+## Локальна телеметрія
 
-For local development and debugging, you can capture telemetry data locally:
+Для локальної розробки та налагодження ви можете збирати дані телеметрії
+локально:
 
-### File-based output (recommended)
+### Вивід у файл (рекомендовано)
 
-1. Enable telemetry in your `.gemini/settings.json`:
+1. Увімкніть телеметрію у вашому `.gemini/settings.json`:
    ```json
    {
      "telemetry": {
@@ -230,560 +229,143 @@ For local development and debugging, you can capture telemetry data locally:
      }
    }
    ```
-2. Run Gemini CLI and send prompts.
-3. View logs and metrics in the specified file (e.g., `.gemini/telemetry.log`).
+2. Запустіть Gemini CLI та надсилайте підказки.
+3. Переглядайте логи та метрики у вказаному файлі (наприклад,
+   `.gemini/telemetry.log`).
 
-### Collector-based export (advanced)
+### Експорт через колектор (просунутий)
 
-1. Run the automation script:
+1. Запустіть сценарій автоматизації:
    ```bash
    npm run telemetry -- --target=local
    ```
-   This will:
-   - Download and start Jaeger and OTEL collector
-   - Configure your workspace for local telemetry
-   - Provide a Jaeger UI at http://localhost:16686
-   - Save logs/metrics to `~/.gemini/tmp/<projectHash>/otel/collector.log`
-   - Stop collector on exit (e.g. `Ctrl+C`)
-2. Run Gemini CLI and send prompts.
-3. View traces at http://localhost:16686 and logs/metrics in the collector log
-   file.
+   Це дозволить:
+   - Завантажити та запустити Jaeger та колектор OTEL.
+   - Налаштувати ваш робочий простір для локальної телеметрії.
+   - Надати інтерфейс Jaeger за адресою http://localhost:16686.
+   - Зберегти логи/метрики у `~/.gemini/tmp/<projectHash>/otel/collector.log`.
+2. Запустіть Gemini CLI та надсилайте підказки.
+3. Переглядайте траси за адресою http://localhost:16686 та логи/метрики у файлі
+   логу колектора.
 
-## Logs and metrics
+## Логи та метрики
 
-The following section describes the structure of logs and metrics generated for
-Gemini CLI.
+Наступний розділ описує структуру логів та метрик, що генеруються для Gemini
+CLI.
 
-The `session.id`, `installation.id`, and `user.email` (available only when
-authenticated with a Google account) are included as common attributes on all
-logs and metrics.
+`session.id`, `installation.id` та `user.email` (доступний лише при
+аутентифікації через обліковий запис Google) включені як спільні атрибути для
+всіх логів та метрик.
 
-### Logs
+### Логи
 
-Logs are timestamped records of specific events. The following events are logged
-for Gemini CLI, grouped by category.
+Логи — це записи конкретних подій із мітками часу. Для Gemini CLI реєструються
+наступні події, згруповані за категоріями.
 
-#### Sessions
+#### Сесії
 
-Captures startup configuration and user prompt submissions.
+Фіксує конфігурацію запуску та подання підказок користувачем.
 
-- `gemini_cli.config`: Emitted once at startup with the CLI configuration.
-  - **Attributes**:
-    - `model` (string)
-    - `embedding_model` (string)
-    - `sandbox_enabled` (boolean)
-    - `core_tools_enabled` (string)
-    - `approval_mode` (string)
-    - `api_key_enabled` (boolean)
-    - `vertex_ai_enabled` (boolean)
-    - `log_user_prompts_enabled` (boolean)
-    - `file_filtering_respect_git_ignore` (boolean)
-    - `debug_mode` (boolean)
-    - `mcp_servers` (string)
-    - `mcp_servers_count` (int)
-    - `extensions` (string)
-    - `extension_ids` (string)
-    - `extension_count` (int)
-    - `mcp_tools` (string, if applicable)
-    - `mcp_tools_count` (int, if applicable)
-    - `output_format` ("text", "json", or "stream-json")
+- `gemini_cli.config`: Видається один раз при старті з конфігурацією CLI.
+  - **Атрибути**:
+    - `model`, `sandbox_enabled`, `approval_mode`, `debug_mode` тощо.
+    - `output_format` ("text", "json" або "stream-json").
 
-- `gemini_cli.user_prompt`: Emitted when a user submits a prompt.
-  - **Attributes**:
-    - `prompt_length` (int)
-    - `prompt_id` (string)
-    - `prompt` (string; excluded if `telemetry.logPrompts` is `false`)
-    - `auth_type` (string)
+- `gemini_cli.user_prompt`: Видається, коли користувач надсилає підказку.
+  - **Атрибути**:
+    - `prompt_length`, `prompt_id`.
+    - `prompt` (виключається, якщо `telemetry.logPrompts` має значення `false`).
 
-#### Tools
+#### Інструменти
 
-Captures tool executions, output truncation, and Smart Edit behavior.
+Фіксує виконання інструментів, обрізання виводу та поведінку Smart Edit.
 
-- `gemini_cli.tool_call`: Emitted for each tool (function) call.
-  - **Attributes**:
-    - `function_name`
-    - `function_args`
-    - `duration_ms`
-    - `success` (boolean)
-    - `decision` ("accept", "reject", "auto_accept", or "modify", if applicable)
-    - `error` (if applicable)
-    - `error_type` (if applicable)
-    - `prompt_id` (string)
-    - `tool_type` ("native" or "mcp")
-    - `mcp_server_name` (string, if applicable)
-    - `extension_name` (string, if applicable)
-    - `extension_id` (string, if applicable)
-    - `content_length` (int, if applicable)
-    - `metadata` (if applicable)
+- `gemini_cli.tool_call`: Видається для кожного виклику інструменту (функції).
+  - **Атрибути**:
+    - `function_name`, `duration_ms`, `success` (boolean).
+    - `decision` ("accept", "reject", "auto_accept" або "modify").
 
-- `gemini_cli.tool_output_truncated`: Output of a tool call was truncated.
-  - **Attributes**:
-    - `tool_name` (string)
-    - `original_content_length` (int)
-    - `truncated_content_length` (int)
-    - `threshold` (int)
-    - `lines` (int)
-    - `prompt_id` (string)
+- `gemini_cli.tool_output_truncated`: Вивід виклику інструменту був обрізаний.
+  - **Атрибути**:
+    - `tool_name`, `original_content_length`, `truncated_content_length`.
 
-- `gemini_cli.smart_edit_strategy`: Smart Edit strategy chosen.
-  - **Attributes**:
-    - `strategy` (string)
+#### Файли
 
-- `gemini_cli.smart_edit_correction`: Smart Edit correction result.
-  - **Attributes**:
-    - `correction` ("success" | "failure")
+Відстежує операції з файлами, що виконуються інструментами.
 
-- `gen_ai.client.inference.operation.details`: This event provides detailed
-  information about the GenAI operation, aligned with [OpenTelemetry GenAI
-  semantic conventions for events].
-  - **Attributes**:
-    - `gen_ai.request.model` (string)
-    - `gen_ai.provider.name` (string)
-    - `gen_ai.operation.name` (string)
-    - `gen_ai.input.messages` (json string)
-    - `gen_ai.output.messages` (json string)
-    - `gen_ai.response.finish_reasons` (array of strings)
-    - `gen_ai.usage.input_tokens` (int)
-    - `gen_ai.usage.output_tokens` (int)
-    - `gen_ai.request.temperature` (float)
-    - `gen_ai.request.top_p` (float)
-    - `gen_ai.request.top_k` (int)
-    - `gen_ai.request.max_tokens` (int)
-    - `gen_ai.system_instructions` (json string)
-    - `server.address` (string)
-    - `server.port` (int)
-
-#### Files
-
-Tracks file operations performed by tools.
-
-- `gemini_cli.file_operation`: Emitted for each file operation.
-  - **Attributes**:
-    - `tool_name` (string)
-    - `operation` ("create" | "read" | "update")
-    - `lines` (int, optional)
-    - `mimetype` (string, optional)
-    - `extension` (string, optional)
-    - `programming_language` (string, optional)
+- `gemini_cli.file_operation`: Видається для кожної операції з файлом.
+  - **Атрибути**:
+    - `operation` ("create" | "read" | "update").
+    - `extension`, `programming_language`.
 
 #### API
 
-Captures Gemini API requests, responses, and errors.
+Фіксує запити, відповіді та помилки Gemini API.
 
-- `gemini_cli.api_request`: Request sent to Gemini API.
-  - **Attributes**:
-    - `model` (string)
-    - `prompt_id` (string)
-    - `request_text` (string, optional)
+- `gemini_cli.api_request`: Запит надіслано до Gemini API.
+- `gemini_cli.api_response`: Отримано відповідь від Gemini API.
+  - **Атрибути**:
+    - `input_token_count`, `output_token_count`, `cached_content_token_count`.
+- `gemini_cli.api_error`: Запит до API не вдався.
 
-- `gemini_cli.api_response`: Response received from Gemini API.
-  - **Attributes**:
-    - `model` (string)
-    - `status_code` (int|string)
-    - `duration_ms` (int)
-    - `input_token_count` (int)
-    - `output_token_count` (int)
-    - `cached_content_token_count` (int)
-    - `thoughts_token_count` (int)
-    - `tool_token_count` (int)
-    - `total_token_count` (int)
-    - `response_text` (string, optional)
-    - `prompt_id` (string)
-    - `auth_type` (string)
-    - `finish_reasons` (array of strings)
+#### Маршрутизація моделей
 
-- `gemini_cli.api_error`: API request failed.
-  - **Attributes**:
-    - `model` (string)
-    - `error` (string)
-    - `error_type` (string)
-    - `status_code` (int|string)
-    - `duration_ms` (int)
-    - `prompt_id` (string)
-    - `auth_type` (string)
+- `gemini_cli.slash_command`: Виконано слеш-команду.
+- `gemini_cli.model_routing`: Роутер моделей прийняв рішення.
 
-- `gemini_cli.malformed_json_response`: `generateJson` response could not be
-  parsed.
-  - **Attributes**:
-    - `model` (string)
+#### Чат та стрімінг
 
-#### Model routing
+- `gemini_cli.chat_compression`: Контекст чату був стиснутий.
+- `gemini_cli.chat.content_retry`: Запущено повторну спробу через помилку
+  вмісту.
 
-- `gemini_cli.slash_command`: A slash command was executed.
-  - **Attributes**:
-    - `command` (string)
-    - `subcommand` (string, optional)
-    - `status` ("success" | "error")
+#### Запуски агентів
 
-- `gemini_cli.slash_command.model`: Model was selected via slash command.
-  - **Attributes**:
-    - `model_name` (string)
+- `gemini_cli.agent.start`: Запущено роботу агента.
+- `gemini_cli.agent.finish`: Робота агента завершена.
 
-- `gemini_cli.model_routing`: Model router made a decision.
-  - **Attributes**:
-    - `decision_model` (string)
-    - `decision_source` (string)
-    - `routing_latency_ms` (int)
-    - `reasoning` (string, optional)
-    - `failed` (boolean)
-    - `error_message` (string, optional)
+### Метрики
 
-#### Chat and streaming
+Метрики — це числові вимірювання поведінки з часом.
 
-- `gemini_cli.chat_compression`: Chat context was compressed.
-  - **Attributes**:
-    - `tokens_before` (int)
-    - `tokens_after` (int)
+#### Власні
 
-- `gemini_cli.chat.invalid_chunk`: Invalid chunk received from a stream.
-  - **Attributes**:
-    - `error.message` (string, optional)
+##### Сесії
 
-- `gemini_cli.chat.content_retry`: Retry triggered due to a content error.
-  - **Attributes**:
-    - `attempt_number` (int)
-    - `error_type` (string)
-    - `retry_delay_ms` (int)
-    - `model` (string)
+- `gemini_cli.session.count`: Кількість запусків CLI.
 
-- `gemini_cli.chat.content_retry_failure`: All content retries failed.
-  - **Attributes**:
-    - `total_attempts` (int)
-    - `final_error_type` (string)
-    - `total_duration_ms` (int, optional)
-    - `model` (string)
+##### Інструменти
 
-- `gemini_cli.conversation_finished`: Conversation session ended.
-  - **Attributes**:
-    - `approvalMode` (string)
-    - `turnCount` (int)
-
-- `gemini_cli.next_speaker_check`: Next speaker determination.
-  - **Attributes**:
-    - `prompt_id` (string)
-    - `finish_reason` (string)
-    - `result` (string)
-
-#### Resilience
-
-Records fallback mechanisms for models and network operations.
-
-- `gemini_cli.flash_fallback`: Switched to a flash model as fallback.
-  - **Attributes**:
-    - `auth_type` (string)
-
-- `gemini_cli.ripgrep_fallback`: Switched to grep as fallback for file search.
-  - **Attributes**:
-    - `error` (string, optional)
-
-- `gemini_cli.web_fetch_fallback_attempt`: Attempted web-fetch fallback.
-  - **Attributes**:
-    - `reason` ("private_ip" | "primary_failed")
-
-#### Extensions
-
-Tracks extension lifecycle and settings changes.
-
-- `gemini_cli.extension_install`: An extension was installed.
-  - **Attributes**:
-    - `extension_name` (string)
-    - `extension_version` (string)
-    - `extension_source` (string)
-    - `status` (string)
-
-- `gemini_cli.extension_uninstall`: An extension was uninstalled.
-  - **Attributes**:
-    - `extension_name` (string)
-    - `status` (string)
-
-- `gemini_cli.extension_enable`: An extension was enabled.
-  - **Attributes**:
-    - `extension_name` (string)
-    - `setting_scope` (string)
-
-- `gemini_cli.extension_disable`: An extension was disabled.
-  - **Attributes**:
-    - `extension_name` (string)
-    - `setting_scope` (string)
-
-- `gemini_cli.extension_update`: An extension was updated.
-  - **Attributes**:
-    - `extension_name` (string)
-    - `extension_version` (string)
-    - `extension_previous_version` (string)
-    - `extension_source` (string)
-    - `status` (string)
-
-#### Agent runs
-
-- `gemini_cli.agent.start`: Agent run started.
-  - **Attributes**:
-    - `agent_id` (string)
-    - `agent_name` (string)
-
-- `gemini_cli.agent.finish`: Agent run finished.
-  - **Attributes**:
-    - `agent_id` (string)
-    - `agent_name` (string)
-    - `duration_ms` (int)
-    - `turn_count` (int)
-    - `terminate_reason` (string)
-
-#### IDE
-
-Captures IDE connectivity and conversation lifecycle events.
-
-- `gemini_cli.ide_connection`: IDE companion connection.
-  - **Attributes**:
-    - `connection_type` (string)
-
-#### UI
-
-Tracks terminal rendering issues and related signals.
-
-- `kitty_sequence_overflow`: Terminal kitty control sequence overflow.
-  - **Attributes**:
-    - `sequence_length` (int)
-    - `truncated_sequence` (string)
-
-### Metrics
-
-Metrics are numerical measurements of behavior over time.
-
-#### Custom
-
-##### Sessions
-
-Counts CLI sessions at startup.
-
-- `gemini_cli.session.count` (Counter, Int): Incremented once per CLI startup.
-
-##### Tools
-
-Measures tool usage and latency.
-
-- `gemini_cli.tool.call.count` (Counter, Int): Counts tool calls.
-  - **Attributes**:
-    - `function_name`
-    - `success` (boolean)
-    - `decision` (string: "accept", "reject", "modify", or "auto_accept", if
-      applicable)
-    - `tool_type` (string: "mcp" or "native", if applicable)
-
-- `gemini_cli.tool.call.latency` (Histogram, ms): Measures tool call latency.
-  - **Attributes**:
-    - `function_name`
+- `gemini_cli.tool.call.count`: Лічильник викликів інструментів.
+- `gemini_cli.tool.call.latency`: Гістограма тривалості викликів інструментів.
 
 ##### API
 
-Tracks API request volume and latency.
+- `gemini_cli.api.request.count`: Лічильник усіх запитів до API.
+- `gemini_cli.api.request.latency`: Гістограма затримки запитів до API.
 
-- `gemini_cli.api.request.count` (Counter, Int): Counts all API requests.
-  - **Attributes**:
-    - `model`
-    - `status_code`
-    - `error_type` (if applicable)
+##### Використання токенів
 
-- `gemini_cli.api.request.latency` (Histogram, ms): Measures API request
-  latency.
-  - **Attributes**:
-    - `model`
-  - Note: Overlaps with `gen_ai.client.operation.duration` (GenAI conventions).
+- `gemini_cli.token.usage`: Лічильник використаних токенів за моделлю та типом
+  (`input`, `output`, `thought`, `cache`, `tool`).
 
-##### Token usage
+##### Файли
 
-Tracks tokens used by model and type.
-
-- `gemini_cli.token.usage` (Counter, Int): Counts tokens used.
-  - **Attributes**:
-    - `model`
-    - `type` ("input", "output", "thought", "cache", or "tool")
-  - Note: Overlaps with `gen_ai.client.token.usage` for `input`/`output`.
-
-##### Files
-
-Counts file operations with basic context.
-
-- `gemini_cli.file.operation.count` (Counter, Int): Counts file operations.
-  - **Attributes**:
-    - `operation` ("create", "read", "update")
-    - `lines` (Int, optional)
-    - `mimetype` (string, optional)
-    - `extension` (string, optional)
-    - `programming_language` (string, optional)
-
-- `gemini_cli.lines.changed` (Counter, Int): Number of lines changed (from file
-  diffs).
-  - **Attributes**:
-    - `function_name`
-    - `type` ("added" or "removed")
-
-##### Chat and streaming
-
-Resilience counters for compression, invalid chunks, and retries.
-
-- `gemini_cli.chat_compression` (Counter, Int): Counts chat compression
-  operations.
-  - **Attributes**:
-    - `tokens_before` (Int)
-    - `tokens_after` (Int)
-
-- `gemini_cli.chat.invalid_chunk.count` (Counter, Int): Counts invalid chunks
-  from streams.
-
-- `gemini_cli.chat.content_retry.count` (Counter, Int): Counts retries due to
-  content errors.
-
-- `gemini_cli.chat.content_retry_failure.count` (Counter, Int): Counts requests
-  where all content retries failed.
-
-##### Model routing
-
-Routing latency/failures and slash-command selections.
-
-- `gemini_cli.slash_command.model.call_count` (Counter, Int): Counts model
-  selections via slash command.
-  - **Attributes**:
-    - `slash_command.model.model_name` (string)
-
-- `gemini_cli.model_routing.latency` (Histogram, ms): Model routing decision
-  latency.
-  - **Attributes**:
-    - `routing.decision_model` (string)
-    - `routing.decision_source` (string)
-
-- `gemini_cli.model_routing.failure.count` (Counter, Int): Counts model routing
-  failures.
-  - **Attributes**:
-    - `routing.decision_source` (string)
-    - `routing.error_message` (string)
-
-##### Agent runs
-
-Agent lifecycle metrics: runs, durations, and turns.
-
-- `gemini_cli.agent.run.count` (Counter, Int): Counts agent runs.
-  - **Attributes**:
-    - `agent_name` (string)
-    - `terminate_reason` (string)
-
-- `gemini_cli.agent.duration` (Histogram, ms): Agent run durations.
-  - **Attributes**:
-    - `agent_name` (string)
-
-- `gemini_cli.agent.turns` (Histogram, turns): Turns taken per agent run.
-  - **Attributes**:
-    - `agent_name` (string)
+- `gemini_cli.file.operation.count`: Кількість операцій з файлами.
+- `gemini_cli.lines.changed`: Кількість змінених рядків.
 
 ##### UI
 
-UI stability signals such as flicker count.
+- `gemini_cli.ui.flicker.count`: Кількість кадрів інтерфейсу, що блимають.
 
-- `gemini_cli.ui.flicker.count` (Counter, Int): Counts UI frames that flicker
-  (render taller than terminal).
+#### Семантичні конвенції GenAI
 
-##### Performance
+Метрики відповідають [OpenTelemetry GenAI semantic conventions] для
+стандартизованої спостережуваності:
 
-Optional performance monitoring for startup, CPU/memory, and phase timing.
-
-- `gemini_cli.startup.duration` (Histogram, ms): CLI startup time by phase.
-  - **Attributes**:
-    - `phase` (string)
-    - `details` (map, optional)
-
-- `gemini_cli.memory.usage` (Histogram, bytes): Memory usage.
-  - **Attributes**:
-    - `memory_type` ("heap_used", "heap_total", "external", "rss")
-    - `component` (string, optional)
-
-- `gemini_cli.cpu.usage` (Histogram, percent): CPU usage percentage.
-  - **Attributes**:
-    - `component` (string, optional)
-
-- `gemini_cli.tool.queue.depth` (Histogram, count): Number of tools in the
-  execution queue.
-
-- `gemini_cli.tool.execution.breakdown` (Histogram, ms): Tool time by phase.
-  - **Attributes**:
-    - `function_name` (string)
-    - `phase` ("validation", "preparation", "execution", "result_processing")
-
-- `gemini_cli.api.request.breakdown` (Histogram, ms): API request time by phase.
-  - **Attributes**:
-    - `model` (string)
-    - `phase` ("request_preparation", "network_latency", "response_processing",
-      "token_processing")
-
-- `gemini_cli.token.efficiency` (Histogram, ratio): Token efficiency metrics.
-  - **Attributes**:
-    - `model` (string)
-    - `metric` (string)
-    - `context` (string, optional)
-
-- `gemini_cli.performance.score` (Histogram, score): Composite performance
-  score.
-  - **Attributes**:
-    - `category` (string)
-    - `baseline` (number, optional)
-
-- `gemini_cli.performance.regression` (Counter, Int): Regression detection
-  events.
-  - **Attributes**:
-    - `metric` (string)
-    - `severity` ("low", "medium", "high")
-    - `current_value` (number)
-    - `baseline_value` (number)
-
-- `gemini_cli.performance.regression.percentage_change` (Histogram, percent):
-  Percent change from baseline when regression detected.
-  - **Attributes**:
-    - `metric` (string)
-    - `severity` ("low", "medium", "high")
-    - `current_value` (number)
-    - `baseline_value` (number)
-
-- `gemini_cli.performance.baseline.comparison` (Histogram, percent): Comparison
-  to baseline.
-  - **Attributes**:
-    - `metric` (string)
-    - `category` (string)
-    - `current_value` (number)
-    - `baseline_value` (number)
-
-#### GenAI semantic convention
-
-The following metrics comply with [OpenTelemetry GenAI semantic conventions] for
-standardized observability across GenAI applications:
-
-- `gen_ai.client.token.usage` (Histogram, token): Number of input and output
-  tokens used per operation.
-  - **Attributes**:
-    - `gen_ai.operation.name` (string): The operation type (e.g.,
-      "generate_content", "chat")
-    - `gen_ai.provider.name` (string): The GenAI provider ("gcp.gen_ai" or
-      "gcp.vertex_ai")
-    - `gen_ai.token.type` (string): The token type ("input" or "output")
-    - `gen_ai.request.model` (string, optional): The model name used for the
-      request
-    - `gen_ai.response.model` (string, optional): The model name that generated
-      the response
-    - `server.address` (string, optional): GenAI server address
-    - `server.port` (int, optional): GenAI server port
-
-- `gen_ai.client.operation.duration` (Histogram, s): GenAI operation duration in
-  seconds.
-  - **Attributes**:
-    - `gen_ai.operation.name` (string): The operation type (e.g.,
-      "generate_content", "chat")
-    - `gen_ai.provider.name` (string): The GenAI provider ("gcp.gen_ai" or
-      "gcp.vertex_ai")
-    - `gen_ai.request.model` (string, optional): The model name used for the
-      request
-    - `gen_ai.response.model` (string, optional): The model name that generated
-      the response
-    - `server.address` (string, optional): GenAI server address
-    - `server.port` (int, optional): GenAI server port
-    - `error.type` (string, optional): Error type if the operation failed
+- `gen_ai.client.token.usage`: Кількість вхідних та вихідних токенів на
+  операцію.
+- `gen_ai.client.operation.duration`: Тривалість операцій GenAI у секундах.
 
 [OpenTelemetry GenAI semantic conventions]:
   https://github.com/open-telemetry/semantic-conventions/blob/main/docs/gen-ai/gen-ai-metrics.md

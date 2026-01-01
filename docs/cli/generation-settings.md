@@ -1,48 +1,50 @@
-# Advanced Model Configuration
+# Розширене налаштування моделей
 
-This guide details the Model Configuration system within the Gemini CLI.
-Designed for researchers, AI quality engineers, and advanced users, this system
-provides a rigorous framework for managing generative model hyperparameters and
-behaviors.
+Цей посібник детально описує систему конфігурації моделей (Model Configuration)
+у Gemini CLI. Розроблена для дослідників, інженерів якості ШІ та просунутих
+користувачів, ця система забезпечує сувору структуру для керування
+гіперпараметрами та поведінкою генеративних моделей.
 
-> **Warning**: This is a power-user feature. Configuration values are passed
-> directly to the model provider with minimal validation. Incorrect settings
-> (e.g., incompatible parameter combinations) may result in runtime errors from
-> the API.
+> **Попередження**: Це функція для досвідчених користувачів. Значення
+> конфігурації передаються безпосередньо провайдеру моделі з мінімальною
+> валідацією. Неправильні налаштування (наприклад, несумісні комбінації
+> параметрів) можуть призвести до помилок виконання з боку API.
 
-## 1. System Overview
+## 1. Огляд системи
 
-The Model Configuration system (`ModelConfigService`) enables deterministic
-control over model generation. It decouples the requested model identifier
-(e.g., a CLI flag or agent request) from the underlying API configuration. This
-allows for:
+Система конфігурації моделей (`ModelConfigService`) забезпечує детермінований
+контроль над генерацією. Вона відокремлює запитуваний ідентифікатор моделі
+(наприклад, прапорець CLI або запит агента) від базової конфігурації API. Це
+дозволяє:
 
-- **Precise Hyperparameter Tuning**: Direct control over `temperature`, `topP`,
-  `thinkingBudget`, and other SDK-level parameters.
-- **Environment-Specific Behavior**: Distinct configurations for different
-  operating contexts (e.g., testing vs. production).
-- **Agent-Scoped Customization**: Applying specific settings only when a
-  particular agent is active.
+- **Точне налаштування гіперпараметрів**: Прямий контроль над `temperature`,
+  `topP`, `thinkingBudget` та іншими параметрами SDK.
+- **Поведінка залежно від середовища**: Окремі конфігурації для різних
+  контекстів роботи (наприклад, тестування проти продакшену).
+- **Налаштування на рівні агента**: Застосування специфічних налаштувань лише
+  тоді, коли активний певний агент.
 
-The system operates on two core primitives: **Aliases** and **Overrides**.
+Система базується на двох основних примітивах: **Аліаси (Aliases)** та
+**Перевизначення (Overrides)**.
 
-## 2. Configuration Primitives
+## 2. Примітиви конфігурації
 
-These settings are located under the `modelConfigs` key in your configuration
-file.
+Ці налаштування знаходяться під ключем `modelConfigs` у вашому файлі
+конфігурації.
 
-### Aliases (`customAliases`)
+### Аліаси (`customAliases`)
 
-Aliases are named, reusable configuration presets. Users should define their own
-aliases (or override system defaults) in the `customAliases` map.
+Аліаси — це іменовані пресети конфігурації для багаторазового використання.
+Користувачі повинні визначати власні аліаси (або перевизначати системні) у
+словнику `customAliases`.
 
-- **Inheritance**: An alias can `extends` another alias (including system
-  defaults like `chat-base`), inheriting its `modelConfig`. Child aliases can
-  overwrite or augment inherited settings.
-- **Abstract Aliases**: An alias is not required to specify a concrete `model`
-  if it serves purely as a base for other aliases.
+- **Успадкування**: Аліас може розширювати (`extends`) інший аліас (включаючи
+  системні, такі як `chat-base`), успадковуючи його `modelConfig`. Дочірні
+  аліаси можуть перезаписувати або доповнювати успадковані налаштування.
+- **Абстрактні аліаси**: Аліас не обов'язково має вказувати конкретну `model`,
+  якщо він слугує суто базою для інших аліасів.
 
-**Example Hierarchy**:
+**Приклад ієрархії**:
 
 ```json
 "modelConfigs": {
@@ -62,18 +64,18 @@ aliases (or override system defaults) in the `customAliases` map.
 }
 ```
 
-### Overrides (`overrides`)
+### Перевизначення (`overrides`)
 
-Overrides are conditional rules that inject configuration based on the runtime
-context. They are evaluated dynamically for each model request.
+Перевизначення — це умовні правила, які впроваджують конфігурацію на основі
+контексту виконання. Вони оцінюються динамічно для кожного запиту до моделі.
 
-- **Match Criteria**: Overrides apply when the request context matches the
-  specified `match` properties.
-  - `model`: Matches the requested model name or alias.
-  - `overrideScope`: Matches the distinct scope of the request (typically the
-    agent name, e.g., `codebaseInvestigator`).
+- **Критерії відповідності**: Перевизначення застосовуються, коли контекст
+  запиту відповідає вказаним властивостям `match`.
+  - `model`: Відповідає запитуваній назві моделі або аліасу.
+  - `overrideScope`: Відповідає конкретній області запиту (зазвичай назва
+    агента, наприклад, `codebaseInvestigator`).
 
-**Example Override**:
+**Приклад перевизначення**:
 
 ```json
 "modelConfigs": {
@@ -90,66 +92,65 @@ context. They are evaluated dynamically for each model request.
 }
 ```
 
-## 3. Resolution Strategy
+## 3. Стратегія вирішення (Resolution)
 
-The `ModelConfigService` resolves the final configuration through a two-step
-process:
+`ModelConfigService` формує фінальну конфігурацію у два кроки:
 
-### Step 1: Alias Resolution
+### Крок 1: Вирішення аліаса
 
-The requested model string is looked up in the merged map of system `aliases`
-and user `customAliases`.
+Запитуваний рядок моделі шукається в об'єднаній карті системних `aliases` та
+користувацьких `customAliases`.
 
-1.  If found, the system recursively resolves the `extends` chain.
-2.  Settings are merged from parent to child (child wins).
-3.  This results in a base `ResolvedModelConfig`.
-4.  If not found, the requested string is treated as the raw model name.
+1.  Якщо знайдено, система рекурсивно проходить по ланцюжку `extends`.
+2.  Налаштування об'єднуються від батька до дитини (дитина перемагає).
+3.  Результатом є базовий `ResolvedModelConfig`.
+4.  Якщо не знайдено, запитуваний рядок вважається сирою назвою моделі.
 
-### Step 2: Override Application
+### Крок 2: Застосування перевизначень
 
-The system evaluates the `overrides` list against the request context (`model`
-and `overrideScope`).
+Система оцінює список `overrides` відносно контексту запиту (`model` та
+`overrideScope`).
 
-1.  **Filtering**: All matching overrides are identified.
-2.  **Sorting**: Matches are prioritized by **specificity** (the number of
-    matched keys in the `match` object).
-    - Specific matches (e.g., `model` + `overrideScope`) override broad matches
-      (e.g., `model` only).
-    - Tie-breaking: If specificity is equal, the order of definition in the
-      `overrides` array is preserved (last one wins).
-3.  **Merging**: The configurations from the sorted overrides are merged
-    sequentially onto the base configuration.
+1.  **Фільтрація**: Визначаються всі відповідні перевизначення.
+2.  **Сортування**: Результати пріоритезуються за **специфічністю** (кількістю
+    ключів, що збіглися в об'єкті `match`).
+    - Специфічні збіги (наприклад, `model` + `overrideScope`) перекривають
+      широкі (наприклад, лише `model`).
+    - Вирішення нічиєї: Якщо специфічність однакова, враховується порядок у
+      масиві `overrides` (останній перемагає).
+3.  **Злиття**: Конфігурації з відсортованих перевизначень послідовно
+    накладаються на базову конфігурацію.
 
-## 4. Configuration Reference
+## 4. Довідник конфігурації
 
-The configuration follows the `ModelConfigServiceConfig` interface.
+Конфігурація відповідає інтерфейсу `ModelConfigServiceConfig`.
 
-### `ModelConfig` Object
+### Об'єкт `ModelConfig`
 
-Defines the actual parameters for the model.
+Визначає фактичні параметри для моделі.
 
-| Property                | Type     | Description                                                        |
-| :---------------------- | :------- | :----------------------------------------------------------------- |
-| `model`                 | `string` | The identifier of the model to be called (e.g., `gemini-2.5-pro`). |
-| `generateContentConfig` | `object` | The configuration object passed to the `@google/genai` SDK.        |
+| Властивість             | Тип      | Опис                                                                 |
+| :---------------------- | :------- | :------------------------------------------------------------------- |
+| `model`                 | `string` | Ідентифікатор моделі, що викликається (наприклад, `gemini-2.5-pro`). |
+| `generateContentConfig` | `object` | Об'єкт конфігурації, що передається в SDK `@google/genai`.           |
 
-### `GenerateContentConfig` (Common Parameters)
+### `GenerateContentConfig` (Спільні параметри)
 
-Directly maps to the SDK's `GenerateContentConfig`. Common parameters include:
+Прямо відповідає `GenerateContentConfig` у SDK. Спільні параметри включають:
 
-- **`temperature`**: (`number`) Controls output randomness. Lower values (0.0)
-  are deterministic; higher values (>0.7) are creative.
-- **`topP`**: (`number`) Nucleus sampling probability.
-- **`maxOutputTokens`**: (`number`) Limit on generated response length.
-- **`thinkingConfig`**: (`object`) Configuration for models with reasoning
-  capabilities (e.g., `thinkingBudget`, `includeThoughts`).
+- **`temperature`**: (`number`) Керує випадковістю виводу. Низькі значення (0.0)
+  детерміновані; високі (>0.7) — творчі.
+- **`topP`**: (`number`) Ймовірність вибірки ядра (nucleus sampling).
+- **`maxOutputTokens`**: (`number`) Ліміт довжини згенерованої відповіді.
+- **`thinkingConfig`**: (`object`) Конфігурація для моделей із можливостями
+  міркування (reasoning), наприклад, `thinkingBudget`, `includeThoughts`.
 
-## 5. Practical Examples
+## 5. Практичні приклади
 
-### Defining a Deterministic Baseline
+### Визначення детермінованої бази
 
-Create an alias for tasks requiring high precision, extending the standard chat
-configuration but enforcing zero temperature.
+Створіть аліас для завдань, що потребують високої точності, розширюючи
+стандартну конфігурацію чату, але примусово встановлюючи нульову температуру.
 
 ```json
 "modelConfigs": {
@@ -167,10 +168,10 @@ configuration but enforcing zero temperature.
 }
 ```
 
-### Agent-Specific Parameter Injection
+### Впровадження параметрів для конкретного агента
 
-Enforce extended thinking budgets for a specific agent without altering the
-global default, e.g. for the `codebaseInvestigator`.
+Встановіть збільшений бюджет міркувань (thinking budget) для конкретного агента
+без зміни глобальних налаштувань, наприклад, для `codebaseInvestigator`.
 
 ```json
 "modelConfigs": {
@@ -189,10 +190,10 @@ global default, e.g. for the `codebaseInvestigator`.
 }
 ```
 
-### Experimental Model Evaluation
+### Експериментальна оцінка моделей
 
-Route traffic for a specific alias to a preview model for A/B testing, without
-changing client code.
+Направте трафік для певного аліаса на попередню (preview) модель для A/B
+тестування без зміни коду клієнта.
 
 ```json
 "modelConfigs": {

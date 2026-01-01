@@ -1,3 +1,4 @@
-# Authentication setup
+# Налаштування аутентифікації
 
-See: [Getting Started - Authentication Setup](../get-started/authentication.md).
+Дивіться:
+[Початок роботи - Налаштування аутентифікації](../get-started/authentication.md).
