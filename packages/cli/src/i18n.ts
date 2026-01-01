@@ -20,12 +20,12 @@ export const getLocale = (): string => {
     ''
   ).toLowerCase();
 
-  // Default to 'ua' unless English is explicitly requested
-
-  if (lang.includes('en')) {
+  // Support 'en', 'en-US', etc.
+  if (lang.startsWith('en')) {
     return 'en';
   }
 
+  // Support 'ua', 'uk', 'uk-UA', etc. Default to 'ua' for this localized fork.
   return 'ua';
 };
 
