@@ -7,6 +7,7 @@
 import type React from 'react';
 import { Box, Text } from 'ink';
 import { theme } from '../semantic-colors.js';
+import { strings } from '../../i18n.js';
 
 interface ConsoleSummaryDisplayProps {
   errorCount: number;
@@ -22,12 +23,26 @@ export const ConsoleSummaryDisplay: React.FC<ConsoleSummaryDisplayProps> = ({
 
   const errorIcon = '\u2716'; // Heavy multiplication x (✖)
 
+  const getErrorLabel = (count: number) => {
+    if (count % 10 === 1 && count % 100 !== 11) {
+      return strings.consoleError;
+    }
+    if (
+      count % 10 >= 2 &&
+      count % 10 <= 4 &&
+      (count % 100 < 10 || count % 100 >= 20)
+    ) {
+      return strings.consoleErrors;
+    }
+    return strings.consoleErrorsMany;
+  };
+
   return (
     <Box>
       {errorCount > 0 && (
         <Text color={theme.status.error}>
-          {errorIcon} {errorCount} error{errorCount > 1 ? 's' : ''}{' '}
-          <Text color={theme.text.secondary}>(F12 for details)</Text>
+          {errorIcon} {errorCount} {getErrorLabel(errorCount)}{' '}
+          <Text color={theme.text.secondary}>{strings.consoleDetails}</Text>
         </Text>
       )}
     </Box>

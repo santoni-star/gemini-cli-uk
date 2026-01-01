@@ -9,6 +9,7 @@ import { theme } from '../semantic-colors.js';
 import { PrepareLabel, MAX_WIDTH } from './PrepareLabel.js';
 import { CommandKind } from '../commands/types.js';
 import { Colors } from '../colors.js';
+import { strings } from '../../i18n.js';
 export interface Suggestion {
   label: string;
   value: string;
@@ -43,7 +44,7 @@ export function SuggestionsDisplay({
   if (isLoading) {
     return (
       <Box paddingX={1} width={width}>
-        <Text color="gray">Loading suggestions...</Text>
+        <Text color="gray">{strings.suggestionsLoading}</Text>
       </Box>
     );
   }

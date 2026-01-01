@@ -10,14 +10,15 @@ import { Box, Text } from 'ink';
 import { type McpClient, MCPServerStatus } from '@google/gemini-cli-core';
 import { GeminiSpinner } from './GeminiRespondingSpinner.js';
 import { theme } from '../semantic-colors.js';
+import { strings } from '../../i18n.js';
 
 export const ConfigInitDisplay = () => {
-  const [message, setMessage] = useState('Initializing...');
+  const [message, setMessage] = useState(strings.configInitializing);
 
   useEffect(() => {
     const onChange = (clients?: Map<string, McpClient>) => {
       if (!clients || clients.size === 0) {
-        setMessage(`Initializing...`);
+        setMessage(strings.configInitializing);
         return;
       }
       let connected = 0;
@@ -30,18 +31,26 @@ export const ConfigInitDisplay = () => {
         }
       }
 
+      const baseMessage = strings.configConnectingMcp
+        .replace('{connected}', connected.toString())
+        .replace('{total}', clients.size.toString());
+
       if (connecting.length > 0) {
         const maxDisplay = 3;
         const displayedServers = connecting.slice(0, maxDisplay).join(', ');
         const remaining = connecting.length - maxDisplay;
-        const suffix = remaining > 0 ? `, +${remaining} more` : '';
+        const suffix =
+          remaining > 0
+            ? strings.configMore.replace('{count}', remaining.toString())
+            : '';
         setMessage(
-          `Connecting to MCP servers... (${connected}/${clients.size}) - Waiting for: ${displayedServers}${suffix}`,
+          `${baseMessage}${strings.configWaitingFor.replace(
+            '{servers}',
+            `${displayedServers}${suffix}`,
+          )}`,
         );
       } else {
-        setMessage(
-          `Connecting to MCP servers... (${connected}/${clients.size})`,
-        );
+        setMessage(baseMessage);
       }
     };
 

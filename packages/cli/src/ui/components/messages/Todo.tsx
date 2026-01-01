@@ -15,6 +15,7 @@ import { theme } from '../../semantic-colors.js';
 import { useUIState } from '../../contexts/UIStateContext.js';
 import { useMemo } from 'react';
 import type { HistoryItemToolGroup } from '../../types.js';
+import { strings } from '../../../i18n.js';
 
 const TodoTitleDisplay: React.FC<{ todos: TodoList }> = ({ todos }) => {
   const score = useMemo(() => {
@@ -28,15 +29,19 @@ const TodoTitleDisplay: React.FC<{ todos: TodoList }> = ({ todos }) => {
         }
       }
     }
-    return `${completed}/${total} completed`;
+    return strings.todoCompleted
+      .replace('{completed}', completed.toString())
+      .replace('{total}', total.toString());
   }, [todos]);
 
   return (
     <Box flexDirection="row" columnGap={2} height={1}>
-      <Text color={theme.text.primary} bold aria-label="Todo list">
-        Todo
+      <Text color={theme.text.primary} bold aria-label={strings.todoTitle}>
+        {strings.todoTitle}
       </Text>
-      <Text color={theme.text.secondary}>{score} (ctrl+t to toggle)</Text>
+      <Text color={theme.text.secondary}>
+        {score} {strings.todoToggleHint}
+      </Text>
     </Box>
   );
 };
@@ -45,26 +50,38 @@ const TodoStatusDisplay: React.FC<{ status: TodoStatus }> = ({ status }) => {
   switch (status) {
     case 'completed':
       return (
-        <Text color={theme.status.success} aria-label="Completed">
+        <Text
+          color={theme.status.success}
+          aria-label={strings.todoStatusCompleted}
+        >
           ✓
         </Text>
       );
     case 'in_progress':
       return (
-        <Text color={theme.text.accent} aria-label="In Progress">
+        <Text
+          color={theme.text.accent}
+          aria-label={strings.todoStatusInProgress}
+        >
           »
         </Text>
       );
     case 'pending':
       return (
-        <Text color={theme.text.secondary} aria-label="Pending">
+        <Text
+          color={theme.text.secondary}
+          aria-label={strings.todoStatusPending}
+        >
           ☐
         </Text>
       );
     case 'cancelled':
     default:
       return (
-        <Text color={theme.status.error} aria-label="Cancelled">
+        <Text
+          color={theme.status.error}
+          aria-label={strings.todoStatusCancelled}
+        >
           ✗
         </Text>
       );

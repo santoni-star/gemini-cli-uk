@@ -24,6 +24,7 @@ import { useAlternateBuffer } from '../hooks/useAlternateBuffer.js';
 import { ScopeSelector } from './shared/ScopeSelector.js';
 import { useUIActions } from '../contexts/UIActionsContext.js';
 import { useUIState } from '../contexts/UIStateContext.js';
+import { strings } from '../../i18n.js';
 
 interface ThemeDialogProps {
   /** Callback function when a theme is selected */

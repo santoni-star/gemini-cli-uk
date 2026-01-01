@@ -9,6 +9,7 @@ import type { RadioSelectItem } from './shared/RadioButtonSelect.js';
 import { RadioButtonSelect } from './shared/RadioButtonSelect.js';
 import { useKeypress } from '../hooks/useKeypress.js';
 import { theme } from '../semantic-colors.js';
+import { strings } from '../../i18n.js';
 
 export type LoopDetectionConfirmationResult = {
   userSelection: 'disable' | 'keep';
@@ -34,14 +35,14 @@ export function LoopDetectionConfirmation({
 
   const OPTIONS: Array<RadioSelectItem<LoopDetectionConfirmationResult>> = [
     {
-      label: 'Keep loop detection enabled (esc)',
+      label: strings.loopOptionKeep,
       value: {
         userSelection: 'keep',
       },
       key: 'Keep loop detection enabled (esc)',
     },
     {
-      label: 'Disable loop detection for this session',
+      label: strings.loopOptionDisable,
       value: {
         userSelection: 'disable',
       },
@@ -68,7 +69,7 @@ export function LoopDetectionConfirmation({
             <Box>
               <Text wrap="truncate-end">
                 <Text color={theme.text.primary} bold>
-                  A potential loop was detected
+                  {strings.loopDetectedTitle}
                 </Text>{' '}
               </Text>
             </Box>
@@ -76,9 +77,7 @@ export function LoopDetectionConfirmation({
           <Box marginTop={1}>
             <Box flexDirection="column">
               <Text color={theme.text.secondary}>
-                This can happen due to repetitive tool calls or other model
-                behavior. Do you want to keep loop detection enabled or disable
-                it for this session?
+                {strings.loopDetectedDescription}
               </Text>
               <Box marginTop={1}>
                 <RadioButtonSelect items={OPTIONS} onSelect={onComplete} />

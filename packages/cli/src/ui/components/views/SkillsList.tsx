@@ -8,6 +8,7 @@ import type React from 'react';
 import { Box, Text } from 'ink';
 import { theme } from '../../semantic-colors.js';
 import { type SkillDefinition } from '../../types.js';
+import { strings } from '../../../i18n.js';
 
 interface SkillsListProps {
   skills: readonly SkillDefinition[];
@@ -54,7 +55,7 @@ export const SkillsList: React.FC<SkillsListProps> = ({
       {enabledSkills.length > 0 && (
         <Box flexDirection="column">
           <Text bold color={theme.text.primary}>
-            Available Agent Skills:
+            {strings.skillsListAvailableTitle}
           </Text>
           <Box height={1} />
           {enabledSkills.map(renderSkill)}
@@ -70,7 +71,7 @@ export const SkillsList: React.FC<SkillsListProps> = ({
       {disabledSkills.length > 0 && (
         <Box flexDirection="column">
           <Text bold color={theme.text.secondary}>
-            Disabled Skills:
+            {strings.skillsListDisabledTitle}
           </Text>
           <Box height={1} />
           {disabledSkills.map(renderSkill)}
@@ -78,7 +79,7 @@ export const SkillsList: React.FC<SkillsListProps> = ({
       )}
 
       {skills.length === 0 && (
-        <Text color={theme.text.primary}> No skills available</Text>
+        <Text color={theme.text.primary}> {strings.skillsListNoSkills}</Text>
       )}
     </Box>
   );

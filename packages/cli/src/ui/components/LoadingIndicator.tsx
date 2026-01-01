@@ -15,6 +15,7 @@ import { formatDuration } from '../utils/formatters.js';
 import { useTerminalSize } from '../hooks/useTerminalSize.js';
 import { isNarrowWidth } from '../utils/isNarrowWidth.js';
 import { INTERACTIVE_SHELL_WAITING_PHRASE } from '../hooks/usePhraseCycler.js';
+import { strings } from '../../i18n.js';
 
 interface LoadingIndicatorProps {
   currentLoadingPhrase?: string;
@@ -46,7 +47,11 @@ export const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({
 
   const cancelAndTimerContent =
     streamingState !== StreamingState.WaitingForConfirmation
-      ? `(esc to cancel, ${elapsedTime < 60 ? `${elapsedTime}s` : formatDuration(elapsedTime * 1000)})`
+      ? `(${strings.loadingEscToCancel}, ${
+          elapsedTime < 60
+            ? `${elapsedTime}${strings.unitSecond}`
+            : formatDuration(elapsedTime * 1000)
+        })`
       : null;
 
   return (

@@ -15,6 +15,7 @@ import { theme } from '../semantic-colors.js';
 import { RadioButtonSelect } from './shared/RadioButtonSelect.js';
 import { relaunchApp } from '../../utils/processUtils.js';
 import { type UseHistoryManagerReturn } from '../hooks/useHistoryManager.js';
+import { strings } from '../../i18n.js';
 
 export interface PermissionsDialogProps {
   targetDirectory?: string;
@@ -36,17 +37,17 @@ export function PermissionsModifyTrustDialog({
 
   const TRUST_LEVEL_ITEMS = [
     {
-      label: `Trust this folder (${dirName})`,
+      label: strings.trustFolder.replace('{dir}', dirName),
       value: TrustLevel.TRUST_FOLDER,
       key: TrustLevel.TRUST_FOLDER,
     },
     {
-      label: `Trust parent folder (${parentFolder})`,
+      label: strings.trustParentFolder.replace('{dir}', parentFolder),
       value: TrustLevel.TRUST_PARENT,
       key: TrustLevel.TRUST_PARENT,
     },
     {
-      label: "Don't trust",
+      label: strings.trustNo,
       value: TrustLevel.DO_NOT_TRUST,
       key: TrustLevel.DO_NOT_TRUST,
     },
@@ -94,25 +95,26 @@ export function PermissionsModifyTrustDialog({
         padding={1}
       >
         <Box flexDirection="column" paddingBottom={1}>
-          <Text bold>{'> '}Modify Trust Level</Text>
+          <Text bold>
+            {'> '}
+            {strings.permissionsModifyTitle}
+          </Text>
           <Box marginTop={1} />
-          <Text>Folder: {cwd}</Text>
           <Text>
-            Current Level: <Text bold>{currentTrustLevel || 'Not Set'}</Text>
+            {strings.permissionsFolder}: {cwd}
+          </Text>
+          <Text>
+            {strings.permissionsCurrentLevel}:{' '}
+            <Text bold>{currentTrustLevel || strings.permissionsNotSet}</Text>
           </Text>
           {isInheritedTrustFromParent && (
             <Text color={theme.text.secondary}>
-              Note: This folder behaves as a trusted folder because one of the
-              parent folders is trusted. It will remain trusted even if you set
-              a different trust level here. To change this, you need to modify
-              the trust setting in the parent folder.
+              {strings.permissionsInheritedParent}
             </Text>
           )}
           {isInheritedTrustFromIde && (
             <Text color={theme.text.secondary}>
-              Note: This folder behaves as a trusted folder because the
-              connected IDE workspace is trusted. It will remain trusted even if
-              you set a different trust level here.
+              {strings.permissionsInheritedIde}
             </Text>
           )}
         </Box>
@@ -125,15 +127,18 @@ export function PermissionsModifyTrustDialog({
         />
         <Box marginTop={1}>
           <Text color={theme.text.secondary}>
-            (Use Enter to select, Esc to close)
+            {strings.authUseEnter.replace(
+              '(Use Enter to select)',
+              '(Enter — вибрати',
+            )}
+            {', Esc — закрити)'}
           </Text>
         </Box>
       </Box>
       {needsRestart && (
         <Box marginLeft={1} marginTop={1}>
           <Text color={theme.status.warning}>
-            To apply the trust changes, Gemini CLI must be restarted. Press
-            &apos;r&apos; to restart CLI now.
+            {strings.permissionsRestartRequired}
           </Text>
         </Box>
       )}

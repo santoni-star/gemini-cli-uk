@@ -125,6 +125,7 @@ import { terminalCapabilityManager } from './utils/terminalCapabilityManager.js'
 import { useInputHistoryStore } from './hooks/useInputHistoryStore.js';
 import { enableBracketedPaste } from './utils/bracketedPaste.js';
 import { useBanner } from './hooks/useBanner.js';
+import { strings } from '../i18n.js';
 
 const WARNING_PROMPT_DURATION_MS = 1000;
 const QUEUE_ERROR_DISPLAY_DURATION_MS = 3000;
@@ -490,7 +491,10 @@ export const AppContainer = (props: AppContainerProps) => {
           setAuthState(AuthState.Authenticated);
         } catch (e) {
           onAuthError(
-            `Failed to authenticate: ${e instanceof Error ? e.message : String(e)}`,
+            strings.authErrorFailed.replace(
+              '{error}',
+              e instanceof Error ? e.message : String(e),
+            ),
           );
           return;
         }
@@ -502,7 +506,7 @@ export const AppContainer = (props: AppContainerProps) => {
           await runExitCleanup();
           writeToStdout(`
 ----------------------------------------------------------------
-Logging in with Google... Restarting Gemini CLI to continue.
+${strings.authExitingGoogle}
 ----------------------------------------------------------------
           `);
           process.exit(RELAUNCH_EXIT_CODE);
@@ -518,9 +522,7 @@ Logging in with Google... Restarting Gemini CLI to continue.
       try {
         onAuthError(null);
         if (!apiKey.trim() && apiKey.length > 1) {
-          onAuthError(
-            'API key cannot be empty string with length greater than 1.',
-          );
+          onAuthError(strings.authApiKeyErrorEmpty);
           return;
         }
 
@@ -530,7 +532,10 @@ Logging in with Google... Restarting Gemini CLI to continue.
         setAuthState(AuthState.Authenticated);
       } catch (e) {
         onAuthError(
-          `Failed to save API key: ${e instanceof Error ? e.message : String(e)}`,
+          strings.authApiKeyErrorSave.replace(
+            '{error}',
+            e instanceof Error ? e.message : String(e),
+          ),
         );
       }
     },
@@ -670,7 +675,7 @@ Logging in with Google... Restarting Gemini CLI to continue.
     historyManager.addItem(
       {
         type: MessageType.INFO,
-        text: 'Refreshing hierarchical memory (GEMINI.md or other context files)...',
+        text: strings.memoryRefreshing,
       },
       Date.now(),
     );
@@ -681,10 +686,12 @@ Logging in with Google... Restarting Gemini CLI to continue.
       historyManager.addItem(
         {
           type: MessageType.INFO,
-          text: `Memory refreshed successfully. ${
+          text: `${strings.memoryRefreshedSuccess}${
             memoryContent.length > 0
-              ? `Loaded ${memoryContent.length} characters from ${fileCount} file(s).`
-              : 'No memory content found.'
+              ? strings.memoryLoadedContent
+                  .replace('{count}', memoryContent.length.toString())
+                  .replace('{fileCount}', fileCount.toString())
+              : strings.memoryNoContent
           }`,
         },
         Date.now(),
@@ -1023,10 +1030,10 @@ Logging in with Google... Restarting Gemini CLI to continue.
     };
 
     const handleSelectionWarning = () => {
-      handleWarning('Press Ctrl-S to enter selection mode to copy text.');
+      handleWarning(strings.selectionWarning);
     };
     const handlePasteTimeout = () => {
-      handleWarning('Paste Timed out. Possibly due to slow connection.');
+      handleWarning(strings.pasteTimeoutWarning);
     };
     appEvents.on(AppEvent.SelectionWarning, handleSelectionWarning);
     appEvents.on(AppEvent.PasteTimeout, handlePasteTimeout);
@@ -1414,7 +1421,7 @@ Logging in with Google... Restarting Gemini CLI to continue.
           authType === AuthType.USE_VERTEX_AI
         ) {
           setDefaultBannerText(
-            'Gemini 3 Flash and Pro are now available. \nEnable "Preview features" in /settings. \nLearn more at https://goo.gle/enable-preview-features',
+            `${strings.modelAvailableInfo}\n${strings.modelPreviewFeaturesInfo}`,
           );
         }
       }

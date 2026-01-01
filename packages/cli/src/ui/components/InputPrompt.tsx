@@ -1010,13 +1010,13 @@ export const InputPrompt: React.FC<InputPromptProps> = ({
   let statusText = '';
   if (shellModeActive) {
     statusColor = theme.ui.symbol;
-    statusText = 'Shell mode';
+    statusText = strings.statusShellMode;
   } else if (showYoloStyling) {
     statusColor = theme.status.error;
-    statusText = 'YOLO mode';
+    statusText = strings.statusYoloMode;
   } else if (showAutoAcceptStyling) {
     statusColor = theme.status.warning;
-    statusText = 'Accepting edits';
+    statusText = strings.statusAcceptingEdits;
   }
 
   const suggestionsNode = shouldShowSuggestions ? (

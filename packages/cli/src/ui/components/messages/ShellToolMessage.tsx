@@ -27,6 +27,7 @@ import {
 } from './ToolShared.js';
 import type { ToolMessageProps } from './ToolMessage.js';
 import type { Config } from '@google/gemini-cli-core';
+import { strings } from '../../../i18n.js';
 
 export interface ShellToolMessageProps extends ToolMessageProps {
   activeShellPtyId?: number | null;
@@ -140,7 +141,7 @@ export const ShellToolMessage: React.FC<ShellToolMessageProps> = ({
         {shouldShowFocusHint && (
           <Box marginLeft={1} flexShrink={0}>
             <Text color={theme.text.accent}>
-              {isThisShellFocused ? '(Focused)' : '(ctrl+f to focus)'}
+              {isThisShellFocused ? strings.toolFocused : strings.toolFocusHint}
             </Text>
           </Box>
         )}

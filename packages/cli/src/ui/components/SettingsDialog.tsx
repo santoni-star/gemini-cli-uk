@@ -48,6 +48,7 @@ import type { Config } from '@google/gemini-cli-core';
 import { useUIState } from '../contexts/UIStateContext.js';
 import { useTextBuffer } from './shared/text-buffer.js';
 import { TextInput } from './shared/TextInput.js';
+import { strings } from '../../i18n.js';
 
 interface FzfResult {
   item: string;
@@ -442,8 +443,6 @@ export function SettingsDialog({
     if (item.value === SettingScope.Workspace)
       label = strings.settingsScopeWorkspace;
     if (item.value === SettingScope.System) label = strings.settingsScopeSystem;
-    if (item.value === SettingScope.Session)
-      label = strings.settingsScopeSession;
 
     return {
       ...item,

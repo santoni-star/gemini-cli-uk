@@ -13,6 +13,7 @@ import { StreamingState } from '../types.js';
 import { UpdateNotification } from './UpdateNotification.js';
 
 import { GEMINI_DIR, Storage, debugLogger } from '@google/gemini-cli-core';
+import { strings } from '../../i18n.js';
 
 import * as fs from 'node:fs/promises';
 import os from 'node:os';
@@ -87,9 +88,7 @@ export const Notifications = () => {
     <>
       {showScreenReaderNudge && (
         <Text>
-          You are currently in screen reader-friendly view. To switch out, open{' '}
-          {settingsPath} and remove the entry for {'"screenReader"'}. This will
-          disappear on next run.
+          {strings.notificationScreenReader.replace('{path}', settingsPath)}
         </Text>
       )}
       {updateInfo && <UpdateNotification message={updateInfo.message} />}
@@ -116,11 +115,11 @@ export const Notifications = () => {
           marginBottom={1}
         >
           <Text color={theme.status.error}>
-            Initialization Error: {initError}
+            {strings.notificationInitError} {initError}
           </Text>
           <Text color={theme.status.error}>
             {' '}
-            Please check API key and configuration.
+            {strings.notificationConfigHint}
           </Text>
         </Box>
       )}

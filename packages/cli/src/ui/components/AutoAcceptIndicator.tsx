@@ -8,6 +8,7 @@ import type React from 'react';
 import { Box, Text } from 'ink';
 import { theme } from '../semantic-colors.js';
 import { ApprovalMode } from '@google/gemini-cli-core';
+import { strings } from '../../i18n.js';
 
 interface AutoAcceptIndicatorProps {
   approvalMode: ApprovalMode;
@@ -23,13 +24,13 @@ export const AutoAcceptIndicator: React.FC<AutoAcceptIndicatorProps> = ({
   switch (approvalMode) {
     case ApprovalMode.AUTO_EDIT:
       textColor = theme.status.warning;
-      textContent = 'accepting edits';
-      subText = ' (shift + tab to toggle)';
+      textContent = strings.indicatorAcceptingEdits;
+      subText = strings.indicatorAutoEditToggleHint;
       break;
     case ApprovalMode.YOLO:
       textColor = theme.status.error;
-      textContent = 'YOLO mode';
-      subText = ' (ctrl + y to toggle)';
+      textContent = strings.indicatorYoloMode;
+      subText = strings.indicatorYoloToggleHint;
       break;
     case ApprovalMode.DEFAULT:
     default:

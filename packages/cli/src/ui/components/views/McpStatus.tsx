@@ -16,6 +16,7 @@ import type {
   JsonMcpResource,
   JsonMcpTool,
 } from '../../types.js';
+import { strings } from '../../../i18n.js';
 
 interface McpStatusProps {
   servers: Record<string, MCPServerConfig>;
@@ -49,14 +50,8 @@ export const McpStatus: React.FC<McpStatusProps> = ({
   if (serverNames.length === 0 && blockedServers.length === 0) {
     return (
       <Box flexDirection="column">
-        <Text>No MCP servers configured.</Text>
-        <Text>
-          Please view MCP documentation in your browser:{' '}
-          <Text color={theme.text.link}>
-            https://goo.gle/gemini-cli-docs-mcp
-          </Text>{' '}
-          or use the cli /docs command
-        </Text>
+        <Text>{strings.mcpNoServers}</Text>
+        <Text>{strings.mcpViewDocs}</Text>
       </Box>
     );
   }
@@ -66,17 +61,16 @@ export const McpStatus: React.FC<McpStatusProps> = ({
       {discoveryInProgress && (
         <Box flexDirection="column" marginBottom={1}>
           <Text color={theme.status.warning}>
-            ⏳ MCP servers are starting up ({connectingServers.length}{' '}
-            initializing)...
+            {strings.mcpStarting.replace(
+              '{count}',
+              String(connectingServers.length),
+            )}
           </Text>
-          <Text color={theme.text.primary}>
-            Note: First startup may take longer. Tool availability will update
-            automatically.
-          </Text>
+          <Text color={theme.text.primary}>{strings.mcpStartupNote}</Text>
         </Box>
       )}
 
-      <Text bold>Configured MCP servers:</Text>
+      <Text bold>{strings.mcpConfiguredServers}</Text>
       <Box height={1} />
 
       {serverNames.map((serverName) => {
@@ -107,25 +101,25 @@ export const McpStatus: React.FC<McpStatusProps> = ({
         switch (status) {
           case MCPServerStatus.CONNECTED:
             statusIndicator = '🟢';
-            statusText = 'Ready';
+            statusText = strings.mcpReady;
             statusColor = theme.status.success;
             break;
           case MCPServerStatus.CONNECTING:
             statusIndicator = '🔄';
-            statusText = 'Starting... (first startup may take longer)';
+            statusText = strings.mcpStarting.split('(')[0].trim();
             statusColor = theme.status.warning;
             break;
           case MCPServerStatus.DISCONNECTED:
           default:
             statusIndicator = '🔴';
-            statusText = 'Disconnected';
+            statusText = strings.mcpDisconnected;
             statusColor = theme.status.error;
             break;
         }
 
         let serverDisplayName = serverName;
         if (server.extension?.name) {
-          serverDisplayName += ` (from ${server.extension?.name})`;
+          serverDisplayName += ` (${strings.mcpFrom} ${server.extension?.name})`;
         }
 
         const toolCount = serverTools.length;
@@ -133,30 +127,40 @@ export const McpStatus: React.FC<McpStatusProps> = ({
         const resourceCount = serverResources.length;
         const parts = [];
         if (toolCount > 0) {
-          parts.push(`${toolCount} ${toolCount === 1 ? 'tool' : 'tools'}`);
+          parts.push(
+            `${toolCount} ${
+              toolCount === 1 ? strings.mcpTool : strings.mcpTools
+            }`,
+          );
         }
         if (promptCount > 0) {
           parts.push(
-            `${promptCount} ${promptCount === 1 ? 'prompt' : 'prompts'}`,
+            `${promptCount} ${
+              promptCount === 1 ? strings.mcpPrompt : strings.mcpPrompts
+            }`,
           );
         }
         if (resourceCount > 0) {
           parts.push(
-            `${resourceCount} ${resourceCount === 1 ? 'resource' : 'resources'}`,
+            `${resourceCount} ${
+              resourceCount === 1 ? strings.mcpResource : strings.mcpResources
+            }`,
           );
         }
 
         const serverAuthStatus = authStatus[serverName];
         let authStatusNode: React.ReactNode = null;
         if (serverAuthStatus === 'authenticated') {
-          authStatusNode = <Text> (OAuth)</Text>;
+          authStatusNode = <Text>{strings.mcpOauthAuthenticated}</Text>;
         } else if (serverAuthStatus === 'expired') {
           authStatusNode = (
-            <Text color={theme.status.error}> (OAuth expired)</Text>
+            <Text color={theme.status.error}>{strings.mcpOauthExpired}</Text>
           );
         } else if (serverAuthStatus === 'unauthenticated') {
           authStatusNode = (
-            <Text color={theme.status.warning}> (OAuth not authenticated)</Text>
+            <Text color={theme.status.warning}>
+              {strings.mcpOauthNotAuthenticated}
+            </Text>
           );
         }
 
@@ -175,10 +179,16 @@ export const McpStatus: React.FC<McpStatusProps> = ({
               {authStatusNode}
             </Box>
             {status === MCPServerStatus.CONNECTING && (
-              <Text> (tools and prompts will appear when ready)</Text>
+              <Text>
+                {' '}
+                ({strings.mcpPrompts} {strings.mcpFrom} {strings.mcpTool}...)
+              </Text>
             )}
             {status === MCPServerStatus.DISCONNECTED && toolCount > 0 && (
-              <Text> ({toolCount} tools cached)</Text>
+              <Text>
+                {' '}
+                {strings.mcpToolsCached.replace('{count}', String(toolCount))}
+              </Text>
             )}
 
             {showDescriptions && server?.description && (
@@ -189,7 +199,7 @@ export const McpStatus: React.FC<McpStatusProps> = ({
 
             {serverTools.length > 0 && (
               <Box flexDirection="column" marginLeft={2}>
-                <Text color={theme.text.primary}>Tools:</Text>
+                <Text color={theme.text.primary}>{strings.mcpTools}:</Text>
                 {serverTools.map((tool) => {
                   const schemaContent =
                     showSchema &&
@@ -217,7 +227,9 @@ export const McpStatus: React.FC<McpStatusProps> = ({
                       )}
                       {schemaContent && (
                         <Box flexDirection="column" marginLeft={4}>
-                          <Text color={theme.text.secondary}>Parameters:</Text>
+                          <Text color={theme.text.secondary}>
+                            {strings.mcpParameters}
+                          </Text>
                           <Text color={theme.text.secondary}>
                             {schemaContent}
                           </Text>
@@ -231,7 +243,9 @@ export const McpStatus: React.FC<McpStatusProps> = ({
 
             {serverPrompts.length > 0 && (
               <Box flexDirection="column" marginLeft={2}>
-                <Text color={theme.text.primary}>Prompts:</Text>
+                <Text color={theme.text.primary}>
+                  {strings.mcpPromptsTitle}
+                </Text>
                 {serverPrompts.map((prompt) => (
                   <Box key={prompt.name} flexDirection="column">
                     <Text>
@@ -251,11 +265,14 @@ export const McpStatus: React.FC<McpStatusProps> = ({
 
             {serverResources.length > 0 && (
               <Box flexDirection="column" marginLeft={2}>
-                <Text color={theme.text.primary}>Resources:</Text>
+                <Text color={theme.text.primary}>
+                  {strings.mcpResourcesTitle}
+                </Text>
                 {serverResources
                   .slice(0, MAX_MCP_RESOURCES_TO_SHOW)
                   .map((resource, index) => {
-                    const label = resource.name || resource.uri || 'resource';
+                    const label =
+                      resource.name || resource.uri || strings.mcpResource;
                     return (
                       <Box
                         key={`${resource.serverName}-resource-${index}`}
@@ -279,11 +296,19 @@ export const McpStatus: React.FC<McpStatusProps> = ({
                 {serverResources.length > MAX_MCP_RESOURCES_TO_SHOW && (
                   <Text color={theme.text.secondary}>
                     {'  '}...{' '}
-                    {serverResources.length - MAX_MCP_RESOURCES_TO_SHOW}{' '}
-                    {serverResources.length - MAX_MCP_RESOURCES_TO_SHOW === 1
-                      ? 'resource'
-                      : 'resources'}{' '}
-                    hidden
+                    {strings.mcpHidden
+                      .replace(
+                        '{count}',
+                        (
+                          serverResources.length - MAX_MCP_RESOURCES_TO_SHOW
+                        ).toString(),
+                      )
+                      .replace(
+                        '{label}',
+                        serverResources.length - MAX_MCP_RESOURCES_TO_SHOW === 1
+                          ? strings.mcpResource
+                          : strings.mcpResources,
+                      )}
                   </Text>
                 )}
               </Box>
@@ -297,9 +322,11 @@ export const McpStatus: React.FC<McpStatusProps> = ({
           <Text color={theme.status.error}>🔴 </Text>
           <Text bold>
             {server.name}
-            {server.extensionName ? ` (from ${server.extensionName})` : ''}
+            {server.extensionName
+              ? ` (${strings.mcpFrom} ${server.extensionName})`
+              : ''}
           </Text>
-          <Text> - Blocked</Text>
+          <Text> - {strings.mcpBlocked}</Text>
         </Box>
       ))}
     </Box>

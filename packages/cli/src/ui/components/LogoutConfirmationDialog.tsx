@@ -10,6 +10,7 @@ import { theme } from '../semantic-colors.js';
 import type { RadioSelectItem } from './shared/RadioButtonSelect.js';
 import { RadioButtonSelect } from './shared/RadioButtonSelect.js';
 import { useKeypress } from '../hooks/useKeypress.js';
+import { strings } from '../../i18n.js';
 
 export enum LogoutChoice {
   LOGIN = 'login',
@@ -35,12 +36,12 @@ export const LogoutConfirmationDialog: React.FC<
 
   const options: Array<RadioSelectItem<LogoutChoice>> = [
     {
-      label: 'Login',
+      label: strings.logoutOptionLogin,
       value: LogoutChoice.LOGIN,
       key: 'login',
     },
     {
-      label: 'Exit',
+      label: strings.logoutOptionExit,
       value: LogoutChoice.EXIT,
       key: 'exit',
     },
@@ -59,19 +60,15 @@ export const LogoutConfirmationDialog: React.FC<
       >
         <Box flexDirection="column" marginBottom={1}>
           <Text bold color={theme.text.primary}>
-            You are now logged out.
+            {strings.logoutLoggedOut}
           </Text>
-          <Text color={theme.text.secondary}>
-            Login again to continue using Gemini CLI, or exit the application.
-          </Text>
+          <Text color={theme.text.secondary}>{strings.logoutLoginAgain}</Text>
         </Box>
 
         <RadioButtonSelect items={options} onSelect={onSelect} isFocused />
 
         <Box marginTop={1}>
-          <Text color={theme.text.secondary}>
-            (Use Enter to select, Esc to close)
-          </Text>
+          <Text color={theme.text.secondary}>{strings.settingsControls}</Text>
         </Box>
       </Box>
     </Box>

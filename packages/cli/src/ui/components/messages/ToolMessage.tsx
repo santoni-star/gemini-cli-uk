@@ -26,6 +26,7 @@ import type { Config } from '@google/gemini-cli-core';
 import { useInactivityTimer } from '../../hooks/useInactivityTimer.js';
 import { ToolCallStatus } from '../../types.js';
 import { ShellInputPrompt } from '../ShellInputPrompt.js';
+import { strings } from '../../../i18n.js';
 
 export type { TextEmphasis };
 
@@ -112,7 +113,7 @@ export const ToolMessage: React.FC<ToolMessageProps> = ({
         {shouldShowFocusHint && (
           <Box marginLeft={1} flexShrink={0}>
             <Text color={theme.text.accent}>
-              {isThisShellFocused ? '(Focused)' : '(ctrl+f to focus)'}
+              {isThisShellFocused ? strings.toolFocused : strings.toolFocusHint}
             </Text>
           </Box>
         )}

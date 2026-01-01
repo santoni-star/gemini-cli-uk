@@ -7,6 +7,7 @@
 import type React from 'react';
 import { Box, Text } from 'ink';
 import { theme } from '../../semantic-colors.js';
+import { strings } from '../../../i18n.js';
 
 interface HooksListProps {
   hooks: ReadonlyArray<{
@@ -27,35 +28,31 @@ interface HooksListProps {
 
 export const HooksList: React.FC<HooksListProps> = ({ hooks }) => (
   <Box flexDirection="column" marginTop={1} marginBottom={1}>
-    <Text>
-      Hooks are scripts or programs that Gemini CLI executes at specific points
-      in the agentic loop, allowing you to intercept and customize behavior.
-    </Text>
+    <Text>{strings.hooksListDescription}</Text>
 
     <Box marginTop={1} flexDirection="column">
       <Text color={theme.status.warning} bold underline>
-        ⚠️ Security Warning:
+        {strings.hooksListSecurityWarningTitle}
       </Text>
       <Text color={theme.status.warning}>
-        Hooks can execute arbitrary commands on your system. Only use hooks from
-        sources you trust. Review hook scripts carefully.
+        {strings.hooksListSecurityWarningText}
       </Text>
     </Box>
 
     <Box marginTop={1}>
       <Text>
-        Learn more:{' '}
+        {strings.hooksListLearnMore}{' '}
         <Text color={theme.text.link}>https://geminicli.com/docs/hooks</Text>
       </Text>
     </Box>
 
     <Box marginTop={1} flexDirection="column">
       {hooks.length === 0 ? (
-        <Text>No hooks configured.</Text>
+        <Text>{strings.hooksListNoHooks}</Text>
       ) : (
         <>
           <Text bold underline>
-            Registered Hooks:
+            {strings.hooksListRegisteredTitle}
           </Text>
           <Box flexDirection="column" paddingLeft={2} marginTop={1}>
             {Object.entries(
@@ -79,7 +76,9 @@ export const HooksList: React.FC<HooksListProps> = ({ hooks }) => (
                     const hookName =
                       hook.config.name || hook.config.command || 'unknown';
                     const statusColor = hook.enabled ? 'green' : 'gray';
-                    const statusText = hook.enabled ? 'enabled' : 'disabled';
+                    const statusText = hook.enabled
+                      ? strings.hooksListEnabled
+                      : strings.hooksListDisabled;
 
                     return (
                       <Box key={`${eventName}-${index}`} flexDirection="column">
@@ -98,14 +97,16 @@ export const HooksList: React.FC<HooksListProps> = ({ hooks }) => (
                             </Text>
                           )}
                           <Text dimColor>
-                            Source: {hook.source}
+                            {strings.hooksListSource}: {hook.source}
                             {hook.config.name &&
                               hook.config.command &&
-                              ` | Command: ${hook.config.command}`}
-                            {hook.matcher && ` | Matcher: ${hook.matcher}`}
-                            {hook.sequential && ` | Sequential`}
+                              ` | ${strings.hooksListCommand}: ${hook.config.command}`}
+                            {hook.matcher &&
+                              ` | ${strings.hooksListMatcher}: ${hook.matcher}`}
+                            {hook.sequential &&
+                              ` | ${strings.hooksListSequential}`}
                             {hook.config.timeout &&
-                              ` | Timeout: ${hook.config.timeout}s`}
+                              ` | ${strings.hooksListTimeout}: ${hook.config.timeout}${strings.unitSecond}`}
                           </Text>
                         </Box>
                       </Box>
@@ -120,10 +121,7 @@ export const HooksList: React.FC<HooksListProps> = ({ hooks }) => (
     </Box>
 
     <Box marginTop={1}>
-      <Text dimColor>
-        Tip: Use `/hooks enable {'<hook-name>'}` or `/hooks disable{' '}
-        {'<hook-name>'}` to toggle hooks
-      </Text>
+      <Text dimColor>{strings.hooksListTip}</Text>
     </Box>
   </Box>
 );

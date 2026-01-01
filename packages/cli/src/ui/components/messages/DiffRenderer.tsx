@@ -14,6 +14,7 @@ import { theme as semanticTheme } from '../../semantic-colors.js';
 import type { Theme } from '../../themes/theme.js';
 import { useSettings } from '../../contexts/SettingsContext.js';
 import { useAlternateBuffer } from '../../hooks/useAlternateBuffer.js';
+import { strings } from '../../../i18n.js';
 
 interface DiffLine {
   type: 'add' | 'del' | 'context' | 'hunk' | 'other';
@@ -127,7 +128,11 @@ export const DiffRenderer: React.FC<DiffRendererProps> = ({
 
   const renderedOutput = useMemo(() => {
     if (!diffContent || typeof diffContent !== 'string') {
-      return <Text color={semanticTheme.status.warning}>No diff content.</Text>;
+      return (
+        <Text color={semanticTheme.status.warning}>
+          {strings.diffNoContent}
+        </Text>
+      );
     }
 
     if (parsedLines.length === 0) {
@@ -137,7 +142,7 @@ export const DiffRenderer: React.FC<DiffRendererProps> = ({
           borderColor={semanticTheme.border.default}
           padding={1}
         >
-          <Text dimColor>No changes detected.</Text>
+          <Text dimColor>{strings.diffNoChanges}</Text>
         </Box>
       );
     }
@@ -225,7 +230,7 @@ const renderDiffContent = (
         borderColor={semanticTheme.border.default}
         padding={1}
       >
-        <Text dimColor>No changes detected.</Text>
+        <Text dimColor>{strings.diffNoChanges}</Text>
       </Box>
     );
   }

@@ -15,6 +15,7 @@ import { loadTrustedFolders, TrustLevel } from '../../config/trustedFolders.js';
 import { expandHomeDir } from '../utils/directoryUtils.js';
 import { MessageType, type HistoryItem } from '../types.js';
 import type { Config } from '@google/gemini-cli-core';
+import { strings } from '../../i18n.js';
 
 export enum MultiFolderTrustChoice {
   YES,
@@ -75,17 +76,17 @@ export const MultiFolderTrustDialog: React.FC<MultiFolderTrustDialogProps> = ({
 
   const options: Array<RadioSelectItem<MultiFolderTrustChoice>> = [
     {
-      label: 'Yes',
+      label: strings.multiTrustYes,
       value: MultiFolderTrustChoice.YES,
       key: 'yes',
     },
     {
-      label: 'Yes, and remember the directories as trusted',
+      label: strings.multiTrustYesRemember,
       value: MultiFolderTrustChoice.YES_AND_REMEMBER,
       key: 'yes-and-remember',
     },
     {
-      label: 'No',
+      label: strings.multiTrustNo,
       value: MultiFolderTrustChoice.NO,
       key: 'no',
     },
@@ -149,16 +150,12 @@ export const MultiFolderTrustDialog: React.FC<MultiFolderTrustDialogProps> = ({
       >
         <Box flexDirection="column" marginBottom={1}>
           <Text bold color={theme.text.primary}>
-            Do you trust the following folders being added to this workspace?
+            {strings.multiTrustTitle}
           </Text>
           <Text color={theme.text.secondary}>
             {folders.map((f) => `- ${f}`).join('\n')}
           </Text>
-          <Text color={theme.text.primary}>
-            Trusting a folder allows Gemini to read and perform auto-edits when
-            in auto-approval mode. This is a security feature to prevent
-            accidental execution in untrusted directories.
-          </Text>
+          <Text color={theme.text.primary}>{strings.multiTrustInfo}</Text>
         </Box>
 
         <RadioButtonSelect
@@ -169,7 +166,7 @@ export const MultiFolderTrustDialog: React.FC<MultiFolderTrustDialogProps> = ({
       </Box>
       {submitted && (
         <Box marginLeft={1} marginTop={1}>
-          <Text color={theme.text.primary}>Applying trust settings...</Text>
+          <Text color={theme.text.primary}>{strings.multiTrustApplying}</Text>
         </Box>
       )}
     </Box>

@@ -9,6 +9,7 @@ import { Box, Text } from 'ink';
 import { useUIState } from '../../contexts/UIStateContext.js';
 import { ExtensionUpdateState } from '../../state/extensions.js';
 import { debugLogger, type GeminiCLIExtension } from '@google/gemini-cli-core';
+import { strings } from '../../../i18n.js';
 
 interface ExtensionsList {
   extensions: readonly GeminiCLIExtension[];
@@ -18,21 +19,23 @@ export const ExtensionsList: React.FC<ExtensionsList> = ({ extensions }) => {
   const { extensionsUpdateState } = useUIState();
 
   if (extensions.length === 0) {
-    return <Text>No extensions installed.</Text>;
+    return <Text>{strings.extensionsListNoExtensions}</Text>;
   }
 
   return (
     <Box flexDirection="column" marginTop={1} marginBottom={1}>
-      <Text>Installed extensions: </Text>
+      <Text>{strings.extensionsListInstalledTitle} </Text>
       <Box flexDirection="column" paddingLeft={2}>
         {extensions.map((ext) => {
           const state = extensionsUpdateState.get(ext.name);
           const isActive = ext.isActive;
-          const activeString = isActive ? 'active' : 'disabled';
+          const activeString = isActive
+            ? strings.extensionsListActive
+            : strings.extensionsListDisabled;
           const activeColor = isActive ? 'green' : 'grey';
 
           let stateColor = 'gray';
-          const stateText = state || 'unknown state';
+          const stateText = state || strings.extensionsListUnknownState;
 
           switch (state) {
             case ExtensionUpdateState.CHECKING_FOR_UPDATES:
@@ -67,7 +70,7 @@ export const ExtensionsList: React.FC<ExtensionsList> = ({ extensions }) => {
               </Text>
               {ext.resolvedSettings && ext.resolvedSettings.length > 0 && (
                 <Box flexDirection="column" paddingLeft={2}>
-                  <Text>settings:</Text>
+                  <Text>{strings.extensionsListSettings}</Text>
                   {ext.resolvedSettings.map((setting) => (
                     <Text key={setting.name}>
                       - {setting.name}: {setting.value}

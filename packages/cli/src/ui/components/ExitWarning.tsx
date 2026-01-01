@@ -8,6 +8,7 @@ import type React from 'react';
 import { Box, Text } from 'ink';
 import { useUIState } from '../contexts/UIStateContext.js';
 import { theme } from '../semantic-colors.js';
+import { strings } from '../../i18n.js';
 
 export const ExitWarning: React.FC = () => {
   const uiState = useUIState();
@@ -15,13 +16,13 @@ export const ExitWarning: React.FC = () => {
     <>
       {uiState.dialogsVisible && uiState.ctrlCPressedOnce && (
         <Box marginTop={1}>
-          <Text color={theme.status.warning}>Press Ctrl+C again to exit.</Text>
+          <Text color={theme.status.warning}>{strings.pressCtrlC}</Text>
         </Box>
       )}
 
       {uiState.dialogsVisible && uiState.ctrlDPressedOnce && (
         <Box marginTop={1}>
-          <Text color={theme.status.warning}>Press Ctrl+D again to exit.</Text>
+          <Text color={theme.status.warning}>{strings.pressCtrlD}</Text>
         </Box>
       )}
     </>

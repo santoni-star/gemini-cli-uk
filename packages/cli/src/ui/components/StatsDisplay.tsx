@@ -6,6 +6,7 @@
 
 import type React from 'react';
 import { Box, Text } from 'ink';
+import chalk from 'chalk';
 import { ThemedGradient } from './ThemedGradient.js';
 import { theme } from '../semantic-colors.js';
 import { formatDuration } from '../utils/formatters.js';
@@ -25,7 +26,7 @@ import {
   type RetrieveUserQuotaResponse,
   VALID_GEMINI_MODELS,
 } from '@google/gemini-cli-core';
-import { strings } from '../../i18n.js';
+import { strings, getLocale } from '../../i18n.js';
 
 // A more flexible and powerful StatRow component
 interface StatRowProps {
@@ -131,7 +132,7 @@ const formatResetTime = (resetTime: string): string => {
   const minutes = totalMinutes % 60;
 
   const fmt = (val: number, unit: 'hour' | 'minute') =>
-    new Intl.NumberFormat('en', {
+    new Intl.NumberFormat(getLocale(), {
       style: 'unit',
       unit,
       unitDisplay: 'narrow',
@@ -405,7 +406,7 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
     }
     return (
       <Text bold color={theme.text.accent}>
-        Session Stats
+        {strings.statsSessionStats}
       </Text>
     );
   };

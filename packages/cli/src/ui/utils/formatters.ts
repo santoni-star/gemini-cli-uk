@@ -9,12 +9,12 @@ import { strings } from '../../i18n.js';
 export const formatMemoryUsage = (bytes: number): string => {
   const gb = bytes / (1024 * 1024 * 1024);
   if (bytes < 1024 * 1024) {
-    return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / 1024).toFixed(1)} ${strings.unitKB}`;
   }
   if (bytes < 1024 * 1024 * 1024) {
-    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} ${strings.unitMB}`;
   }
-  return `${gb.toFixed(2)} GB`;
+  return `${gb.toFixed(2)} ${strings.unitGB}`;
 };
 
 /**

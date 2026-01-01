@@ -13,6 +13,7 @@ import {
   ScrollableList,
   type ScrollableListRef,
 } from './shared/ScrollableList.js';
+import { strings } from '../../i18n.js';
 
 interface DetailedMessagesDisplayProps {
   messages: ConsoleMessageItem[];
@@ -65,7 +66,8 @@ export const DetailedMessagesDisplay: React.FC<
     >
       <Box marginBottom={1}>
         <Text bold color={theme.text.primary}>
-          Debug Console <Text color={theme.text.secondary}>(F12 to close)</Text>
+          {strings.debugConsoleTitle}{' '}
+          <Text color={theme.text.secondary}>{strings.debugConsoleClose}</Text>
         </Text>
       </Box>
       <Box height={maxHeight} width={width - borderAndPadding}>

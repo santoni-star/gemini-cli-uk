@@ -9,6 +9,7 @@ import { type ReactNode } from 'react';
 import { theme } from '../semantic-colors.js';
 import { MarkdownDisplay } from '../utils/MarkdownDisplay.js';
 import { RadioButtonSelect } from './shared/RadioButtonSelect.js';
+import { strings } from '../../i18n.js';
 
 type ConsentPromptProps = {
   // If a simple string is given, it will render using markdown by default.
@@ -40,8 +41,8 @@ export const ConsentPrompt = (props: ConsentPromptProps) => {
       <Box marginTop={1}>
         <RadioButtonSelect
           items={[
-            { label: 'Yes', value: true, key: 'Yes' },
-            { label: 'No', value: false, key: 'No' },
+            { label: strings.yes, value: true, key: 'Yes' },
+            { label: strings.no, value: false, key: 'No' },
           ]}
           onSelect={onConfirm}
         />

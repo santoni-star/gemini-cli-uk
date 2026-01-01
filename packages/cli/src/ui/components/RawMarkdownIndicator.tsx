@@ -7,14 +7,18 @@
 import type React from 'react';
 import { Box, Text } from 'ink';
 import { theme } from '../semantic-colors.js';
+import { strings } from '../../i18n.js';
 
 export const RawMarkdownIndicator: React.FC = () => {
   const modKey = process.platform === 'darwin' ? 'option+m' : 'alt+m';
   return (
     <Box>
       <Text>
-        raw markdown mode
-        <Text color={theme.text.secondary}> ({modKey} to toggle) </Text>
+        {strings.indicatorRawMarkdown}
+        <Text color={theme.text.secondary}>
+          {' '}
+          {strings.indicatorRawMarkdownToggleHint.replace('{key}', modKey)}{' '}
+        </Text>
       </Text>
     </Box>
   );

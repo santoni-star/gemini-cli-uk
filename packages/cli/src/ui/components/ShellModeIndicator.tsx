@@ -7,12 +7,13 @@
 import type React from 'react';
 import { Box, Text } from 'ink';
 import { theme } from '../semantic-colors.js';
+import { strings } from '../../i18n.js';
 
 export const ShellModeIndicator: React.FC = () => (
   <Box>
     <Text color={theme.ui.symbol}>
-      shell mode enabled
-      <Text color={theme.text.secondary}> (esc to disable)</Text>
+      {strings.shellModeEnabled}
+      <Text color={theme.text.secondary}> {strings.shellModeDisableHint}</Text>
     </Text>
   </Box>
 );

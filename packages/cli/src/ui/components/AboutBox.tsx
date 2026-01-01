@@ -8,6 +8,7 @@ import type React from 'react';
 import { Box, Text } from 'ink';
 import { theme } from '../semantic-colors.js';
 import { GIT_COMMIT_INFO } from '../../generated/git-commit.js';
+import { strings } from '../../i18n.js';
 
 interface AboutBoxProps {
   cliVersion: string;
@@ -40,13 +41,13 @@ export const AboutBox: React.FC<AboutBoxProps> = ({
   >
     <Box marginBottom={1}>
       <Text bold color={theme.text.accent}>
-        About Gemini CLI
+        {strings.aboutTitle}
       </Text>
     </Box>
     <Box flexDirection="row">
       <Box width="35%">
         <Text bold color={theme.text.link}>
-          CLI Version
+          {strings.aboutCliVersion}
         </Text>
       </Box>
       <Box>
@@ -57,7 +58,7 @@ export const AboutBox: React.FC<AboutBoxProps> = ({
       <Box flexDirection="row">
         <Box width="35%">
           <Text bold color={theme.text.link}>
-            Git Commit
+            {strings.aboutGitCommit}
           </Text>
         </Box>
         <Box>
@@ -68,7 +69,7 @@ export const AboutBox: React.FC<AboutBoxProps> = ({
     <Box flexDirection="row">
       <Box width="35%">
         <Text bold color={theme.text.link}>
-          Model
+          {strings.aboutModel}
         </Text>
       </Box>
       <Box>
@@ -78,7 +79,7 @@ export const AboutBox: React.FC<AboutBoxProps> = ({
     <Box flexDirection="row">
       <Box width="35%">
         <Text bold color={theme.text.link}>
-          Sandbox
+          {strings.aboutSandbox}
         </Text>
       </Box>
       <Box>
@@ -88,7 +89,7 @@ export const AboutBox: React.FC<AboutBoxProps> = ({
     <Box flexDirection="row">
       <Box width="35%">
         <Text bold color={theme.text.link}>
-          OS
+          {strings.aboutOs}
         </Text>
       </Box>
       <Box>
@@ -98,7 +99,7 @@ export const AboutBox: React.FC<AboutBoxProps> = ({
     <Box flexDirection="row">
       <Box width="35%">
         <Text bold color={theme.text.link}>
-          Auth Method
+          {strings.aboutAuthMethod}
         </Text>
       </Box>
       <Box>
@@ -111,7 +112,7 @@ export const AboutBox: React.FC<AboutBoxProps> = ({
       <Box flexDirection="row">
         <Box width="35%">
           <Text bold color={theme.text.link}>
-            User Email
+            {strings.aboutUserEmail}
           </Text>
         </Box>
         <Box>
@@ -123,7 +124,7 @@ export const AboutBox: React.FC<AboutBoxProps> = ({
       <Box flexDirection="row">
         <Box width="35%">
           <Text bold color={theme.text.link}>
-            GCP Project
+            {strings.aboutGcpProject}
           </Text>
         </Box>
         <Box>
@@ -135,7 +136,7 @@ export const AboutBox: React.FC<AboutBoxProps> = ({
       <Box flexDirection="row">
         <Box width="35%">
           <Text bold color={theme.text.link}>
-            IDE Client
+            {strings.aboutIdeClient}
           </Text>
         </Box>
         <Box>

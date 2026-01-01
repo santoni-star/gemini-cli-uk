@@ -5,33 +5,33 @@
  */
 
 import { en } from './locales/en.js';
-import { uk } from './locales/uk.js';
+import { ua } from './locales/ua.js';
 import type { TranslationStrings } from './locales/types.js';
 
-const getLocale = (): string => {
+export const getLocale = (): string => {
   if (typeof process === 'undefined' || !process.env) {
-    return 'uk';
+    return 'ua';
   }
 
   const lang = (
-    process.env.GEMINI_CLI_LANG ||
-    process.env.LANG ||
-    process.env.LC_ALL ||
+    process.env['GEMINI_CLI_LANG'] ||
+    process.env['LANG'] ||
+    process.env['LC_ALL'] ||
     ''
   ).toLowerCase();
 
-  // Default to 'uk' unless English is explicitly requested
+  // Default to 'ua' unless English is explicitly requested
 
   if (lang.includes('en')) {
     return 'en';
   }
 
-  return 'uk';
+  return 'ua';
 };
 
 const translations: Record<string, TranslationStrings> = {
   en,
-  uk,
+  ua,
 };
 
 export const strings = translations[getLocale()] || en;

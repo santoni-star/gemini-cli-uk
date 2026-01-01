@@ -15,6 +15,7 @@ import {
 } from '../../constants.js';
 import { theme } from '../../semantic-colors.js';
 import { SHELL_TOOL_NAME } from '@google/gemini-cli-core';
+import { strings } from '../../../i18n.js';
 
 export const STATUS_INDICATOR_WIDTH = 3;
 
@@ -47,22 +48,29 @@ export const ToolStatusIndicator: React.FC<ToolStatusIndicatorProps> = ({
         />
       )}
       {status === ToolCallStatus.Success && (
-        <Text color={theme.status.success} aria-label={'Success:'}>
+        <Text
+          color={theme.status.success}
+          aria-label={strings.toolStatusSuccess}
+        >
           {TOOL_STATUS.SUCCESS}
         </Text>
       )}
       {status === ToolCallStatus.Confirming && (
-        <Text color={statusColor} aria-label={'Confirming:'}>
+        <Text color={statusColor} aria-label={strings.toolStatusConfirming}>
           {TOOL_STATUS.CONFIRMING}
         </Text>
       )}
       {status === ToolCallStatus.Canceled && (
-        <Text color={statusColor} aria-label={'Canceled:'} bold>
+        <Text color={statusColor} aria-label={strings.toolStatusCanceled} bold>
           {TOOL_STATUS.CANCELED}
         </Text>
       )}
       {status === ToolCallStatus.Error && (
-        <Text color={theme.status.error} aria-label={'Error:'} bold>
+        <Text
+          color={theme.status.error}
+          aria-label={strings.toolStatusError}
+          bold
+        >
           {TOOL_STATUS.ERROR}
         </Text>
       )}
