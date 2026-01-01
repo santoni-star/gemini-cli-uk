@@ -338,6 +338,8 @@ export const en: TranslationStrings = {
     'Enable preview features (e.g., preview models).',
   settingsLabelVimMode: 'Vim Mode',
   settingsDescVimMode: 'Enable Vim keybindings',
+  settingsLabelLanguage: 'Language',
+  settingsDescLanguage: 'The interface language for the CLI.',
   settingsLabelDisableAutoUpdate: 'Disable Auto Update',
   settingsDescDisableAutoUpdate: 'Disable automatic updates',
   settingsLabelCommandName: 'Command Name',

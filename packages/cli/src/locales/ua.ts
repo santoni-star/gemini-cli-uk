@@ -342,6 +342,8 @@ export const ua: TranslationStrings = {
     'Увімкнути попередні функції (наприклад, моделі в попередньому перегляді).',
   settingsLabelVimMode: 'Режим Vim',
   settingsDescVimMode: 'Увімкнути клавіші Vim',
+  settingsLabelLanguage: 'Мова',
+  settingsDescLanguage: 'Мова інтерфейсу для CLI.',
   settingsLabelDisableAutoUpdate: 'Вимкнути автоматичне оновлення',
   settingsDescDisableAutoUpdate: 'Вимкнути автоматичні оновлення',
   settingsLabelCommandName: 'Назва команди',

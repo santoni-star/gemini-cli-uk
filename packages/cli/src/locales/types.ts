@@ -188,6 +188,8 @@ export interface TranslationStrings {
   settingsDescPreviewFeatures: string;
   settingsLabelVimMode: string;
   settingsDescVimMode: string;
+  settingsLabelLanguage: string;
+  settingsDescLanguage: string;
   settingsLabelDisableAutoUpdate: string;
   settingsDescDisableAutoUpdate: string;
   settingsLabelCommandName: string;

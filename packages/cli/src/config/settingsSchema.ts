@@ -190,6 +190,19 @@ const SETTINGS_SCHEMA = {
         description: 'Enable Vim keybindings',
         showInDialog: true,
       },
+      language: {
+        type: 'enum',
+        label: 'Language',
+        category: 'General',
+        requiresRestart: true,
+        default: 'ua',
+        description: 'The interface language for the CLI.',
+        showInDialog: true,
+        options: [
+          { value: 'ua', label: 'Українська' },
+          { value: 'en', label: 'English' },
+        ],
+      },
       disableAutoUpdate: {
         type: 'boolean',
         label: 'Disable Auto Update',
