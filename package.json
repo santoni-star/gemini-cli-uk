@@ -69,7 +69,7 @@
     }
   },
   "bin": {
-    "gemini-uk": "bundle/gemini.js"
+    "gemini-ua": "bundle/gemini.js"
   },
   "files": [
     "bundle/",
