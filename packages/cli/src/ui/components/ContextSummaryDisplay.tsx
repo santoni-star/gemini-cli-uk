@@ -10,6 +10,7 @@ import { theme } from '../semantic-colors.js';
 import { type IdeContext, type MCPServerConfig } from '@google/gemini-cli-core';
 import { useTerminalSize } from '../hooks/useTerminalSize.js';
 import { isNarrowWidth } from '../utils/isNarrowWidth.js';
+import { strings } from '../../i18n.js';
 
 interface ContextSummaryDisplayProps {
   geminiMdFileCount: number;
@@ -45,9 +46,9 @@ export const ContextSummaryDisplay: React.FC<ContextSummaryDisplayProps> = ({
     if (openFileCount === 0) {
       return '';
     }
-    return `${openFileCount} open file${
-      openFileCount > 1 ? 's' : ''
-    } (ctrl+g to view)`;
+    return `${openFileCount} ${
+      openFileCount > 1 ? strings.summaryOpenFiles : strings.summaryOpenFile
+    } ${strings.summaryCtrlG}`;
   })();
 
   const geminiMdText = (() => {
@@ -56,8 +57,8 @@ export const ContextSummaryDisplay: React.FC<ContextSummaryDisplayProps> = ({
     }
     const allNamesTheSame = new Set(contextFileNames).size < 2;
     const name = allNamesTheSame ? contextFileNames[0] : 'context';
-    return `${geminiMdFileCount} ${name} file${
-      geminiMdFileCount > 1 ? 's' : ''
+    return `${geminiMdFileCount} ${name} ${
+      geminiMdFileCount > 1 ? strings.summaryFiles : strings.summaryFile
     }`;
   })();
 
@@ -69,14 +70,22 @@ export const ContextSummaryDisplay: React.FC<ContextSummaryDisplayProps> = ({
     const parts = [];
     if (mcpServerCount > 0) {
       parts.push(
-        `${mcpServerCount} MCP server${mcpServerCount > 1 ? 's' : ''}`,
+        `${mcpServerCount} ${
+          mcpServerCount > 1
+            ? strings.summaryMcpServers
+            : strings.summaryMcpServer
+        }`,
       );
     }
 
     if (blockedMcpServerCount > 0) {
-      let blockedText = `${blockedMcpServerCount} Blocked`;
+      let blockedText = `${blockedMcpServerCount} ${strings.summaryBlocked}`;
       if (mcpServerCount === 0) {
-        blockedText += ` MCP server${blockedMcpServerCount > 1 ? 's' : ''}`;
+        blockedText += ` ${
+          blockedMcpServerCount > 1
+            ? strings.summaryMcpServers
+            : strings.summaryMcpServer
+        }`;
       }
       parts.push(blockedText);
     }
@@ -88,7 +97,7 @@ export const ContextSummaryDisplay: React.FC<ContextSummaryDisplayProps> = ({
   if (isNarrow) {
     return (
       <Box flexDirection="column" paddingX={1}>
-        <Text color={theme.text.secondary}>Using:</Text>
+        <Text color={theme.text.secondary}>{strings.summaryUsing}:</Text>
         {summaryParts.map((part, index) => (
           <Text key={index} color={theme.text.secondary}>
             {'  '}- {part}
@@ -101,7 +110,7 @@ export const ContextSummaryDisplay: React.FC<ContextSummaryDisplayProps> = ({
   return (
     <Box paddingX={1}>
       <Text color={theme.text.secondary}>
-        Using: {summaryParts.join(' | ')}
+        {strings.summaryUsing}: {summaryParts.join(' | ')}
       </Text>
     </Box>
   );

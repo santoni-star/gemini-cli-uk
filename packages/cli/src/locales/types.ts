@@ -60,6 +60,15 @@ export interface TranslationStrings {
   unitMinute: string;
   unitSecond: string;
   unitMillisecond: string;
+  summaryUsing: string;
+  summaryOpenFile: string;
+  summaryOpenFiles: string;
+  summaryCtrlG: string;
+  summaryFile: string;
+  summaryFiles: string;
+  summaryMcpServer: string;
+  summaryMcpServers: string;
+  summaryBlocked: string;
   commandDescriptions: Record<string, string>;
   tips: string[];
   help: {
