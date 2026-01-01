@@ -1,5 +1,13 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`<ChatList /> > handles invalid date formats gracefully 1`] = `
+"Список збережених розмов:
+
+  - bad-date-chat (Некоректна дата)
+
+Примітка: новіші в кінці, старіші на початку"
+`;
+
 exports[`<ChatList /> > renders correctly with a list of chats 1`] = `
 "Список збережених розмов:
 
@@ -8,3 +16,5 @@ exports[`<ChatList /> > renders correctly with a list of chats 1`] = `
 
 Примітка: новіші в кінці, старіші на початку"
 `;
+
+exports[`<ChatList /> > renders correctly with no chats 1`] = `"Збережених розмов не знайдено."`;
