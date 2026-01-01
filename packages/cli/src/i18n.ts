@@ -64,3 +64,5 @@ const translations: Record<string, TranslationStrings> = {
 };
 
 export const strings = translations[getLocale()] || en;
+
+export const getStrings = (): TranslationStrings => strings;

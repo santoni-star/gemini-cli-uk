@@ -24,7 +24,7 @@ import { useAlternateBuffer } from '../hooks/useAlternateBuffer.js';
 import { ScopeSelector } from './shared/ScopeSelector.js';
 import { useUIActions } from '../contexts/UIActionsContext.js';
 import { useUIState } from '../contexts/UIStateContext.js';
-import { strings } from '../../i18n.js';
+import { getStrings } from '../../i18n.js';
 
 interface ThemeDialogProps {
   /** Callback function when a theme is selected */
@@ -70,8 +70,8 @@ function generateThemeItem(
     value: name,
     themeNameDisplay: name,
     themeTypeDisplay: typeDisplay,
-    themeWarning: isCompatible ? '' : strings.themeIncompatible,
-    themeMatch: isBackgroundMatch ? strings.themeMatchesTerminal : '',
+    themeWarning: isCompatible ? '' : getStrings().themeIncompatible,
+    themeMatch: isBackgroundMatch ? getStrings().themeMatchesTerminal : '',
     key: name,
     isCompatible,
   };
@@ -291,7 +291,7 @@ export function ThemeDialog({
           <Box flexDirection="column" width="45%" paddingRight={2}>
             <Text bold={mode === 'theme'} wrap="truncate">
               {mode === 'theme' ? '> ' : '  '}
-              {strings.themeSelect}{' '}
+              {getStrings().themeSelect}{' '}
               <Text color={theme.text.secondary}>
                 {otherScopeModifiedMessage}
               </Text>
@@ -345,7 +345,7 @@ export function ThemeDialog({
           {/* Right Column: Preview */}
           <Box flexDirection="column" width="55%" paddingLeft={2}>
             <Text bold color={theme.text.primary}>
-              {strings.themePreview}
+              {getStrings().themePreview}
             </Text>
             {/* Get the Theme object for the highlighted theme, fall back to default if not found */}
             {(() => {
@@ -406,18 +406,18 @@ def fibonacci(n):
       )}
       <Box marginTop={1}>
         <Text color={theme.text.secondary} wrap="truncate">
-          {strings.themeControls
-            .replace(
+          {getStrings()
+            .themeControls.replace(
               '{select}',
               mode === 'theme'
-                ? strings.themeControlsSelect
-                : strings.themeControlsApplyScope,
+                ? getStrings().themeControlsSelect
+                : getStrings().themeControlsApplyScope,
             )
             .replace(
               '{config}',
               mode === 'theme'
-                ? strings.themeControlsConfigureScope
-                : strings.themeControlsSelectTheme,
+                ? getStrings().themeControlsConfigureScope
+                : getStrings().themeControlsSelectTheme,
             )}
         </Text>
       </Box>

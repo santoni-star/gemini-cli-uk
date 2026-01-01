@@ -48,7 +48,7 @@ import type { Config } from '@google/gemini-cli-core';
 import { useUIState } from '../contexts/UIStateContext.js';
 import { useTextBuffer } from './shared/text-buffer.js';
 import { TextInput } from './shared/TextInput.js';
-import { strings } from '../../i18n.js';
+import { getStrings } from '../../i18n.js';
 
 interface FzfResult {
   item: string;
@@ -439,10 +439,10 @@ export function SettingsDialog({
   // Scope selector items
   const scopeItems = getScopeItems().map((item) => {
     let label = item.label;
-    if (item.value === SettingScope.User) label = strings.settingsScopeUser;
-    if (item.value === SettingScope.Workspace)
-      label = strings.settingsScopeWorkspace;
-    if (item.value === SettingScope.System) label = strings.settingsScopeSystem;
+    const s = getStrings();
+    if (item.value === SettingScope.User) label = s.settingsScopeUser;
+    if (item.value === SettingScope.Workspace) label = s.settingsScopeWorkspace;
+    if (item.value === SettingScope.System) label = s.settingsScopeSystem;
 
     return {
       ...item,
@@ -872,7 +872,7 @@ export function SettingsDialog({
             wrap="truncate"
           >
             {focusSection === 'settings' ? '> ' : '  '}
-            {strings.settingsTitle}{' '}
+            {getStrings().settingsTitle}{' '}
           </Text>
         </Box>
         <Box
@@ -891,14 +891,14 @@ export function SettingsDialog({
           <TextInput
             focus={focusSection === 'settings' && !editingKey}
             buffer={buffer}
-            placeholder={strings.settingsSearchPlaceholder}
+            placeholder={getStrings().settingsSearchPlaceholder}
           />
         </Box>
         <Box height={1} />
         {visibleItems.length === 0 ? (
           <Box marginX={1} height={1} flexDirection="column">
             <Text color={theme.text.secondary}>
-              {strings.settingsNoMatches}
+              {getStrings().settingsNoMatches}
             </Text>
           </Box>
         ) : (
@@ -1049,7 +1049,7 @@ export function SettingsDialog({
           <Box marginX={1} flexDirection="column">
             <Text bold={focusSection === 'scope'} wrap="truncate">
               {focusSection === 'scope' ? '> ' : '  '}
-              {strings.settingsApplyTo}
+              {getStrings().settingsApplyTo}
             </Text>
             <RadioButtonSelect
               items={scopeItems}
@@ -1067,8 +1067,11 @@ export function SettingsDialog({
         <Box height={1} />
         <Box marginX={1}>
           <Text color={theme.text.secondary}>
-            {strings.settingsControls
-              .replace('(Use Enter to select', '(Enter — вибрати')
+            {getStrings()
+              .settingsControls.replace(
+                '(Use Enter to select',
+                '(Enter — вибрати',
+              )
               .replace(
                 ', Tab to change focus',
                 showScopeSelection ? ', Tab — змінити фокус' : '',
@@ -1079,7 +1082,7 @@ export function SettingsDialog({
         {showRestartPrompt && (
           <Box marginX={1}>
             <Text color={theme.status.warning}>
-              {strings.settingsRestartRequired}
+              {getStrings().settingsRestartRequired}
             </Text>
           </Box>
         )}

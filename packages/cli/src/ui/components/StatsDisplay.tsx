@@ -26,7 +26,7 @@ import {
   type RetrieveUserQuotaResponse,
   VALID_GEMINI_MODELS,
 } from '@google/gemini-cli-core';
-import { strings, getLocale } from '../../i18n.js';
+import { getStrings, getLocale } from '../../i18n.js';
 
 // A more flexible and powerful StatRow component
 interface StatRowProps {
@@ -150,10 +150,10 @@ const formatResetTime = (resetTime: string): string => {
   // Basic string replacement for unit labels to match Ukrainian locale if needed
   // Note: Intl.NumberFormat with 'en' is used above, we can refine this
   const localizedTime = timeString
-    .replace('hr', strings.statsHour)
-    .replace('min', strings.statsMinute);
+    .replace('hr', getStrings().statsHour)
+    .replace('min', getStrings().statsMinute);
 
-  return strings.statsResetsIn.replace('{time}', localizedTime);
+  return getStrings().statsResetsIn.replace('{time}', localizedTime);
 };
 
 const ModelUsageTable: React.FC<{
@@ -195,7 +195,7 @@ const ModelUsageTable: React.FC<{
       <Box alignItems="flex-end">
         <Box width={nameWidth}>
           <Text bold color={theme.text.primary} wrap="truncate-end">
-            {strings.statsModelUsage}
+            {getStrings().statsModelUsage}
           </Text>
         </Box>
         <Box
@@ -205,7 +205,7 @@ const ModelUsageTable: React.FC<{
           flexShrink={0}
         >
           <Text bold color={theme.text.primary}>
-            {strings.statsReqs}
+            {getStrings().statsReqs}
           </Text>
         </Box>
         {!showQuotaColumn && (
@@ -217,7 +217,7 @@ const ModelUsageTable: React.FC<{
               flexShrink={0}
             >
               <Text bold color={theme.text.primary}>
-                {strings.statsInputTokens}
+                {getStrings().statsInputTokens}
               </Text>
             </Box>
             <Box
@@ -227,7 +227,7 @@ const ModelUsageTable: React.FC<{
               flexShrink={0}
             >
               <Text bold color={theme.text.primary}>
-                {strings.statsCacheReads}
+                {getStrings().statsCacheReads}
               </Text>
             </Box>
             <Box
@@ -237,7 +237,7 @@ const ModelUsageTable: React.FC<{
               flexShrink={0}
             >
               <Text bold color={theme.text.primary}>
-                {strings.statsOutputTokens}
+                {getStrings().statsOutputTokens}
               </Text>
             </Box>
           </>
@@ -249,7 +249,7 @@ const ModelUsageTable: React.FC<{
             alignItems="flex-end"
           >
             <Text bold color={theme.text.primary}>
-              {strings.statsUsageLeft}
+              {getStrings().statsUsageLeft}
             </Text>
           </Box>
         )}
@@ -346,10 +346,13 @@ const ModelUsageTable: React.FC<{
         <Box flexDirection="column" marginTop={1}>
           <Text color={theme.text.primary}>
             <Text color={theme.status.success}>
-              {strings.statsSavingsHighlight}
+              {getStrings().statsSavingsHighlight}
             </Text>{' '}
-            {strings.statsCacheSavings
-              .replace('{tokens}', totalCachedTokens.toLocaleString())
+            {getStrings()
+              .statsCacheSavings.replace(
+                '{tokens}',
+                totalCachedTokens.toLocaleString(),
+              )
               .replace(
                 '{percent}',
                 chalk.hex(cacheEfficiencyColor)(cacheEfficiency.toFixed(1)),
@@ -361,9 +364,13 @@ const ModelUsageTable: React.FC<{
       {showQuotaColumn && (
         <>
           <Box marginTop={1} marginBottom={2}>
-            <Text color={theme.text.primary}>{strings.statsUsageLimits}</Text>
+            <Text color={theme.text.primary}>
+              {getStrings().statsUsageLimits}
+            </Text>
           </Box>
-          <Text color={theme.text.secondary}>» {strings.statsTipModel}</Text>
+          <Text color={theme.text.secondary}>
+            » {getStrings().statsTipModel}
+          </Text>
         </>
       )}
     </Box>
@@ -406,7 +413,7 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
     }
     return (
       <Text bold color={theme.text.accent}>
-        {strings.statsSessionStats}
+        {getStrings().statsSessionStats}
       </Text>
     );
   };
@@ -423,33 +430,33 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
       {renderTitle()}
       <Box height={1} />
 
-      <Section title={strings.statsInteractionSummary}>
-        <StatRow title={strings.statsSessionID}>
+      <Section title={getStrings().statsInteractionSummary}>
+        <StatRow title={getStrings().statsSessionID}>
           <Text color={theme.text.primary}>{stats.sessionId}</Text>
         </StatRow>
-        <StatRow title={strings.statsToolCalls}>
+        <StatRow title={getStrings().statsToolCalls}>
           <Text color={theme.text.primary}>
             {tools.totalCalls} ({' '}
             <Text color={theme.status.success}>✓ {tools.totalSuccess}</Text>{' '}
             <Text color={theme.status.error}>x {tools.totalFail}</Text> )
           </Text>
         </StatRow>
-        <StatRow title={strings.statsSuccessRate}>
+        <StatRow title={getStrings().statsSuccessRate}>
           <Text color={successColor}>{computed.successRate.toFixed(1)}%</Text>
         </StatRow>
         {computed.totalDecisions > 0 && (
-          <StatRow title={strings.statsUserAgreement}>
+          <StatRow title={getStrings().statsUserAgreement}>
             <Text color={agreementColor}>
               {computed.agreementRate.toFixed(1)}%{' '}
               <Text color={theme.text.secondary}>
-                ({computed.totalDecisions} {strings.statsReviewed})
+                ({computed.totalDecisions} {getStrings().statsReviewed})
               </Text>
             </Text>
           </StatRow>
         )}
         {files &&
           (files.totalLinesAdded > 0 || files.totalLinesRemoved > 0) && (
-            <StatRow title={strings.statsCodeChanges}>
+            <StatRow title={getStrings().statsCodeChanges}>
               <Text color={theme.text.primary}>
                 <Text color={theme.status.success}>
                   +{files.totalLinesAdded}
@@ -462,16 +469,16 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
           )}
       </Section>
 
-      <Section title={strings.statsPerformance}>
-        <StatRow title={strings.statsWallTime}>
+      <Section title={getStrings().statsPerformance}>
+        <StatRow title={getStrings().statsWallTime}>
           <Text color={theme.text.primary}>{duration}</Text>
         </StatRow>
-        <StatRow title={strings.statsAgentActive}>
+        <StatRow title={getStrings().statsAgentActive}>
           <Text color={theme.text.primary}>
             {formatDuration(computed.agentActiveTime)}
           </Text>
         </StatRow>
-        <SubStatRow title={strings.statsApiTime}>
+        <SubStatRow title={getStrings().statsApiTime}>
           <Text color={theme.text.primary}>
             {formatDuration(computed.totalApiTime)}{' '}
             <Text color={theme.text.secondary}>
@@ -479,7 +486,7 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({
             </Text>
           </Text>
         </SubStatRow>
-        <SubStatRow title={strings.statsToolTime}>
+        <SubStatRow title={getStrings().statsToolTime}>
           <Text color={theme.text.primary}>
             {formatDuration(computed.totalToolTime)}{' '}
             <Text color={theme.text.secondary}>
