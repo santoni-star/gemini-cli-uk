@@ -38,14 +38,14 @@ Remove-Item -Path (Join-Path $env:LocalAppData "npm-cache\_npx") -Recurse -Force
 ## Спосіб 2: При використанні npm (глобальне встановлення)
 
 Якщо ви встановили CLI глобально (наприклад,
-`npm install -g santoni-star/gemini-cli-uk`), скористайтеся командою
-`npm uninstall` з прапорцем `-g`.
+`npm install -g santoni-star/gemini-ua`), скористайтеся командою `npm uninstall`
+з прапорцем `-g`.
 
 ```bash
 # Для української версії (якщо встановлювали через GitHub)
 npm uninstall -g @google/gemini-cli
 # Або якщо ви встановлювали конкретно за посиланням:
-npm uninstall -g santoni-star/gemini-cli-uk
+npm uninstall -g santoni-star/gemini-ua
 ```
 
 Ця команда повністю видалить пакет з вашої системи.

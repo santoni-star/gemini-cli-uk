@@ -49,13 +49,13 @@ Gemini безпосередньо у ваш термінал. Він забез�
 #### Використання через npx (без встановлення)
 
 ```bash
-npx https://github.com/santoni-star/gemini-cli-uk
+npx https://github.com/santoni-star/gemini-ua
 ```
 
 #### Встановлення глобально через npm
 
 ```bash
-npm install -g santoni-star/gemini-cli-uk
+npm install -g santoni-star/gemini-ua
 ```
 
 #### Встановлення через Homebrew (macOS/Linux)
@@ -79,7 +79,7 @@ brew install gemini-cli
    ```
 2. Встановіть українську версію Gemini CLI:
    ```bash
-   npm install -g santoni-star/gemini-cli-uk
+   npm install -g santoni-star/gemini-ua
    ```
 3. Запустіть програму:
    ```bash

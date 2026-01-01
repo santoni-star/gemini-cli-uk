@@ -15,7 +15,7 @@ Gemini 3 Pro та Gemini 3 Flash тепер доступні у Gemini CLI! На
 Оновіть Gemini CLI до останньої версії:
 
 ```bash
-npm install -g santoni-star/gemini-cli-uk
+npm install -g santoni-star/gemini-ua
 ```
 
 Після оновлення:

@@ -16,7 +16,7 @@ Gemini CLI переносить потужність передових мовн
 Стандартний метод встановлення та запуску Gemini CLI використовує `npm`:
 
 ```bash
-npm install -g santoni-star/gemini-cli-uk
+npm install -g santoni-star/gemini-ua
 ```
 
 Після встановлення запустіть Gemini CLI з командного рядка:

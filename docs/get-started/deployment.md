@@ -22,7 +22,7 @@
 - **Глобальне встановлення:**
 
   ```bash
-  npm install -g santoni-star/gemini-cli-uk
+  npm install -g santoni-star/gemini-ua
   ```
 
   Після цього запускайте CLI з будь-якого місця:
@@ -35,7 +35,7 @@
 
   ```bash
   # Запуск останньої версії з GitHub без глобального встановлення
-  npx https://github.com/santoni-star/gemini-cli-uk
+  npx https://github.com/santoni-star/gemini-ua
   ```
 
 ### 2. Запуск у пісочниці (Docker/Podman)
@@ -71,7 +71,7 @@ GitHub.
 
 ```bash
 # Запуск CLI безпосередньо з гілки main на GitHub
-npx https://github.com/santoni-star/gemini-cli-uk
+npx https://github.com/santoni-star/gemini-ua
 ```
 
 ## Архітектура розгортання

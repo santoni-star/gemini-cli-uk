@@ -8,13 +8,13 @@
 Перед використанням пісочниці вам потрібно встановити Gemini CLI:
 
 ```bash
-npm install -g santoni-star/gemini-cli-uk
+npm install -g santoni-star/gemini-ua
 ```
 
 Щоб перевірити встановлення:
 
 ```bash
-gemini-uk --version
+gemini-ua --version
 ```
 
 ## Огляд пісочниці
@@ -54,11 +54,11 @@ gemini-uk --version
 
 ```bash
 # Увімкнути пісочницю за допомогою прапорця команди
-gemini-uk -s -p "проаналізуй структуру коду"
+gemini-ua -s -p "проаналізуй структуру коду"
 
 # Використовувати змінну середовища
 export GEMINI_SANDBOX=true
-gemini-uk -p "запусти тести"
+gemini-ua -p "запусти тести"
 
 # Налаштувати в settings.json
 {
@@ -134,7 +134,7 @@ export SANDBOX_SET_UID_GID=false  # Вимкнути мапінг UID/GID
 ### Режим налагодження
 
 ```bash
-DEBUG=1 gemini-uk -s -p "команда для налагодження"
+DEBUG=1 gemini-ua -s -p "команда для налагодження"
 ```
 
 ## Нотатки щодо безпеки

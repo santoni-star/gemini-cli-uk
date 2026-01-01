@@ -29,8 +29,7 @@
 
 - **Error: Command not found (при спробі запустити `gemini`)**
   - **Рішення:** Переконайтеся, що шлях до бінарних файлів npm додано у ваш
-    `PATH`. Спробуйте перевстановити:
-    `npm install -g santoni-star/gemini-cli-uk`.
+    `PATH`. Спробуйте перевстановити: `npm install -g santoni-star/gemini-ua`.
 
 - **Помилка: "Operation not permitted" або "Permission denied"**
   - **Причина:** Ви намагаєтеся виконати дію, яку забороняє пісочниця

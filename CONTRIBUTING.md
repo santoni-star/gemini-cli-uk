@@ -172,8 +172,8 @@ Pull Request**. Це сигнал для нас, що PR ще не готови�
 Клонуйте репозиторій:
 
 ```bash
-git clone https://github.com/santoni-star/gemini-cli-uk.git
-cd gemini-cli-uk
+git clone https://github.com/santoni-star/gemini-ua.git
+cd gemini-ua
 ```
 
 Встановіть залежності:

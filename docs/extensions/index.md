@@ -6,7 +6,7 @@
 
 ## Керування розширеннями
 
-Керування здійснюється через команди `gemini-uk extensions` у терміналі. Ці
+Керування здійснюється через команди `gemini-ua extensions` у терміналі. Ці
 зміни набудуть чинності після перезапуску CLI.
 
 ### Встановлення розширення
@@ -15,13 +15,13 @@
 шлях.
 
 ```bash
-gemini-uk extensions install <джерело>
+gemini-ua extensions install <джерело>
 ```
 
 ### Видалення розширення
 
 ```bash
-gemini-uk extensions uninstall <назва>
+gemini-ua extensions uninstall <назва>
 ```
 
 ### Вимкнення розширення
@@ -29,15 +29,15 @@ gemini-uk extensions uninstall <назва>
 Ви можете вимкнути розширення глобально або для конкретного робочого простору.
 
 ```bash
-gemini-uk extensions disable <назва> [--scope <user|workspace>]
+gemini-ua extensions disable <назва> [--scope <user|workspace>]
 ```
 
 ### Оновлення розширення
 
 ```bash
-gemini-uk extensions update <назва>
+gemini-ua extensions update <назва>
 # Або всі відразу:
-gemini-uk extensions update --all
+gemini-ua extensions update --all
 ```
 
 ## Як це працює
