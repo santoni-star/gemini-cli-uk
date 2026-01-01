@@ -18,7 +18,7 @@
 // limitations under the License.
 
 import { execSync } from 'node:child_process';
-import { existsSync, mkdirSync, writeFileSync, readFileSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -41,18 +41,10 @@ if (!existsSync(generatedCoreDir)) {
 }
 
 try {
-  const gitHash = execSync('git rev-parse --short HEAD', {
+  const gitHash = execSync('git rev-parse HEAD 2>/dev/null', {
     encoding: 'utf-8',
   }).trim();
-  if (gitHash) {
-    gitCommitInfo = gitHash;
-  }
-
-  const pkgJsonPath = join(root, 'package.json');
-  if (existsSync(pkgJsonPath)) {
-    const pkg = JSON.parse(readFileSync(pkgJsonPath, 'utf-8'));
-    cliVersion = pkg.version || 'UNKNOWN';
-  }
+  gitCommitInfo = gitHash;
 } catch {
   // ignore
 }
