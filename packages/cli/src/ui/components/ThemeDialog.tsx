@@ -69,8 +69,8 @@ function generateThemeItem(
     value: name,
     themeNameDisplay: name,
     themeTypeDisplay: typeDisplay,
-    themeWarning: isCompatible ? '' : ' (Incompatible)',
-    themeMatch: isBackgroundMatch ? ' (Matches terminal)' : '',
+    themeWarning: isCompatible ? '' : strings.themeIncompatible,
+    themeMatch: isBackgroundMatch ? strings.themeMatchesTerminal : '',
     key: name,
     isCompatible,
   };
@@ -289,7 +289,8 @@ export function ThemeDialog({
           {/* Left Column: Selection */}
           <Box flexDirection="column" width="45%" paddingRight={2}>
             <Text bold={mode === 'theme'} wrap="truncate">
-              {mode === 'theme' ? '> ' : '  '}Select Theme{' '}
+              {mode === 'theme' ? '> ' : '  '}
+              {strings.themeSelect}{' '}
               <Text color={theme.text.secondary}>
                 {otherScopeModifiedMessage}
               </Text>
@@ -343,7 +344,7 @@ export function ThemeDialog({
           {/* Right Column: Preview */}
           <Box flexDirection="column" width="55%" paddingLeft={2}>
             <Text bold color={theme.text.primary}>
-              Preview
+              {strings.themePreview}
             </Text>
             {/* Get the Theme object for the highlighted theme, fall back to default if not found */}
             {(() => {
@@ -404,8 +405,19 @@ def fibonacci(n):
       )}
       <Box marginTop={1}>
         <Text color={theme.text.secondary} wrap="truncate">
-          (Use Enter to {mode === 'theme' ? 'select' : 'apply scope'}, Tab to{' '}
-          {mode === 'theme' ? 'configure scope' : 'select theme'}, Esc to close)
+          {strings.themeControls
+            .replace(
+              '{select}',
+              mode === 'theme'
+                ? strings.themeControlsSelect
+                : strings.themeControlsApplyScope,
+            )
+            .replace(
+              '{config}',
+              mode === 'theme'
+                ? strings.themeControlsConfigureScope
+                : strings.themeControlsSelectTheme,
+            )}
         </Text>
       </Box>
     </Box>

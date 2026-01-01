@@ -16,6 +16,7 @@ import * as path from 'node:path';
 import { relaunchApp } from '../../utils/processUtils.js';
 import { runExitCleanup } from '../../utils/cleanup.js';
 import { ExitCodes } from '@google/gemini-cli-core';
+import { strings } from '../../i18n.js';
 
 export enum FolderTrustChoice {
   TRUST_FOLDER = 'trust_folder',
@@ -63,17 +64,17 @@ export const FolderTrustDialog: React.FC<FolderTrustDialogProps> = ({
 
   const options: Array<RadioSelectItem<FolderTrustChoice>> = [
     {
-      label: `Trust folder (${dirName})`,
+      label: strings.trustFolder.replace('{dir}', dirName),
       value: FolderTrustChoice.TRUST_FOLDER,
       key: `Trust folder (${dirName})`,
     },
     {
-      label: `Trust parent folder (${parentFolder})`,
+      label: strings.trustParentFolder.replace('{dir}', parentFolder),
       value: FolderTrustChoice.TRUST_PARENT,
       key: `Trust parent folder (${parentFolder})`,
     },
     {
-      label: "Don't trust",
+      label: strings.trustNo,
       value: FolderTrustChoice.DO_NOT_TRUST,
       key: "Don't trust",
     },
@@ -91,13 +92,9 @@ export const FolderTrustDialog: React.FC<FolderTrustDialogProps> = ({
       >
         <Box flexDirection="column" marginBottom={1}>
           <Text bold color={theme.text.primary}>
-            Do you trust this folder?
+            {strings.trustTitle}
           </Text>
-          <Text color={theme.text.primary}>
-            Trusting a folder allows Gemini to execute commands it suggests.
-            This is a security feature to prevent accidental execution in
-            untrusted directories.
-          </Text>
+          <Text color={theme.text.primary}>{strings.trustDescription}</Text>
         </Box>
 
         <RadioButtonSelect
@@ -108,17 +105,12 @@ export const FolderTrustDialog: React.FC<FolderTrustDialogProps> = ({
       </Box>
       {isRestarting && (
         <Box marginLeft={1} marginTop={1}>
-          <Text color={theme.status.warning}>
-            Gemini CLI is restarting to apply the trust changes...
-          </Text>
+          <Text color={theme.status.warning}>{strings.trustRestarting}</Text>
         </Box>
       )}
       {exiting && (
         <Box marginLeft={1} marginTop={1}>
-          <Text color={theme.status.warning}>
-            A folder trust level must be selected to continue. Exiting since
-            escape was pressed.
-          </Text>
+          <Text color={theme.status.warning}>{strings.trustExiting}</Text>
         </Box>
       )}
     </Box>

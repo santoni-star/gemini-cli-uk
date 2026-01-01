@@ -72,6 +72,79 @@ export const uk: TranslationStrings = {
   unitMinute: 'хв',
   unitSecond: 'с',
   unitMillisecond: 'мс',
+  authGetStarted: 'Початок роботи',
+  authHowToAuthenticate:
+    'Як ви бажаєте пройти аутентифікацію для цього проекту?',
+  authLoginGoogle: 'Увійти через Google',
+  authCloudShell: 'Використовувати облікові дані користувача Cloud Shell',
+  authMetadataServer:
+    'Використовувати стандартні облікові дані сервера метаданих',
+  authUseGeminiApiKey: 'Використовувати ключ Gemini API',
+  authVertexAI: 'Vertex AI',
+  authExitingGoogle:
+    'Вхід через Google... Перезапуск Gemini CLI для продовження.',
+  authMustSelect:
+    'Ви повинні обрати метод аутентифікації, щоб продовжити. Натисніть Ctrl+C двічі для виходу.',
+  authUseEnter: '(Натисніть Enter для вибору)',
+  authTermsPrivacy:
+    'Умови використання та Повідомлення про конфіденційність Gemini CLI',
+  authEnterApiKey: 'Введіть ключ Gemini API',
+  authApiKeyStoreInfo:
+    'Будь ласка, введіть ваш ключ Gemini API. Він буде надійно збережений у системному сховищі ключів.',
+  authApiKeyGetInfo: 'Ви можете отримати ключ API за адресою',
+  authApiKeyPlaceholder: 'Вставте ваш ключ API сюти',
+  authApiKeyControls:
+    '(Натисніть Enter для підтвердження, Esc для скасування, Ctrl+C для очищення збереженого ключа)',
+  editorUser: 'Налаштування користувача',
+  editorWorkspace: 'Налаштування робочого простору',
+  editorSelect: 'Виберіть редактор',
+  editorApplyTo: 'Застосувати до',
+  editorAlsoModifiedIn: '(Також змінено в {scope})',
+  editorModifiedIn: '(Змінено в {scope})',
+  editorNone: 'Не обрано',
+  editorControls: '(Enter — вибрати, Tab — змінити фокус, Esc — закрити)',
+  editorPreference: 'Налаштування редактора',
+  editorSupportedInfo:
+    'Ці редактори наразі підтримуються. Зверніть увагу, що деякі з них не можна використовувати в режимі пісочниці.',
+  editorCurrentIs: 'Ваш бажаний редактор:',
+  themeSelect: 'Виберіть тему',
+  themePreview: 'Попередній перегляд',
+  themeIncompatible: ' (Несумісна)',
+  themeMatchesTerminal: ' (Збігається з терміналом)',
+  themeControls: '(Enter — {select}, Tab — {config}, Esc — закрити)',
+  themeControlsSelect: 'вибрати',
+  themeControlsApplyScope: 'застосувати область',
+  themeControlsConfigureScope: 'налаштувати область',
+  themeControlsSelectTheme: 'вибрати тему',
+  modelManual: 'Вручну',
+  modelManualSelect: 'Вибрати модель самостійно',
+  modelSelect: 'Вибір моделі',
+  modelAvailableInfo: 'Gemini 3 тепер доступна.',
+  modelPreviewFeaturesInfo:
+    'Увімкніть "Preview features" у /settings.\nДізнайтеся більше на https://goo.gle/enable-preview-features',
+  modelComingSoon: "Gemini 3 з'явиться незабаром.",
+  modelAppliesToInfo:
+    'Застосовується до поточної та майбутніх сесій Gemini CLI.',
+  modelSpecificFlagInfo:
+    '> Щоб використати конкретну модель при запуску, використовуйте прапорець --model.',
+  modelControls: '(Натисніть Esc, щоб закрити)',
+  shellExecutionTitle: 'Виконання команди оболонки',
+  shellExecutionInfo:
+    'Спеціальна команда хоче запустити наступні команди терміналу:',
+  shellExecutionProceed: 'Бажаєте продовжити?',
+  shellAllowOnce: 'Дозволити один раз',
+  shellAllowSession: 'Дозволити для цієї сесії',
+  shellNoEsc: 'Ні (esc)',
+  trustTitle: 'Ви довіряєте цій папці?',
+  trustDescription:
+    'Довіра до папки дозволяє Gemini виконувати команди, які він пропонує. Це функція безпеки для запобігання випадковому виконанню в ненадійних каталогах.',
+  trustFolder: 'Довіряти папці ({dir})',
+  trustParentFolder: 'Довіряти батьківській папці ({dir})',
+  trustNo: 'Не довіряти',
+  trustRestarting:
+    'Gemini CLI перезапускається для застосування змін довіри...',
+  trustExiting:
+    'Необхідно обрати рівень довіри для продовження. Вихід через натискання Esc.',
   summaryUsing: 'Використовується',
   summaryOpenFile: 'відкритий файл',
   summaryOpenFiles: 'відкритих файлів',

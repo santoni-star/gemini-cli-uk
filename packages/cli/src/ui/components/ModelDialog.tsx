@@ -24,6 +24,7 @@ import { theme } from '../semantic-colors.js';
 import { DescriptiveRadioButtonSelect } from './shared/DescriptiveRadioButtonSelect.js';
 import { ConfigContext } from '../contexts/ConfigContext.js';
 import { ThemedGradient } from './ThemedGradient.js';
+import { strings } from '../../i18n.js';
 
 interface ModelDialogProps {
   onClose: () => void;
@@ -78,9 +79,9 @@ export function ModelDialog({ onClose }: ModelDialogProps): React.JSX.Element {
       {
         value: 'Manual',
         title: manualModelSelected
-          ? `Manual (${manualModelSelected})`
-          : 'Manual',
-        description: 'Manually select a model',
+          ? `${strings.modelManual} (${manualModelSelected})`
+          : strings.modelManual,
+        description: strings.modelManualSelect,
         key: 'Manual',
       },
     ];
@@ -176,11 +177,10 @@ export function ModelDialog({ onClose }: ModelDialogProps): React.JSX.Element {
     subheader = undefined;
     // When a user has the access but has not enabled the preview features.
   } else if (config?.getHasAccessToPreviewModel()) {
-    header = 'Gemini 3 is now available.';
-    subheader =
-      'Enable "Preview features" in /settings.\nLearn more at https://goo.gle/enable-preview-features';
+    header = strings.modelAvailableInfo;
+    subheader = strings.modelPreviewFeaturesInfo;
   } else {
-    header = 'Gemini 3 is coming soon.';
+    header = strings.modelComingSoon;
     subheader = undefined;
   }
 
@@ -192,7 +192,7 @@ export function ModelDialog({ onClose }: ModelDialogProps): React.JSX.Element {
       padding={1}
       width="100%"
     >
-      <Text bold>Select Model</Text>
+      <Text bold>{strings.modelSelect}</Text>
 
       <Box flexDirection="column">
         {header && (
@@ -213,17 +213,15 @@ export function ModelDialog({ onClose }: ModelDialogProps): React.JSX.Element {
         />
       </Box>
       <Box marginTop={1} flexDirection="column">
-        <Text color={theme.text.secondary}>
-          Applies to this session and future Gemini CLI sessions.
-        </Text>
+        <Text color={theme.text.secondary}>{strings.modelAppliesToInfo}</Text>
       </Box>
       <Box marginTop={1} flexDirection="column">
         <Text color={theme.text.secondary}>
-          {'> To use a specific Gemini model on startup, use the --model flag.'}
+          {strings.modelSpecificFlagInfo}
         </Text>
       </Box>
       <Box marginTop={1} flexDirection="column">
-        <Text color={theme.text.secondary}>(Press Esc to close)</Text>
+        <Text color={theme.text.secondary}>{strings.modelControls}</Text>
       </Box>
     </Box>
   );

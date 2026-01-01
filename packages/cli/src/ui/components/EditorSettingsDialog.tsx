@@ -25,6 +25,7 @@ import {
 } from '@google/gemini-cli-core';
 import { useKeypress } from '../hooks/useKeypress.js';
 import { coreEvents } from '@google/gemini-cli-core';
+import { strings } from '../../i18n.js';
 
 interface EditorDialogProps {
   onSelect: (
@@ -82,12 +83,12 @@ export function EditorSettingsDialog({
     key: string;
   }> = [
     {
-      label: 'User Settings',
+      label: strings.editorUser,
       value: SettingScope.User,
       key: SettingScope.User,
     },
     {
-      label: 'Workspace Settings',
+      label: strings.editorWorkspace,
       value: SettingScope.Workspace,
       key: SettingScope.Workspace,
     },
@@ -118,11 +119,11 @@ export function EditorSettingsDialog({
     otherScopeModifiedMessage =
       settings.forScope(selectedScope).settings.general?.preferredEditor !==
       undefined
-        ? `(Also modified in ${otherScope})`
-        : `(Modified in ${otherScope})`;
+        ? strings.editorAlsoModifiedIn.replace('{scope}', otherScope)
+        : strings.editorModifiedIn.replace('{scope}', otherScope);
   }
 
-  let mergedEditorName = 'None';
+  let mergedEditorName = strings.editorNone;
   if (
     settings.merged.general?.preferredEditor &&
     isEditorAvailable(settings.merged.general?.preferredEditor)
@@ -143,7 +144,8 @@ export function EditorSettingsDialog({
     >
       <Box flexDirection="column" width="45%" paddingRight={2}>
         <Text bold={focusedSection === 'editor'}>
-          {focusedSection === 'editor' ? '> ' : '  '}Select Editor{' '}
+          {focusedSection === 'editor' ? '> ' : '  '}
+          {strings.editorSelect}{' '}
           <Text color={theme.text.secondary}>{otherScopeModifiedMessage}</Text>
         </Text>
         <RadioButtonSelect
@@ -161,7 +163,8 @@ export function EditorSettingsDialog({
 
         <Box marginTop={1} flexDirection="column">
           <Text bold={focusedSection === 'scope'}>
-            {focusedSection === 'scope' ? '> ' : '  '}Apply To
+            {focusedSection === 'scope' ? '> ' : '  '}
+            {strings.editorApplyTo}
           </Text>
           <RadioButtonSelect
             items={scopeItems}
@@ -172,26 +175,23 @@ export function EditorSettingsDialog({
         </Box>
 
         <Box marginTop={1}>
-          <Text color={theme.text.secondary}>
-            (Use Enter to select, Tab to change focus, Esc to close)
-          </Text>
+          <Text color={theme.text.secondary}>{strings.editorControls}</Text>
         </Box>
       </Box>
 
       <Box flexDirection="column" width="55%" paddingLeft={2}>
         <Text bold color={theme.text.primary}>
-          Editor Preference
+          {strings.editorPreference}
         </Text>
         <Box flexDirection="column" gap={1} marginTop={1}>
           <Text color={theme.text.secondary}>
-            These editors are currently supported. Please note that some editors
-            cannot be used in sandbox mode.
+            {strings.editorSupportedInfo}
           </Text>
           <Text color={theme.text.secondary}>
-            Your preferred editor is:{' '}
+            {strings.editorCurrentIs}{' '}
             <Text
               color={
-                mergedEditorName === 'None'
+                mergedEditorName === strings.editorNone
                   ? theme.status.error
                   : theme.text.link
               }

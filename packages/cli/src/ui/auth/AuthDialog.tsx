@@ -24,6 +24,7 @@ import { AuthState } from '../types.js';
 import { runExitCleanup } from '../../utils/cleanup.js';
 import { validateAuthMethodWithSettings } from './useAuth.js';
 import { RELAUNCH_EXIT_CODE } from '../../utils/processUtils.js';
+import { strings } from '../../i18n.js';
 
 interface AuthDialogProps {
   config: Config;
@@ -43,14 +44,14 @@ export function AuthDialog({
   const [exiting, setExiting] = useState(false);
   let items = [
     {
-      label: 'Login with Google',
+      label: strings.authLoginGoogle,
       value: AuthType.LOGIN_WITH_GOOGLE,
       key: AuthType.LOGIN_WITH_GOOGLE,
     },
     ...(process.env['CLOUD_SHELL'] === 'true'
       ? [
           {
-            label: 'Use Cloud Shell user credentials',
+            label: strings.authCloudShell,
             value: AuthType.COMPUTE_ADC,
             key: AuthType.COMPUTE_ADC,
           },
@@ -58,19 +59,19 @@ export function AuthDialog({
       : process.env['GEMINI_CLI_USE_COMPUTE_ADC'] === 'true'
         ? [
             {
-              label: 'Use metadata server application default credentials',
+              label: strings.authMetadataServer,
               value: AuthType.COMPUTE_ADC,
               key: AuthType.COMPUTE_ADC,
             },
           ]
         : []),
     {
-      label: 'Use Gemini API Key',
+      label: strings.authUseGeminiApiKey,
       value: AuthType.USE_GEMINI,
       key: AuthType.USE_GEMINI,
     },
     {
-      label: 'Vertex AI',
+      label: strings.authVertexAI,
       value: AuthType.USE_VERTEX_AI,
       key: AuthType.USE_VERTEX_AI,
     },
@@ -166,9 +167,7 @@ export function AuthDialog({
         }
         if (settings.merged.security?.auth?.selectedType === undefined) {
           // Prevent exiting if no auth method is set
-          onAuthError(
-            'You must select an auth method to proceed. Press Ctrl+C twice to exit.',
-          );
+          onAuthError(strings.authMustSelect);
           return;
         }
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
@@ -188,9 +187,7 @@ export function AuthDialog({
         width="100%"
         alignItems="flex-start"
       >
-        <Text color={theme.text.primary}>
-          Logging in with Google... Restarting Gemini CLI to continue.
-        </Text>
+        <Text color={theme.text.primary}>{strings.authExitingGoogle}</Text>
       </Box>
     );
   }
@@ -207,11 +204,11 @@ export function AuthDialog({
       <Text color={theme.text.accent}>? </Text>
       <Box flexDirection="column" flexGrow={1}>
         <Text bold color={theme.text.primary}>
-          Get started
+          {strings.authGetStarted}
         </Text>
         <Box marginTop={1}>
           <Text color={theme.text.primary}>
-            How would you like to authenticate for this project?
+            {strings.authHowToAuthenticate}
           </Text>
         </Box>
         <Box marginTop={1}>
@@ -230,17 +227,15 @@ export function AuthDialog({
           </Box>
         )}
         <Box marginTop={1}>
-          <Text color={theme.text.secondary}>(Use Enter to select)</Text>
+          <Text color={theme.text.secondary}>{strings.authUseEnter}</Text>
         </Box>
         <Box marginTop={1}>
-          <Text color={theme.text.primary}>
-            Terms of Services and Privacy Notice for Gemini CLI
-          </Text>
+          <Text color={theme.text.primary}>{strings.authTermsPrivacy}</Text>
         </Box>
         <Box marginTop={1}>
           <Text color={theme.text.link}>
             {
-              'https://github.com/google-gemini/gemini-cli/blob/main/docs/tos-privacy.md'
+              'https://github.com/santoni-star/gemini-ua/blob/main/docs/tos-privacy.md'
             }
           </Text>
         </Box>

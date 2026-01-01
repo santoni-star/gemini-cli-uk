@@ -199,6 +199,20 @@ const SETTINGS_SCHEMA = {
         description: 'Disable automatic updates',
         showInDialog: true,
       },
+      commandName: {
+        type: 'enum',
+        label: 'Command Name',
+        category: 'General',
+        requiresRestart: false,
+        default: 'gemini-ua',
+        description:
+          'The command name to use for the CLI (requires manual terminal setup).',
+        showInDialog: true,
+        options: [
+          { value: 'gemini-ua', label: 'gemini-ua' },
+          { value: 'gemini', label: 'gemini' },
+        ],
+      },
       disableUpdateNag: {
         type: 'boolean',
         label: 'Disable Update Nag',
