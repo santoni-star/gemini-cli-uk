@@ -46,7 +46,7 @@ Gemini CLI (наприклад, ваша локальна машина).
 1. Запустіть CLI:
 
    ```bash
-   gemini-uk
+   gemini-ua
    ```
 
 2. Виберіть **Login with Google**. Gemini CLI відкриє вікно входу у вашому
@@ -88,7 +88,7 @@ Google, ви можете скористатися ключем API з Google AI
 3. Запустіть CLI:
 
    ```bash
-   gemini-uk
+   gemini-ua
    ```
 
 4. Виберіть **Use Gemini API key**.
@@ -146,7 +146,7 @@ export GOOGLE_CLOUD_LOCATION="ЛОКАЦІЯ_ВАШОГО_ПРОЕКТУ"
 4. Запустіть CLI:
 
    ```bash
-   gemini-uk
+   gemini-ua
    ```
 
 5. Виберіть **Vertex AI**.
@@ -180,7 +180,7 @@ export GOOGLE_CLOUD_LOCATION="ЛОКАЦІЯ_ВАШОГО_ПРОЕКТУ"
 4.  Запустіть CLI:
 
     ```bash
-    gemini-uk
+    gemini-ua
     ```
 
 5.  Виберіть **Vertex AI**.
@@ -208,7 +208,7 @@ export GOOGLE_CLOUD_LOCATION="ЛОКАЦІЯ_ВАШОГО_ПРОЕКТУ"
 4.  Запустіть CLI:
 
     ```bash
-    gemini-uk
+    gemini-ua
     ```
 
 5.  Виберіть **Vertex AI**.

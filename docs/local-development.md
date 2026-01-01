@@ -33,7 +33,7 @@ UI.
 2.  **Запустіть Gemini CLI з трасуванням:** В іншому терміналі:
 
     ```bash
-    GEMINI_DEV_TRACING=true gemini-uk
+    GEMINI_DEV_TRACING=true gemini-ua
     ```
 
 3.  **Перегляньте траси:** Відкрийте вказаний URL у браузері та перейдіть на
@@ -52,7 +52,7 @@ UI.
 
 2.  **Запустіть Gemini CLI:**
     ```bash
-    GEMINI_DEV_TRACING=true gemini-uk
+    GEMINI_DEV_TRACING=true gemini-ua
     ```
 
 Для отримання детальнішої інформації дивіться

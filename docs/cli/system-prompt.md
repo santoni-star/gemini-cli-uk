@@ -49,9 +49,9 @@
 логіку роботи інструментів.
 
 - Записати вбудований промпт у шлях за замовчуванням:
-  - `GEMINI_WRITE_SYSTEM_MD=1 gemini-uk`
+  - `GEMINI_WRITE_SYSTEM_MD=1 gemini-ua`
 - Або в інше місце:
-  - `GEMINI_WRITE_SYSTEM_MD=~/prompts/DEFAULT_SYSTEM.md gemini-uk`
+  - `GEMINI_WRITE_SYSTEM_MD=~/prompts/DEFAULT_SYSTEM.md gemini-ua`
 
 ## Найкращі практики: SYSTEM.md проти GEMINI.md
 

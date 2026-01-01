@@ -58,7 +58,7 @@ Gemini CLI підтримує три типи транспорту для MCP:
 @server://resource/path
 ```
 
-## Керування серверами через команду `gemini-uk mcp`
+## Керування серверами через команду `gemini-ua mcp`
 
 Ви можете керувати серверами безпосередньо з терміналу, не редагуючи JSON
 вручну.
@@ -67,10 +67,10 @@ Gemini CLI підтримує три типи транспорту для MCP:
 
 ```bash
 # Додавання локального сервера
-gemini-uk mcp add my-server python server.py
+gemini-ua mcp add my-server python server.py
 
 # Додавання віддаленого HTTP-сервера
-gemini-uk mcp add --transport http web-tools https://api.example.com/mcp/
+gemini-ua mcp add --transport http web-tools https://api.example.com/mcp/
 ```
 
 ### Список серверів (`mcp list`)
@@ -78,13 +78,13 @@ gemini-uk mcp add --transport http web-tools https://api.example.com/mcp/
 Показує всі налаштовані сервери та їхній статус (підключено/відключено).
 
 ```bash
-gemini-uk mcp list
+gemini-ua mcp list
 ```
 
 ### Видалення сервера (`mcp remove`)
 
 ```bash
-gemini-uk mcp remove my-server
+gemini-ua mcp remove my-server
 ```
 
 ## Перегляд статусу в CLI

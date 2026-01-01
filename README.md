@@ -67,6 +67,25 @@ npm install -g santoni-star/gemini-cli-uk
 brew install gemini-cli
 ```
 
+#### Запуск на Android через Termux
+
+Ви можете використовувати Gemini CLI на Android за допомогою
+[Termux](https://termux.dev/):
+
+1. Встановіть необхідні пакети:
+   ```bash
+   pkg update && pkg upgrade
+   pkg install nodejs git
+   ```
+2. Встановіть українську версію Gemini CLI:
+   ```bash
+   npm install -g santoni-star/gemini-cli-uk
+   ```
+3. Запустіть програму:
+   ```bash
+   gemini-ua
+   ```
+
 ## Цикл релізів та теги
 
 Дивіться [Релізи](./docs/releases.md) для отримання детальної інформації.

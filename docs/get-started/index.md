@@ -22,7 +22,7 @@ npm install -g santoni-star/gemini-cli-uk
 Після встановлення запустіть Gemini CLI з командного рядка:
 
 ```bash
-gemini-uk
+gemini-ua
 ```
 
 Для отримання додаткових варіантів встановлення дивіться
@@ -37,7 +37,7 @@ gemini-uk
 1. Запустіть Gemini CLI після встановлення:
 
    ```bash
-   gemini-uk
+   gemini-ua
    ```
 
 2. Коли з'явиться запитання "How would you like to authenticate for this
