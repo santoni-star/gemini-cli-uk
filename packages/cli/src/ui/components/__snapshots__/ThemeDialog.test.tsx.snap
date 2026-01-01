@@ -3,7 +3,7 @@
 exports[`Initial Theme Selection > should default to a dark theme when terminal background is dark and no theme is set 1`] = `
 "╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │                                                                                                                      │
-│ > Select Theme                                        Preview                                                        │
+│ > Виберіть тему                                       Попередній перегляд                                            │
 │ ▲                                                     ┌────────────────────────────────────────────────────────────┐ │
 │    1. ANSI Dark                                       │                                                            │ │
 │    2. Atom One Dark                                   │ 1 # function                                               │ │
@@ -13,13 +13,13 @@ exports[`Initial Theme Selection > should default to a dark theme when terminal 
 │    6. GitHub Dark                                     │ 5         a, b = b, a + b                                  │ │
 │    7. Holiday Dark                                    │ 6     return a                                             │ │
 │    8. Shades Of Purple Dark                           │                                                            │ │
-│    9. ANSI Light Light (Incompatible)                 │ 1 - print("Hello, " + name)                                │ │
-│   10. Ayu Light Light (Incompatible)                  │ 1 + print(f"Hello, {name}!")                               │ │
-│   11. Default Light Light (Incompatible)              │                                                            │ │
-│   12. GitHub Light Light (Incompatible)               └────────────────────────────────────────────────────────────┘ │
+│    9. ANSI Light Light (Несумісна)                    │ 1 - print("Hello, " + name)                                │ │
+│   10. Ayu Light Light (Несумісна)                     │ 1 + print(f"Hello, {name}!")                               │ │
+│   11. Default Light Light (Несумісна)                 │                                                            │ │
+│   12. GitHub Light Light (Несумісна)                  └────────────────────────────────────────────────────────────┘ │
 │ ▼                                                                                                                    │
 │                                                                                                                      │
-│ (Use Enter to select, Tab to configure scope, Esc to close)                                                          │
+│ (Enter — вибрати, Tab — налаштувати область, Esc — закрити)                                                          │
 │                                                                                                                      │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯"
 `;
@@ -27,7 +27,7 @@ exports[`Initial Theme Selection > should default to a dark theme when terminal 
 exports[`Initial Theme Selection > should default to a light theme when terminal background is light and no theme is set 1`] = `
 "╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │                                                                                                                      │
-│ > Select Theme                                        Preview                                                        │
+│ > Виберіть тему                                       Попередній перегляд                                            │
 │ ▲                                                     ┌────────────────────────────────────────────────────────────┐ │
 │    1. ANSI Light Light                                │                                                            │ │
 │    2. Ayu Light Light                                 │ 1 # function                                               │ │
@@ -35,15 +35,15 @@ exports[`Initial Theme Selection > should default to a light theme when terminal
 │    4. GitHub Light Light                              │ 3     a, b = 0, 1                                          │ │
 │    5. Google Code Light                               │ 4     for _ in range(n):                                   │ │
 │    6. Xcode Light                                     │ 5         a, b = b, a + b                                  │ │
-│    7. ANSI Dark (Incompatible)                        │ 6     return a                                             │ │
-│    8. Atom One Dark (Incompatible)                    │                                                            │ │
-│    9. Ayu Dark (Incompatible)                         │ 1 - print("Hello, " + name)                                │ │
-│   10. Default Dark (Incompatible)                     │ 1 + print(f"Hello, {name}!")                               │ │
-│   11. Dracula Dark (Incompatible)                     │                                                            │ │
-│   12. GitHub Dark (Incompatible)                      └────────────────────────────────────────────────────────────┘ │
+│    7. ANSI Dark (Несумісна)                           │ 6     return a                                             │ │
+│    8. Atom One Dark (Несумісна)                       │                                                            │ │
+│    9. Ayu Dark (Несумісна)                            │ 1 - print("Hello, " + name)                                │ │
+│   10. Default Dark (Несумісна)                        │ 1 + print(f"Hello, {name}!")                               │ │
+│   11. Dracula Dark (Несумісна)                        │                                                            │ │
+│   12. GitHub Dark (Несумісна)                         └────────────────────────────────────────────────────────────┘ │
 │ ▼                                                                                                                    │
 │                                                                                                                      │
-│ (Use Enter to select, Tab to configure scope, Esc to close)                                                          │
+│ (Enter — вибрати, Tab — налаштувати область, Esc — закрити)                                                          │
 │                                                                                                                      │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯"
 `;
@@ -51,7 +51,7 @@ exports[`Initial Theme Selection > should default to a light theme when terminal
 exports[`Initial Theme Selection > should use the theme from settings even if terminal background suggests a different theme type 1`] = `
 "╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │                                                                                                                      │
-│ > Select Theme                                        Preview                                                        │
+│ > Виберіть тему                                       Попередній перегляд                                            │
 │ ▲                                                     ┌────────────────────────────────────────────────────────────┐ │
 │ ●  1. ANSI Dark                                       │                                                            │ │
 │    2. Atom One Dark                                   │ 1 # function                                               │ │
@@ -61,13 +61,13 @@ exports[`Initial Theme Selection > should use the theme from settings even if te
 │    6. GitHub Dark                                     │ 5         a, b = b, a + b                                  │ │
 │    7. Holiday Dark                                    │ 6     return a                                             │ │
 │    8. Shades Of Purple Dark                           │                                                            │ │
-│    9. ANSI Light Light (Incompatible)                 │ 1 - print("Hello, " + name)                                │ │
-│   10. Ayu Light Light (Incompatible)                  │ 1 + print(f"Hello, {name}!")                               │ │
-│   11. Default Light Light (Incompatible)              │                                                            │ │
-│   12. GitHub Light Light (Incompatible)               └────────────────────────────────────────────────────────────┘ │
+│    9. ANSI Light Light (Несумісна)                    │ 1 - print("Hello, " + name)                                │ │
+│   10. Ayu Light Light (Несумісна)                     │ 1 + print(f"Hello, {name}!")                               │ │
+│   11. Default Light Light (Несумісна)                 │                                                            │ │
+│   12. GitHub Light Light (Несумісна)                  └────────────────────────────────────────────────────────────┘ │
 │ ▼                                                                                                                    │
 │                                                                                                                      │
-│ (Use Enter to select, Tab to configure scope, Esc to close)                                                          │
+│ (Enter — вибрати, Tab — налаштувати область, Esc — закрити)                                                          │
 │                                                                                                                      │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯"
 `;
@@ -80,7 +80,7 @@ exports[`ThemeDialog Snapshots > should render correctly in scope selector mode 
 │   2. Workspace Settings                                                                                              │
 │   3. System Settings                                                                                                 │
 │                                                                                                                      │
-│ (Use Enter to apply scope, Tab to select theme, Esc to close)                                                        │
+│ (Enter — застосувати область, Tab — вибрати тему, Esc — закрити)                                                     │
 │                                                                                                                      │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯"
 `;
@@ -88,7 +88,7 @@ exports[`ThemeDialog Snapshots > should render correctly in scope selector mode 
 exports[`ThemeDialog Snapshots > should render correctly in theme selection mode 1`] = `
 "╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │                                                                                                                      │
-│ > Select Theme                                        Preview                                                        │
+│ > Виберіть тему                                       Попередній перегляд                                            │
 │ ▲                                                     ┌────────────────────────────────────────────────────────────┐ │
 │    1. ANSI Dark                                       │                                                            │ │
 │    2. ANSI Light Light                                │ 1 # function                                               │ │
@@ -104,7 +104,7 @@ exports[`ThemeDialog Snapshots > should render correctly in theme selection mode
 │   12. Holiday Dark                                    └────────────────────────────────────────────────────────────┘ │
 │ ▼                                                                                                                    │
 │                                                                                                                      │
-│ (Use Enter to select, Tab to configure scope, Esc to close)                                                          │
+│ (Enter — вибрати, Tab — налаштувати область, Esc — закрити)                                                          │
 │                                                                                                                      │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯"
 `;

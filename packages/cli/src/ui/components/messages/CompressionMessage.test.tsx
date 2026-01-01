@@ -30,7 +30,7 @@ describe('<CompressionMessage />', () => {
       const { lastFrame, unmount } = render(<CompressionMessage {...props} />);
       const output = lastFrame();
 
-      expect(output).toContain('Compressing chat history');
+      expect(output).toContain('Стиснення історії чату');
       unmount();
     });
   });
@@ -48,7 +48,7 @@ describe('<CompressionMessage />', () => {
 
       expect(output).toContain('✦');
       expect(output).toContain(
-        'Chat history compressed from 100 to 50 tokens.',
+        'Історію чату стиснуто з 100 до 50 токенів.',
       );
       unmount();
     });
@@ -73,7 +73,7 @@ describe('<CompressionMessage />', () => {
 
         expect(output).toContain('✦');
         expect(output).toContain(
-          `compressed from ${original} to ${newTokens} tokens`,
+          `стиснуто з ${original} до ${newTokens} токенів`,
         );
         expect(output).not.toContain('Skipping compression');
         expect(output).not.toContain('did not reduce size');
@@ -96,7 +96,7 @@ describe('<CompressionMessage />', () => {
 
       expect(output).toContain('✦');
       expect(output).toContain(
-        'Compression was not beneficial for this history size.',
+        'Стиснення не було корисним для такого об’єму історії.',
       );
       unmount();
     });
@@ -113,7 +113,7 @@ describe('<CompressionMessage />', () => {
       const output = lastFrame();
 
       expect(output).toContain(
-        'Compression was not beneficial for this history size.',
+        'Стиснення не було корисним для такого об’єму історії.',
       );
       unmount();
     });
@@ -125,17 +125,17 @@ describe('<CompressionMessage />', () => {
         {
           original: 200,
           new: 80,
-          expected: 'compressed from 200 to 80 tokens',
+          expected: 'стиснуто з 200 до 80 токенів',
         },
         {
           original: 500,
           new: 150,
-          expected: 'compressed from 500 to 150 tokens',
+          expected: 'стиснуто з 500 до 150 токенів',
         },
         {
           original: 1500,
           new: 400,
-          expected: 'compressed from 1500 to 400 tokens',
+          expected: 'стиснуто з 1500 до 400 токенів',
         },
       ];
 
@@ -177,9 +177,9 @@ describe('<CompressionMessage />', () => {
         const output = lastFrame();
 
         expect(output).toContain(
-          'Compression was not beneficial for this history size.',
+          'Стиснення не було корисним для такого об’єму історії.',
         );
-        expect(output).not.toContain('compressed from');
+        expect(output).not.toContain('стиснуто з');
         unmount();
       }
     });
@@ -204,9 +204,9 @@ describe('<CompressionMessage />', () => {
         );
         const output = lastFrame();
 
-        expect(output).toContain('compression did not reduce size');
-        expect(output).not.toContain('compressed from');
-        expect(output).not.toContain('Compression was not beneficial');
+        expect(output).toContain('стиснення історії чату не зменшило об’єм');
+        expect(output).not.toContain('стиснуто з');
+        expect(output).not.toContain('Стиснення не було корисним');
         unmount();
       }
     });

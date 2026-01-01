@@ -3,16 +3,17 @@
 exports[`ApiAuthDialog > renders correctly 1`] = `
 "╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
 │                                                                                                  │
-│ Enter Gemini API Key                                                                             │
+│ Введіть ключ Gemini API                                                                          │
 │                                                                                                  │
-│ Please enter your Gemini API key. It will be securely stored in your system keychain.            │
-│ You can get an API key from https://aistudio.google.com/app/apikey                               │
+│ Будь ласка, введіть ваш ключ Gemini API. Він буде надійно збережений у системному сховищі        │
+│ ключів.                                                                                          │
+│ Ви можете отримати ключ API за адресою https://aistudio.google.com/app/apikey                    │
 │                                                                                                  │
 │ ╭──────────────────────────────────────────────────────────────────────────────────────────────╮ │
-│ │ Paste your API key here                                                                      │ │
+│ │ Вставте ваш ключ API сюти                                                                    │ │
 │ ╰──────────────────────────────────────────────────────────────────────────────────────────────╯ │
 │                                                                                                  │
-│ (Press Enter to submit, Esc to cancel, Ctrl+C to clear stored key)                               │
+│ (Натисніть Enter для підтвердження, Esc для скасування, Ctrl+C для очищення збереженого ключа)   │
 │                                                                                                  │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯"
 `;

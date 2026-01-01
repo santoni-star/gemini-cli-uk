@@ -29,7 +29,7 @@ describe('<ChatList />', () => {
 
   it('renders correctly with no chats', () => {
     const { lastFrame, unmount } = render(<ChatList chats={[]} />);
-    expect(lastFrame()).toContain('No saved conversation checkpoints found.');
+    expect(lastFrame()).toContain('Збережених розмов не знайдено.');
     expect(lastFrame()).toMatchSnapshot();
     unmount();
   });
@@ -44,7 +44,7 @@ describe('<ChatList />', () => {
     const { lastFrame, unmount } = render(
       <ChatList chats={mockChatsWithInvalidDate} />,
     );
-    expect(lastFrame()).toContain('(Invalid Date)');
+    expect(lastFrame()).toContain('(Некоректна дата)');
     expect(lastFrame()).toMatchSnapshot();
     unmount();
   });

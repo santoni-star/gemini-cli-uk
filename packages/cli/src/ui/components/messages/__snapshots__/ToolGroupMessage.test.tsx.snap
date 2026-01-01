@@ -35,28 +35,11 @@ exports[`<ToolGroupMessage /> > Confirmation Handling > renders confirmation wit
 │ Test result                                                                  │
 │ Do you want to proceed?                                                      │
 │                                                                              │
-│ Do you want to proceed?                                                      │
+│ Бажаєте продовжити?                                                          │
 │                                                                              │
-│ ● 1. Allow once                                                              │
-│   2. Allow for this session                                                  │
-│   3. No, suggest changes (esc)                                               │
-│                                                                              │
-╰──────────────────────────────────────────────────────────────────────────────╯"
-`;
-
-exports[`<ToolGroupMessage /> > Confirmation Handling > renders confirmation with permanent approval enabled 1`] = `
-"╭──────────────────────────────────────────────────────────────────────────────╮
-│ ?  confirm-tool A tool for testing                                         ← │
-│                                                                              │
-│ Test result                                                                  │
-│ Do you want to proceed?                                                      │
-│                                                                              │
-│ Do you want to proceed?                                                      │
-│                                                                              │
-│ ● 1. Allow once                                                              │
-│   2. Allow for this session                                                  │
-│   3. Allow for all future sessions                                           │
-│   4. No, suggest changes (esc)                                               │
+│ ● 1. Дозволити один раз                                                      │
+│   2. Дозволити для цієї сесії                                                │
+│   3. Ні, запропонувати зміни (esc)                                           │
 │                                                                              │
 ╰──────────────────────────────────────────────────────────────────────────────╯"
 `;
@@ -68,11 +51,11 @@ exports[`<ToolGroupMessage /> > Confirmation Handling > shows confirmation dialo
 │ Test result                                                                  │
 │ Confirm first tool                                                           │
 │                                                                              │
-│ Do you want to proceed?                                                      │
+│ Бажаєте продовжити?                                                          │
 │                                                                              │
-│ ● 1. Allow once                                                              │
-│   2. Allow for this session                                                  │
-│   3. No, suggest changes (esc)                                               │
+│ ● 1. Дозволити один раз                                                      │
+│   2. Дозволити для цієї сесії                                                │
+│   3. Ні, запропонувати зміни (esc)                                           │
 │                                                                              │
 │                                                                              │
 │ ?  second-confirm A tool for testing                                         │
@@ -151,11 +134,11 @@ exports[`<ToolGroupMessage /> > Golden Snapshots > renders tool call awaiting co
 │ Test result                                                                  │
 │ Are you sure you want to proceed?                                            │
 │                                                                              │
-│ Do you want to proceed?                                                      │
+│ Бажаєте продовжити?                                                          │
 │                                                                              │
-│ ● 1. Allow once                                                              │
-│   2. Allow for this session                                                  │
-│   3. No, suggest changes (esc)                                               │
+│ ● 1. Дозволити один раз                                                      │
+│   2. Дозволити для цієї сесії                                                │
+│   3. Ні, запропонувати зміни (esc)                                           │
 │                                                                              │
 ╰──────────────────────────────────────────────────────────────────────────────╯"
 `;

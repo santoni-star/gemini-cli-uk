@@ -47,12 +47,12 @@ exports[`<OverflowProvider><DiffRenderer /></OverflowProvider> > with useAlterna
 exports[`<OverflowProvider><DiffRenderer /></OverflowProvider> > with useAlternateBuffer = false > should handle diff with only header and no changes 1`] = `
 "╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │                                                                                                                      │
-│ No changes detected.                                                                                                 │
+│ Змін не виявлено.                                                                                                    │
 │                                                                                                                      │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯"
 `;
 
-exports[`<OverflowProvider><DiffRenderer /></OverflowProvider> > with useAlternateBuffer = false > should handle empty diff content 1`] = `"No diff content."`;
+exports[`<OverflowProvider><DiffRenderer /></OverflowProvider> > with useAlternateBuffer = false > should handle empty diff content 1`] = `"Вміст diff порожній."`;
 
 exports[`<OverflowProvider><DiffRenderer /></OverflowProvider> > with useAlternateBuffer = false > should not render a gap indicator for small gaps (<= MAX_CONTEXT_LINES_WITHOUT_GAP) 1`] = `
 " 1   context line 1
@@ -140,12 +140,12 @@ exports[`<OverflowProvider><DiffRenderer /></OverflowProvider> > with useAlterna
 exports[`<OverflowProvider><DiffRenderer /></OverflowProvider> > with useAlternateBuffer = true > should handle diff with only header and no changes 1`] = `
 "╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
 │                                                                                                                      │
-│ No changes detected.                                                                                                 │
+│ Змін не виявлено.                                                                                                    │
 │                                                                                                                      │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯"
 `;
 
-exports[`<OverflowProvider><DiffRenderer /></OverflowProvider> > with useAlternateBuffer = true > should handle empty diff content 1`] = `"No diff content."`;
+exports[`<OverflowProvider><DiffRenderer /></OverflowProvider> > with useAlternateBuffer = true > should handle empty diff content 1`] = `"Вміст diff порожній."`;
 
 exports[`<OverflowProvider><DiffRenderer /></OverflowProvider> > with useAlternateBuffer = true > should not render a gap indicator for small gaps (<= MAX_CONTEXT_LINES_WITHOUT_GAP) 1`] = `
 " 1   context line 1

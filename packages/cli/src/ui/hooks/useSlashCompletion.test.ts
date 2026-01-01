@@ -264,7 +264,7 @@ describe('useSlashCompletion', () => {
             {
               label: 'memory',
               value: 'memory',
-              description: 'Manage memory',
+              description: "Команди для роботи з пам'яттю",
               commandKind: CommandKind.BUILT_IN,
             },
           ]);
@@ -310,7 +310,7 @@ describe('useSlashCompletion', () => {
             label: 'stats',
             value: 'stats',
             description:
-              'check session stats. Usage: /stats [session|model|tools]',
+              'Статистика використання',
             commandKind: CommandKind.BUILT_IN,
           },
         ]);
@@ -600,10 +600,10 @@ describe('useSlashCompletion', () => {
       const slashCommands = [
         createTestCommand({
           name: 'memory',
-          description: 'Manage memory',
+          description: "Команди для роботи з пам'яттю",
           subCommands: [
-            createTestCommand({ name: 'show', description: 'Show memory' }),
-            createTestCommand({ name: 'add', description: 'Add to memory' }),
+            createTestCommand({ name: 'show', description: "Показати поточний вміст пам'яти" }),
+            createTestCommand({ name: 'add', description: "Додати вміст до пам'яти" }),
           ],
         }),
       ];
@@ -624,13 +624,13 @@ describe('useSlashCompletion', () => {
             {
               label: 'show',
               value: 'show',
-              description: 'Show memory',
+              description: "Показати поточний вміст пам'яти",
               commandKind: CommandKind.BUILT_IN,
             },
             {
               label: 'add',
               value: 'add',
-              description: 'Add to memory',
+              description: "Додати вміст до пам'яти",
               commandKind: CommandKind.BUILT_IN,
             },
           ]),
@@ -643,9 +643,9 @@ describe('useSlashCompletion', () => {
       const slashCommands = [
         createTestCommand({
           name: 'memory',
-          description: 'Manage memory',
+          description: "Команди для роботи з пам'яттю",
           subCommands: [
-            createTestCommand({ name: 'show', description: 'Show memory' }),
+            createTestCommand({ name: 'show', description: "Показати поточний вміст пам'яти" }),
           ],
         }),
         createTestCommand({
@@ -671,7 +671,7 @@ describe('useSlashCompletion', () => {
             {
               label: 'memory',
               value: 'memory',
-              description: 'Manage memory',
+              description: "Команди для роботи з пам'яттю",
               commandKind: CommandKind.BUILT_IN,
             },
             {
@@ -689,10 +689,10 @@ describe('useSlashCompletion', () => {
       const slashCommands = [
         createTestCommand({
           name: 'memory',
-          description: 'Manage memory',
+          description: "Команди для роботи з пам'яттю",
           subCommands: [
-            createTestCommand({ name: 'show', description: 'Show memory' }),
-            createTestCommand({ name: 'add', description: 'Add to memory' }),
+            createTestCommand({ name: 'show', description: "Показати поточний вміст пам'яти" }),
+            createTestCommand({ name: 'add', description: "Додати вміст до пам'яти" }),
           ],
         }),
       ];
@@ -712,13 +712,13 @@ describe('useSlashCompletion', () => {
             {
               label: 'show',
               value: 'show',
-              description: 'Show memory',
+              description: "Показати поточний вміст пам'яти",
               commandKind: CommandKind.BUILT_IN,
             },
             {
               label: 'add',
               value: 'add',
-              description: 'Add to memory',
+              description: "Додати вміст до пам'яти",
               commandKind: CommandKind.BUILT_IN,
             },
           ]),
@@ -731,10 +731,10 @@ describe('useSlashCompletion', () => {
       const slashCommands = [
         createTestCommand({
           name: 'memory',
-          description: 'Manage memory',
+          description: "Команди для роботи з пам'яттю",
           subCommands: [
-            createTestCommand({ name: 'show', description: 'Show memory' }),
-            createTestCommand({ name: 'add', description: 'Add to memory' }),
+            createTestCommand({ name: 'show', description: "Показати поточний вміст пам'яти" }),
+            createTestCommand({ name: 'add', description: "Додати вміст до пам'яти" }),
           ],
         }),
       ];
@@ -752,7 +752,7 @@ describe('useSlashCompletion', () => {
           {
             label: 'add',
             value: 'add',
-            description: 'Add to memory',
+            description: "Додати вміст до пам'яти",
             commandKind: CommandKind.BUILT_IN,
           },
         ]);

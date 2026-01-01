@@ -3,10 +3,10 @@
 exports[`SettingsDialog > Initial Rendering > should render settings list with visual indicators 1`] = `
 "╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
 │                                                                                                  │
-│  > Settings                                                                                      │
+│  > Налаштування                                                                                  │
 │                                                                                                  │
 │ ╭──────────────────────────────────────────────────────────────────────────────────────────────╮ │
-│ │ Search to filter                                                                             │ │
+│ │ Пошук для фільтрації                                                                         │ │
 │ ╰──────────────────────────────────────────────────────────────────────────────────────────────╯ │
 │                                                                                                  │
 │  ▲                                                                                               │
@@ -14,7 +14,11 @@ exports[`SettingsDialog > Initial Rendering > should render settings list with v
 │                                                                                                  │
 │    Vim Mode                                             false                                    │
 │                                                                                                  │
+│    Language                                             Українська                               │
+│                                                                                                  │
 │    Disable Auto Update                                  false                                    │
+│                                                                                                  │
+│    Command Name                                         gemini-ua                                │
 │                                                                                                  │
 │    Enable Prompt Completion                             false                                    │
 │                                                                                                  │
@@ -22,18 +26,14 @@ exports[`SettingsDialog > Initial Rendering > should render settings list with v
 │                                                                                                  │
 │    Enable Session Cleanup                               false                                    │
 │                                                                                                  │
-│    Output Format                                        Text                                     │
-│                                                                                                  │
-│    Hide Window Title                                    false                                    │
-│                                                                                                  │
 │  ▼                                                                                               │
 │                                                                                                  │
-│    Apply To                                                                                      │
-│  ● User Settings                                                                                 │
-│    Workspace Settings                                                                            │
-│    System Settings                                                                               │
+│    Застосувати до                                                                                │
+│  ● Налаштування користувача                                                                      │
+│    Налаштування робочого простору                                                                │
+│    Системні налаштування                                                                         │
 │                                                                                                  │
-│  (Use Enter to select, Tab to change focus, Esc to close)                                        │
+│  (Enter — вибрати, Tab — змінити фокус, Esc — закрити)                                           │
 │                                                                                                  │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯"
 `;
@@ -41,10 +41,10 @@ exports[`SettingsDialog > Initial Rendering > should render settings list with v
 exports[`SettingsDialog > Snapshot Tests > should render 'accessibility settings enabled' correctly 1`] = `
 "╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
 │                                                                                                  │
-│  > Settings                                                                                      │
+│  > Налаштування                                                                                  │
 │                                                                                                  │
 │ ╭──────────────────────────────────────────────────────────────────────────────────────────────╮ │
-│ │ Search to filter                                                                             │ │
+│ │ Пошук для фільтрації                                                                         │ │
 │ ╰──────────────────────────────────────────────────────────────────────────────────────────────╯ │
 │                                                                                                  │
 │  ▲                                                                                               │
@@ -52,7 +52,11 @@ exports[`SettingsDialog > Snapshot Tests > should render 'accessibility settings
 │                                                                                                  │
 │    Vim Mode                                             true*                                    │
 │                                                                                                  │
+│    Language                                             Українська                               │
+│                                                                                                  │
 │    Disable Auto Update                                  false                                    │
+│                                                                                                  │
+│    Command Name                                         gemini-ua                                │
 │                                                                                                  │
 │    Enable Prompt Completion                             false                                    │
 │                                                                                                  │
@@ -60,18 +64,14 @@ exports[`SettingsDialog > Snapshot Tests > should render 'accessibility settings
 │                                                                                                  │
 │    Enable Session Cleanup                               false                                    │
 │                                                                                                  │
-│    Output Format                                        Text                                     │
-│                                                                                                  │
-│    Hide Window Title                                    false                                    │
-│                                                                                                  │
 │  ▼                                                                                               │
 │                                                                                                  │
-│    Apply To                                                                                      │
-│  ● User Settings                                                                                 │
-│    Workspace Settings                                                                            │
-│    System Settings                                                                               │
+│    Застосувати до                                                                                │
+│  ● Налаштування користувача                                                                      │
+│    Налаштування робочого простору                                                                │
+│    Системні налаштування                                                                         │
 │                                                                                                  │
-│  (Use Enter to select, Tab to change focus, Esc to close)                                        │
+│  (Enter — вибрати, Tab — змінити фокус, Esc — закрити)                                           │
 │                                                                                                  │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯"
 `;
@@ -79,10 +79,10 @@ exports[`SettingsDialog > Snapshot Tests > should render 'accessibility settings
 exports[`SettingsDialog > Snapshot Tests > should render 'all boolean settings disabled' correctly 1`] = `
 "╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
 │                                                                                                  │
-│  > Settings                                                                                      │
+│  > Налаштування                                                                                  │
 │                                                                                                  │
 │ ╭──────────────────────────────────────────────────────────────────────────────────────────────╮ │
-│ │ Search to filter                                                                             │ │
+│ │ Пошук для фільтрації                                                                         │ │
 │ ╰──────────────────────────────────────────────────────────────────────────────────────────────╯ │
 │                                                                                                  │
 │  ▲                                                                                               │
@@ -90,7 +90,11 @@ exports[`SettingsDialog > Snapshot Tests > should render 'all boolean settings d
 │                                                                                                  │
 │    Vim Mode                                             false*                                   │
 │                                                                                                  │
+│    Language                                             Українська                               │
+│                                                                                                  │
 │    Disable Auto Update                                  false*                                   │
+│                                                                                                  │
+│    Command Name                                         gemini-ua                                │
 │                                                                                                  │
 │    Enable Prompt Completion                             false*                                   │
 │                                                                                                  │
@@ -98,18 +102,14 @@ exports[`SettingsDialog > Snapshot Tests > should render 'all boolean settings d
 │                                                                                                  │
 │    Enable Session Cleanup                               false                                    │
 │                                                                                                  │
-│    Output Format                                        Text                                     │
-│                                                                                                  │
-│    Hide Window Title                                    false*                                   │
-│                                                                                                  │
 │  ▼                                                                                               │
 │                                                                                                  │
-│    Apply To                                                                                      │
-│  ● User Settings                                                                                 │
-│    Workspace Settings                                                                            │
-│    System Settings                                                                               │
+│    Застосувати до                                                                                │
+│  ● Налаштування користувача                                                                      │
+│    Налаштування робочого простору                                                                │
+│    Системні налаштування                                                                         │
 │                                                                                                  │
-│  (Use Enter to select, Tab to change focus, Esc to close)                                        │
+│  (Enter — вибрати, Tab — змінити фокус, Esc — закрити)                                           │
 │                                                                                                  │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯"
 `;
@@ -117,10 +117,10 @@ exports[`SettingsDialog > Snapshot Tests > should render 'all boolean settings d
 exports[`SettingsDialog > Snapshot Tests > should render 'default state' correctly 1`] = `
 "╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
 │                                                                                                  │
-│  > Settings                                                                                      │
+│  > Налаштування                                                                                  │
 │                                                                                                  │
 │ ╭──────────────────────────────────────────────────────────────────────────────────────────────╮ │
-│ │ Search to filter                                                                             │ │
+│ │ Пошук для фільтрації                                                                         │ │
 │ ╰──────────────────────────────────────────────────────────────────────────────────────────────╯ │
 │                                                                                                  │
 │  ▲                                                                                               │
@@ -128,7 +128,11 @@ exports[`SettingsDialog > Snapshot Tests > should render 'default state' correct
 │                                                                                                  │
 │    Vim Mode                                             false                                    │
 │                                                                                                  │
+│    Language                                             Українська                               │
+│                                                                                                  │
 │    Disable Auto Update                                  false                                    │
+│                                                                                                  │
+│    Command Name                                         gemini-ua                                │
 │                                                                                                  │
 │    Enable Prompt Completion                             false                                    │
 │                                                                                                  │
@@ -136,18 +140,14 @@ exports[`SettingsDialog > Snapshot Tests > should render 'default state' correct
 │                                                                                                  │
 │    Enable Session Cleanup                               false                                    │
 │                                                                                                  │
-│    Output Format                                        Text                                     │
-│                                                                                                  │
-│    Hide Window Title                                    false                                    │
-│                                                                                                  │
 │  ▼                                                                                               │
 │                                                                                                  │
-│    Apply To                                                                                      │
-│  ● User Settings                                                                                 │
-│    Workspace Settings                                                                            │
-│    System Settings                                                                               │
+│    Застосувати до                                                                                │
+│  ● Налаштування користувача                                                                      │
+│    Налаштування робочого простору                                                                │
+│    Системні налаштування                                                                         │
 │                                                                                                  │
-│  (Use Enter to select, Tab to change focus, Esc to close)                                        │
+│  (Enter — вибрати, Tab — змінити фокус, Esc — закрити)                                           │
 │                                                                                                  │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯"
 `;
@@ -155,10 +155,10 @@ exports[`SettingsDialog > Snapshot Tests > should render 'default state' correct
 exports[`SettingsDialog > Snapshot Tests > should render 'file filtering settings configured' correctly 1`] = `
 "╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
 │                                                                                                  │
-│  > Settings                                                                                      │
+│  > Налаштування                                                                                  │
 │                                                                                                  │
 │ ╭──────────────────────────────────────────────────────────────────────────────────────────────╮ │
-│ │ Search to filter                                                                             │ │
+│ │ Пошук для фільтрації                                                                         │ │
 │ ╰──────────────────────────────────────────────────────────────────────────────────────────────╯ │
 │                                                                                                  │
 │  ▲                                                                                               │
@@ -166,7 +166,11 @@ exports[`SettingsDialog > Snapshot Tests > should render 'file filtering setting
 │                                                                                                  │
 │    Vim Mode                                             false                                    │
 │                                                                                                  │
+│    Language                                             Українська                               │
+│                                                                                                  │
 │    Disable Auto Update                                  false                                    │
+│                                                                                                  │
+│    Command Name                                         gemini-ua                                │
 │                                                                                                  │
 │    Enable Prompt Completion                             false                                    │
 │                                                                                                  │
@@ -174,18 +178,14 @@ exports[`SettingsDialog > Snapshot Tests > should render 'file filtering setting
 │                                                                                                  │
 │    Enable Session Cleanup                               false                                    │
 │                                                                                                  │
-│    Output Format                                        Text                                     │
-│                                                                                                  │
-│    Hide Window Title                                    false                                    │
-│                                                                                                  │
 │  ▼                                                                                               │
 │                                                                                                  │
-│    Apply To                                                                                      │
-│  ● User Settings                                                                                 │
-│    Workspace Settings                                                                            │
-│    System Settings                                                                               │
+│    Застосувати до                                                                                │
+│  ● Налаштування користувача                                                                      │
+│    Налаштування робочого простору                                                                │
+│    Системні налаштування                                                                         │
 │                                                                                                  │
-│  (Use Enter to select, Tab to change focus, Esc to close)                                        │
+│  (Enter — вибрати, Tab — змінити фокус, Esc — закрити)                                           │
 │                                                                                                  │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯"
 `;
@@ -193,10 +193,10 @@ exports[`SettingsDialog > Snapshot Tests > should render 'file filtering setting
 exports[`SettingsDialog > Snapshot Tests > should render 'focused on scope selector' correctly 1`] = `
 "╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
 │                                                                                                  │
-│    Settings                                                                                      │
+│    Налаштування                                                                                  │
 │                                                                                                  │
 │ ╭──────────────────────────────────────────────────────────────────────────────────────────────╮ │
-│ │ Search to filter                                                                             │ │
+│ │ Пошук для фільтрації                                                                         │ │
 │ ╰──────────────────────────────────────────────────────────────────────────────────────────────╯ │
 │                                                                                                  │
 │  ▲                                                                                               │
@@ -204,7 +204,11 @@ exports[`SettingsDialog > Snapshot Tests > should render 'focused on scope selec
 │                                                                                                  │
 │    Vim Mode                                             false                                    │
 │                                                                                                  │
+│    Language                                             Українська                               │
+│                                                                                                  │
 │    Disable Auto Update                                  false                                    │
+│                                                                                                  │
+│    Command Name                                         gemini-ua                                │
 │                                                                                                  │
 │    Enable Prompt Completion                             false                                    │
 │                                                                                                  │
@@ -212,18 +216,14 @@ exports[`SettingsDialog > Snapshot Tests > should render 'focused on scope selec
 │                                                                                                  │
 │    Enable Session Cleanup                               false                                    │
 │                                                                                                  │
-│    Output Format                                        Text                                     │
-│                                                                                                  │
-│    Hide Window Title                                    false                                    │
-│                                                                                                  │
 │  ▼                                                                                               │
 │                                                                                                  │
-│  > Apply To                                                                                      │
-│  ● 1. User Settings                                                                              │
-│    2. Workspace Settings                                                                         │
-│    3. System Settings                                                                            │
+│  > Застосувати до                                                                                │
+│  ● 1. Налаштування користувача                                                                   │
+│    2. Налаштування робочого простору                                                             │
+│    3. Системні налаштування                                                                      │
 │                                                                                                  │
-│  (Use Enter to select, Tab to change focus, Esc to close)                                        │
+│  (Enter — вибрати, Tab — змінити фокус, Esc — закрити)                                           │
 │                                                                                                  │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯"
 `;
@@ -231,10 +231,10 @@ exports[`SettingsDialog > Snapshot Tests > should render 'focused on scope selec
 exports[`SettingsDialog > Snapshot Tests > should render 'mixed boolean and number settings' correctly 1`] = `
 "╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
 │                                                                                                  │
-│  > Settings                                                                                      │
+│  > Налаштування                                                                                  │
 │                                                                                                  │
 │ ╭──────────────────────────────────────────────────────────────────────────────────────────────╮ │
-│ │ Search to filter                                                                             │ │
+│ │ Пошук для фільтрації                                                                         │ │
 │ ╰──────────────────────────────────────────────────────────────────────────────────────────────╯ │
 │                                                                                                  │
 │  ▲                                                                                               │
@@ -242,7 +242,11 @@ exports[`SettingsDialog > Snapshot Tests > should render 'mixed boolean and numb
 │                                                                                                  │
 │    Vim Mode                                             false*                                   │
 │                                                                                                  │
+│    Language                                             Українська                               │
+│                                                                                                  │
 │    Disable Auto Update                                  true*                                    │
+│                                                                                                  │
+│    Command Name                                         gemini-ua                                │
 │                                                                                                  │
 │    Enable Prompt Completion                             false                                    │
 │                                                                                                  │
@@ -250,18 +254,14 @@ exports[`SettingsDialog > Snapshot Tests > should render 'mixed boolean and numb
 │                                                                                                  │
 │    Enable Session Cleanup                               false                                    │
 │                                                                                                  │
-│    Output Format                                        Text                                     │
-│                                                                                                  │
-│    Hide Window Title                                    false*                                   │
-│                                                                                                  │
 │  ▼                                                                                               │
 │                                                                                                  │
-│    Apply To                                                                                      │
-│  ● User Settings                                                                                 │
-│    Workspace Settings                                                                            │
-│    System Settings                                                                               │
+│    Застосувати до                                                                                │
+│  ● Налаштування користувача                                                                      │
+│    Налаштування робочого простору                                                                │
+│    Системні налаштування                                                                         │
 │                                                                                                  │
-│  (Use Enter to select, Tab to change focus, Esc to close)                                        │
+│  (Enter — вибрати, Tab — змінити фокус, Esc — закрити)                                           │
 │                                                                                                  │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯"
 `;
@@ -269,10 +269,10 @@ exports[`SettingsDialog > Snapshot Tests > should render 'mixed boolean and numb
 exports[`SettingsDialog > Snapshot Tests > should render 'tools and security settings' correctly 1`] = `
 "╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
 │                                                                                                  │
-│  > Settings                                                                                      │
+│  > Налаштування                                                                                  │
 │                                                                                                  │
 │ ╭──────────────────────────────────────────────────────────────────────────────────────────────╮ │
-│ │ Search to filter                                                                             │ │
+│ │ Пошук для фільтрації                                                                         │ │
 │ ╰──────────────────────────────────────────────────────────────────────────────────────────────╯ │
 │                                                                                                  │
 │  ▲                                                                                               │
@@ -280,7 +280,11 @@ exports[`SettingsDialog > Snapshot Tests > should render 'tools and security set
 │                                                                                                  │
 │    Vim Mode                                             false                                    │
 │                                                                                                  │
+│    Language                                             Українська                               │
+│                                                                                                  │
 │    Disable Auto Update                                  false                                    │
+│                                                                                                  │
+│    Command Name                                         gemini-ua                                │
 │                                                                                                  │
 │    Enable Prompt Completion                             false                                    │
 │                                                                                                  │
@@ -288,18 +292,14 @@ exports[`SettingsDialog > Snapshot Tests > should render 'tools and security set
 │                                                                                                  │
 │    Enable Session Cleanup                               false                                    │
 │                                                                                                  │
-│    Output Format                                        Text                                     │
-│                                                                                                  │
-│    Hide Window Title                                    false                                    │
-│                                                                                                  │
 │  ▼                                                                                               │
 │                                                                                                  │
-│    Apply To                                                                                      │
-│  ● User Settings                                                                                 │
-│    Workspace Settings                                                                            │
-│    System Settings                                                                               │
+│    Застосувати до                                                                                │
+│  ● Налаштування користувача                                                                      │
+│    Налаштування робочого простору                                                                │
+│    Системні налаштування                                                                         │
 │                                                                                                  │
-│  (Use Enter to select, Tab to change focus, Esc to close)                                        │
+│  (Enter — вибрати, Tab — змінити фокус, Esc — закрити)                                           │
 │                                                                                                  │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯"
 `;
@@ -307,10 +307,10 @@ exports[`SettingsDialog > Snapshot Tests > should render 'tools and security set
 exports[`SettingsDialog > Snapshot Tests > should render 'various boolean settings enabled' correctly 1`] = `
 "╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
 │                                                                                                  │
-│  > Settings                                                                                      │
+│  > Налаштування                                                                                  │
 │                                                                                                  │
 │ ╭──────────────────────────────────────────────────────────────────────────────────────────────╮ │
-│ │ Search to filter                                                                             │ │
+│ │ Пошук для фільтрації                                                                         │ │
 │ ╰──────────────────────────────────────────────────────────────────────────────────────────────╯ │
 │                                                                                                  │
 │  ▲                                                                                               │
@@ -318,7 +318,11 @@ exports[`SettingsDialog > Snapshot Tests > should render 'various boolean settin
 │                                                                                                  │
 │    Vim Mode                                             true*                                    │
 │                                                                                                  │
+│    Language                                             Українська                               │
+│                                                                                                  │
 │    Disable Auto Update                                  true*                                    │
+│                                                                                                  │
+│    Command Name                                         gemini-ua                                │
 │                                                                                                  │
 │    Enable Prompt Completion                             true*                                    │
 │                                                                                                  │
@@ -326,18 +330,14 @@ exports[`SettingsDialog > Snapshot Tests > should render 'various boolean settin
 │                                                                                                  │
 │    Enable Session Cleanup                               false                                    │
 │                                                                                                  │
-│    Output Format                                        Text                                     │
-│                                                                                                  │
-│    Hide Window Title                                    true*                                    │
-│                                                                                                  │
 │  ▼                                                                                               │
 │                                                                                                  │
-│    Apply To                                                                                      │
-│  ● User Settings                                                                                 │
-│    Workspace Settings                                                                            │
-│    System Settings                                                                               │
+│    Застосувати до                                                                                │
+│  ● Налаштування користувача                                                                      │
+│    Налаштування робочого простору                                                                │
+│    Системні налаштування                                                                         │
 │                                                                                                  │
-│  (Use Enter to select, Tab to change focus, Esc to close)                                        │
+│  (Enter — вибрати, Tab — змінити фокус, Esc — закрити)                                           │
 │                                                                                                  │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯"
 `;

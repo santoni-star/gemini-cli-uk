@@ -11,11 +11,11 @@ exports[`AlternateBufferQuittingDisplay > renders with active and pending tool m
  ███░      ░░█████████
 ░░░         ░░░░░░░░░
 
-Tips for getting started:
-1. Ask questions, edit files, or run commands.
-2. Be specific for the best results.
-3. Create GEMINI.md files to customize your interactions with Gemini.
-4. /help for more information.
+Поради для початку роботи:
+1. Ставте запитання, редагуйте файли або виконуйте команди.
+2. Будьте конкретними для отримання найкращих результатів.
+3. Створюйте файли GEMINI.md, щоб налаштувати вашу взаємодію з Gemini.
+4. /help для отримання додаткової інформації.
 ╭─────────────────────────────────────────────────────────────────────────────╮
 │ ✓  tool1 Description for tool 1                                             │
 │                                                                             │
@@ -41,11 +41,11 @@ exports[`AlternateBufferQuittingDisplay > renders with empty history and no pend
  ███░      ░░█████████
 ░░░         ░░░░░░░░░
 
-Tips for getting started:
-1. Ask questions, edit files, or run commands.
-2. Be specific for the best results.
-3. Create GEMINI.md files to customize your interactions with Gemini.
-4. /help for more information."
+Поради для початку роботи:
+1. Ставте запитання, редагуйте файли або виконуйте команди.
+2. Будьте конкретними для отримання найкращих результатів.
+3. Створюйте файли GEMINI.md, щоб налаштувати вашу взаємодію з Gemini.
+4. /help для отримання додаткової інформації."
 `;
 
 exports[`AlternateBufferQuittingDisplay > renders with history but no pending items > with_history_no_pending 1`] = `
@@ -59,11 +59,11 @@ exports[`AlternateBufferQuittingDisplay > renders with history but no pending it
  ███░      ░░█████████
 ░░░         ░░░░░░░░░
 
-Tips for getting started:
-1. Ask questions, edit files, or run commands.
-2. Be specific for the best results.
-3. Create GEMINI.md files to customize your interactions with Gemini.
-4. /help for more information.
+Поради для початку роботи:
+1. Ставте запитання, редагуйте файли або виконуйте команди.
+2. Будьте конкретними для отримання найкращих результатів.
+3. Створюйте файли GEMINI.md, щоб налаштувати вашу взаємодію з Gemini.
+4. /help для отримання додаткової інформації.
 ╭─────────────────────────────────────────────────────────────────────────────╮
 │ ✓  tool1 Description for tool 1                                             │
 │                                                                             │
@@ -85,11 +85,11 @@ exports[`AlternateBufferQuittingDisplay > renders with pending items but no hist
  ███░      ░░█████████
 ░░░         ░░░░░░░░░
 
-Tips for getting started:
-1. Ask questions, edit files, or run commands.
-2. Be specific for the best results.
-3. Create GEMINI.md files to customize your interactions with Gemini.
-4. /help for more information.
+Поради для початку роботи:
+1. Ставте запитання, редагуйте файли або виконуйте команди.
+2. Будьте конкретними для отримання найкращих результатів.
+3. Створюйте файли GEMINI.md, щоб налаштувати вашу взаємодію з Gemini.
+4. /help для отримання додаткової інформації.
 ╭─────────────────────────────────────────────────────────────────────────────╮
 │ o  tool3 Description for tool 3                                             │
 │                                                                             │
@@ -107,11 +107,11 @@ exports[`AlternateBufferQuittingDisplay > renders with user and gemini messages 
  ███░      ░░█████████
 ░░░         ░░░░░░░░░
 
-Tips for getting started:
-1. Ask questions, edit files, or run commands.
-2. Be specific for the best results.
-3. Create GEMINI.md files to customize your interactions with Gemini.
-4. /help for more information.
+Поради для початку роботи:
+1. Ставте запитання, редагуйте файли або виконуйте команди.
+2. Будьте конкретними для отримання найкращих результатів.
+3. Створюйте файли GEMINI.md, щоб налаштувати вашу взаємодію з Gemini.
+4. /help для отримання додаткової інформації.
 
 > Hello Gemini
 

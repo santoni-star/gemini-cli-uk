@@ -10,7 +10,7 @@ exports[`<ModelStatsDisplay /> > should display a single model correctly 1`] = `
 │  API                                                                                             │
 │  Requests                    1                                                                   │
 │  Errors                      0 (0.0%)                                                            │
-│  Avg Latency                 100ms                                                               │
+│  Avg Latency                 100мс                                                               │
 │  Tokens                                                                                          │
 │  Total                       30                                                                  │
 │    ↳ Input                   5                                                                   │
@@ -32,7 +32,7 @@ exports[`<ModelStatsDisplay /> > should display conditional rows if at least one
 │  API                                                                                             │
 │  Requests                    1                                1                                  │
 │  Errors                      0 (0.0%)                         0 (0.0%)                           │
-│  Avg Latency                 100ms                            50ms                               │
+│  Avg Latency                 100мс                            50мс                               │
 │  Tokens                                                                                          │
 │  Total                       30                               15                                 │
 │    ↳ Input                   5                                5                                  │
@@ -54,7 +54,7 @@ exports[`<ModelStatsDisplay /> > should display stats for multiple models correc
 │  API                                                                                             │
 │  Requests                    10                               20                                 │
 │  Errors                      1 (10.0%)                        2 (10.0%)                          │
-│  Avg Latency                 100ms                            25ms                               │
+│  Avg Latency                 100мс                            25мс                               │
 │  Tokens                                                                                          │
 │  Total                       300                              600                                │
 │    ↳ Input                   50                               100                                │
@@ -76,7 +76,7 @@ exports[`<ModelStatsDisplay /> > should handle large values without wrapping or 
 │  API                                                                                             │
 │  Requests                    999,999,999                                                         │
 │  Errors                      123,456,789 (12.3%)                                                 │
-│  Avg Latency                 0ms                                                                 │
+│  Avg Latency                 0мс                                                                 │
 │  Tokens                                                                                          │
 │  Total                       999,999,999                                                         │
 │    ↳ Input                   864,197,532                                                         │
@@ -98,7 +98,7 @@ exports[`<ModelStatsDisplay /> > should handle models with long names (gemini-3-
 │  API                                                                         │
 │  Requests                    10                     20                       │
 │  Errors                      0 (0.0%)               0 (0.0%)                 │
-│  Avg Latency                 200ms                  50ms                     │
+│  Avg Latency                 200мс                  50мс                     │
 │  Tokens                                                                      │
 │  Total                       6,000                  12,000                   │
 │    ↳ Input                   1,000                  2,000                    │
@@ -120,7 +120,7 @@ exports[`<ModelStatsDisplay /> > should not display conditional rows if no model
 │  API                                                                                             │
 │  Requests                    1                                                                   │
 │  Errors                      0 (0.0%)                                                            │
-│  Avg Latency                 100ms                                                               │
+│  Avg Latency                 100мс                                                               │
 │  Tokens                                                                                          │
 │  Total                       30                                                                  │
 │    ↳ Input                   10                                                                  │

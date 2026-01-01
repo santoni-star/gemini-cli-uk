@@ -178,7 +178,7 @@ describe('App', () => {
 
       const { lastFrame } = renderWithProviders(<App />, uiState);
 
-      expect(lastFrame()).toContain(`Press Ctrl+${key} again to exit.`);
+      expect(lastFrame()).toContain(`Натисніть Ctrl+${key} ще раз, щоб вийти.`);
     },
   );
 

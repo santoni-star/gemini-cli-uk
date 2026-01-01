@@ -2,12 +2,12 @@
 
 exports[`LoopDetectionConfirmation > renders correctly 1`] = `
 " ╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
- │ ?  A potential loop was detected                                                                 │
+ │ ?  Виявлено потенційне зациклення                                                                │
  │                                                                                                  │
- │ This can happen due to repetitive tool calls or other model behavior. Do you want to keep loop   │
- │ detection enabled or disable it for this session?                                                │
+ │ Це може статися через повторювані виклики інструментів або іншу поведінку моделі. Бажаєте        │
+ │ залишити виявлення зациклення увімкненим чи вимкнути його для цієї сесії?                        │
  │                                                                                                  │
- │ ● 1. Keep loop detection enabled (esc)                                                           │
- │   2. Disable loop detection for this session                                                     │
+ │ ● 1. Залишити виявлення зациклення увімкненим (esc)                                              │
+ │   2. Вимкнути виявлення зациклення для цієї сесії                                                │
  ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯"
 `;

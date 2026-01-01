@@ -27,7 +27,7 @@ describe('AboutBox', () => {
   it('renders with required props', () => {
     const { lastFrame } = render(<AboutBox {...defaultProps} />);
     const output = lastFrame();
-    expect(output).toContain('About Gemini CLI');
+    expect(output).toContain('Про Gemini CLI');
     expect(output).toContain('1.0.0');
     expect(output).toContain('mock-commit-hash');
     expect(output).toContain('gemini-pro');
@@ -37,9 +37,9 @@ describe('AboutBox', () => {
   });
 
   it.each([
-    ['userEmail', 'test@example.com', 'User Email'],
-    ['gcpProject', 'my-project', 'GCP Project'],
-    ['ideClient', 'vscode', 'IDE Client'],
+    ['userEmail', 'test@example.com', 'Email користувача'],
+    ['gcpProject', 'my-project', 'Проект GCP'],
+    ['ideClient', 'vscode', 'Клієнт IDE'],
   ])('renders optional prop %s', (prop, value, label) => {
     const props = { ...defaultProps, [prop]: value };
     const { lastFrame } = render(<AboutBox {...props} />);

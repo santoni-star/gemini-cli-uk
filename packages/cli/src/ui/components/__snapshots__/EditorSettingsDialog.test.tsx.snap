@@ -3,16 +3,16 @@
 exports[`EditorSettingsDialog > renders correctly 1`] = `
 "╭──────────────────────────────────────────────────────────────────────────────────────────────────╮
 │                                                                                                  │
-│ > Select Editor                              Editor Preference                                   │
+│ > Виберіть редактор                          Налаштування редактора                              │
 │ ● 1. VS Code                                                                                     │
-│   2. Vim                                     These editors are currently supported. Please note  │
-│                                              that some editors cannot be used in sandbox mode.   │
-│   Apply To                                                                                       │
-│ ● 1. User Settings                           Your preferred editor is: VS Code.                  │
-│   2. Workspace Settings                                                                          │
+│   2. Vim                                     Ці редактори наразі підтримуються. Зверніть увагу,  │
+│                                              що деякі з них не можна використовувати в режимі    │
+│   Застосувати до                             пісочниці.                                          │
+│ ● 1. Налаштування користувача                                                                    │
+│   2. Налаштування робочого простору          Ваш бажаний редактор: VS Code.                      │
 │                                                                                                  │
-│ (Use Enter to select, Tab to change                                                              │
-│ focus, Esc to close)                                                                             │
+│ (Enter — вибрати, Tab — змінити фокус,                                                           │
+│ Esc — закрити)                                                                                   │
 │                                                                                                  │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯"
 `;

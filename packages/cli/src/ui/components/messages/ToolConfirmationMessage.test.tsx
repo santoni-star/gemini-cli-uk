@@ -218,7 +218,7 @@ describe('ToolConfirmationMessage', () => {
         },
       );
 
-      expect(lastFrame()).toContain('Allow for all future sessions');
+      expect(lastFrame()).toContain('Дозволити для всіх наступних сесій');
     });
   });
 });

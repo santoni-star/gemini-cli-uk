@@ -22,7 +22,7 @@ exports[`SuggestionsDisplay > highlights active item 1`] = `
 
 exports[`SuggestionsDisplay > renders MCP tag for MCP prompts 1`] = `" mcp-tool [MCP]"`;
 
-exports[`SuggestionsDisplay > renders loading state 1`] = `" Loading suggestions..."`;
+exports[`SuggestionsDisplay > renders loading state 1`] = `" Завантаження пропозицій..."`;
 
 exports[`SuggestionsDisplay > renders suggestions list 1`] = `
 " command1   Description 1

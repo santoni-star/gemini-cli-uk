@@ -1,96 +1,96 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`McpStatus > renders correctly when discovery is in progress 1`] = `
-"⏳ MCP servers are starting up (0 initializing)...
-Note: First startup may take longer. Tool availability will update automatically.
+"⏳ Сервери MCP запускаються (0 ініціалізуються)...
+Примітка: перший запуск може зайняти більше часу. Доступність інструментів оновиться автоматично.
 
-Configured MCP servers:
+Налаштовані сервери MCP:
 
-🟢 server-1 - Ready (1 tool)
+🟢 server-1 - Готовий (1 інструмент)
 A test server
-  Tools:
+  Інструменти:
   - tool-1
     A test tool
 "
 `;
 
 exports[`McpStatus > renders correctly with a blocked server 1`] = `
-"Configured MCP servers:
+"Налаштовані сервери MCP:
 
-🟢 server-1 - Ready (1 tool)
+🟢 server-1 - Готовий (1 інструмент)
 A test server
-  Tools:
+  Інструменти:
   - tool-1
     A test tool
 
-🔴 server-1 (from test-extension) - Blocked
+🔴 server-1 (з test-extension) - Заблоковано
 "
 `;
 
 exports[`McpStatus > renders correctly with a connected server 1`] = `
-"Configured MCP servers:
+"Налаштовані сервери MCP:
 
-🟢 server-1 - Ready (1 tool)
+🟢 server-1 - Готовий (1 інструмент)
 A test server
-  Tools:
+  Інструменти:
   - tool-1
     A test tool
 "
 `;
 
 exports[`McpStatus > renders correctly with a connecting server 1`] = `
-"Configured MCP servers:
+"Налаштовані сервери MCP:
 
-🟢 server-1 - Ready (1 tool)
+🟢 server-1 - Готовий (1 інструмент)
 A test server
-  Tools:
+  Інструменти:
   - tool-1
     A test tool
 "
 `;
 
 exports[`McpStatus > renders correctly with a disconnected server 1`] = `
-"Configured MCP servers:
+"Налаштовані сервери MCP:
 
-🟢 server-1 - Ready (1 tool)
+🟢 server-1 - Готовий (1 інструмент)
 A test server
-  Tools:
+  Інструменти:
   - tool-1
     A test tool
 "
 `;
 
 exports[`McpStatus > renders correctly with authenticated OAuth status 1`] = `
-"Configured MCP servers:
+"Налаштовані сервери MCP:
 
-🟢 server-1 - Ready (1 tool) (OAuth)
+🟢 server-1 - Готовий (1 інструмент) (OAuth)
 A test server
-  Tools:
+  Інструменти:
   - tool-1
     A test tool
 "
 `;
 
 exports[`McpStatus > renders correctly with expired OAuth status 1`] = `
-"Configured MCP servers:
+"Налаштовані сервери MCP:
 
-🟢 server-1 - Ready (1 tool) (OAuth expired)
+🟢 server-1 - Готовий (1 інструмент) (OAuth прострочено)
 A test server
-  Tools:
+  Інструменти:
   - tool-1
     A test tool
 "
 `;
 
 exports[`McpStatus > renders correctly with parametersJsonSchema 1`] = `
-"Configured MCP servers:
+"Налаштовані сервери MCP:
 
-🟢 server-1 - Ready (1 tool)
+🟢 server-1 - Готовий (1 інструмент)
 A test server
-  Tools:
+  Інструменти:
   - tool-1
     A test tool
-      Parameters:
+      Параметри:
       {
         "type": "object",
         "properties": {
@@ -103,42 +103,42 @@ A test server
 `;
 
 exports[`McpStatus > renders correctly with prompts 1`] = `
-"Configured MCP servers:
+"Налаштовані сервери MCP:
 
-🟢 server-1 - Ready (1 tool, 1 prompt)
+🟢 server-1 - Готовий (1 інструмент, 1 підказка)
 A test server
-  Tools:
+  Інструменти:
   - tool-1
     A test tool
-  Prompts:
+  Підказки:
   - prompt-1
     A test prompt
 "
 `;
 
 exports[`McpStatus > renders correctly with resources 1`] = `
-"Configured MCP servers:
+"Налаштовані сервери MCP:
 
-🟢 server-1 - Ready (1 tool, 1 resource)
+🟢 server-1 - Готовий (1 інструмент, 1 ресурс)
 A test server
-  Tools:
+  Інструменти:
   - tool-1
     A test tool
-  Resources:
+  Ресурси:
   - resource-1 (file:///tmp/resource-1.txt)
     A test resource
 "
 `;
 
 exports[`McpStatus > renders correctly with schema enabled 1`] = `
-"Configured MCP servers:
+"Налаштовані сервери MCP:
 
-🟢 server-1 - Ready (1 tool)
+🟢 server-1 - Готовий (1 інструмент)
 A test server
-  Tools:
+  Інструменти:
   - tool-1
     A test tool
-      Parameters:
+      Параметри:
       {
         "type": "object",
         "properties": {
@@ -151,11 +151,11 @@ A test server
 `;
 
 exports[`McpStatus > renders correctly with unauthenticated OAuth status 1`] = `
-"Configured MCP servers:
+"Налаштовані сервери MCP:
 
-🟢 server-1 - Ready (1 tool) (OAuth not authenticated)
+🟢 server-1 - Готовий (1 інструмент) (OAuth не авторизовано)
 A test server
-  Tools:
+  Інструменти:
   - tool-1
     A test tool
 "

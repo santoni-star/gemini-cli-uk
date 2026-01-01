@@ -58,7 +58,7 @@ describe('<ExtensionsList />', () => {
   it('should render "No extensions installed." if there are no extensions', () => {
     mockUIState(new Map());
     const { lastFrame, unmount } = render(<ExtensionsList extensions={[]} />);
-    expect(lastFrame()).toContain('No extensions installed.');
+    expect(lastFrame()).toContain('Розширень не встановлено.');
     unmount();
   });
 
@@ -68,9 +68,9 @@ describe('<ExtensionsList />', () => {
       <ExtensionsList extensions={mockExtensions} />,
     );
     const output = lastFrame();
-    expect(output).toContain('ext-one (v1.0.0) - active');
-    expect(output).toContain('ext-two (v2.1.0) - active');
-    expect(output).toContain('ext-disabled (v3.0.0) - disabled');
+    expect(output).toContain('ext-one (v1.0.0) - активне');
+    expect(output).toContain('ext-two (v2.1.0) - активне');
+    expect(output).toContain('ext-disabled (v3.0.0) - вимкнено');
     unmount();
   });
 
@@ -79,38 +79,38 @@ describe('<ExtensionsList />', () => {
     const { lastFrame, unmount } = render(
       <ExtensionsList extensions={[mockExtensions[0]]} />,
     );
-    expect(lastFrame()).toContain('(unknown state)');
+    expect(lastFrame()).toContain('(невідомий статус)');
     unmount();
   });
 
   const stateTestCases = [
     {
       state: ExtensionUpdateState.CHECKING_FOR_UPDATES,
-      expectedText: '(checking for updates)',
+      expectedText: '(перевірка оновлень)',
     },
     {
       state: ExtensionUpdateState.UPDATING,
-      expectedText: '(updating)',
+      expectedText: '(оновлення)',
     },
     {
       state: ExtensionUpdateState.UPDATE_AVAILABLE,
-      expectedText: '(update available)',
+      expectedText: '(доступне оновлення)',
     },
     {
       state: ExtensionUpdateState.UPDATED_NEEDS_RESTART,
-      expectedText: '(updated, needs restart)',
+      expectedText: '(оновлено, потрібен перезапуск)',
     },
     {
       state: ExtensionUpdateState.UPDATED,
-      expectedText: '(updated)',
+      expectedText: '(оновлено)',
     },
     {
       state: ExtensionUpdateState.ERROR,
-      expectedText: '(error)',
+      expectedText: '(помилка)',
     },
     {
       state: ExtensionUpdateState.UP_TO_DATE,
-      expectedText: '(up to date)',
+      expectedText: '(остання версія)',
     },
   ];
 
@@ -149,7 +149,7 @@ describe('<ExtensionsList />', () => {
       <ExtensionsList extensions={[extensionWithSettings]} />,
     );
     const output = lastFrame();
-    expect(output).toContain('settings:');
+    expect(output).toContain('налаштування:');
     expect(output).toContain('- sensitiveApiKey: ***');
     expect(output).toContain('- maxTokens: 1000');
     unmount();

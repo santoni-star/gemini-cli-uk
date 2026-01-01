@@ -89,7 +89,7 @@ describe('getInstallationInfo', () => {
     expect(info.packageManager).toBe(PackageManager.UNKNOWN);
     expect(info.isGlobal).toBe(false);
     expect(info.updateMessage).toBe(
-      'Running from a local git clone. Please update with "git pull".',
+      'Запущено з локального клону git. Будь ласка, оновіть за допомогою "git pull".',
     );
   });
 
@@ -102,7 +102,7 @@ describe('getInstallationInfo', () => {
 
     expect(info.packageManager).toBe(PackageManager.NPX);
     expect(info.isGlobal).toBe(false);
-    expect(info.updateMessage).toBe('Running via npx, update not applicable.');
+    expect(info.updateMessage).toBe('Запущено через npx, оновлення не застосовується.');
   });
 
   it('should detect running via pnpx', () => {
@@ -114,7 +114,7 @@ describe('getInstallationInfo', () => {
 
     expect(info.packageManager).toBe(PackageManager.PNPX);
     expect(info.isGlobal).toBe(false);
-    expect(info.updateMessage).toBe('Running via pnpx, update not applicable.');
+    expect(info.updateMessage).toBe('Запущено через pnpx, оновлення не застосовується.');
   });
 
   it('should detect running via bunx', () => {
@@ -129,7 +129,7 @@ describe('getInstallationInfo', () => {
 
     expect(info.packageManager).toBe(PackageManager.BUNX);
     expect(info.isGlobal).toBe(false);
-    expect(info.updateMessage).toBe('Running via bunx, update not applicable.');
+    expect(info.updateMessage).toBe('Запущено через bunx, оновлення не застосовується.');
   });
 
   it('should detect Homebrew installation via execSync', () => {
@@ -150,7 +150,7 @@ describe('getInstallationInfo', () => {
     expect(info.packageManager).toBe(PackageManager.HOMEBREW);
     expect(info.isGlobal).toBe(true);
     expect(info.updateMessage).toBe(
-      'Installed via Homebrew. Please update with "brew upgrade gemini-cli".',
+      'Встановлено через Homebrew. Будь ласка, оновіть за допомогою "brew upgrade gemini-cli".',
     );
   });
 
@@ -188,10 +188,10 @@ describe('getInstallationInfo', () => {
     expect(info.packageManager).toBe(PackageManager.PNPM);
     expect(info.isGlobal).toBe(true);
     expect(info.updateCommand).toBe('pnpm add -g @google/gemini-cli@latest');
-    expect(info.updateMessage).toContain('Attempting to automatically update');
+    expect(info.updateMessage).toContain('Спроба автоматичного оновлення...');
 
     const infoDisabled = getInstallationInfo(projectRoot, true);
-    expect(infoDisabled.updateMessage).toContain('Please run pnpm add');
+    expect(infoDisabled.updateMessage).toContain('Будь ласка, запустіть pnpm add');
   });
 
   it('should detect global yarn installation', () => {
@@ -208,10 +208,10 @@ describe('getInstallationInfo', () => {
     expect(info.updateCommand).toBe(
       'yarn global add @google/gemini-cli@latest',
     );
-    expect(info.updateMessage).toContain('Attempting to automatically update');
+    expect(info.updateMessage).toContain('Спроба автоматичного оновлення...');
 
     const infoDisabled = getInstallationInfo(projectRoot, true);
-    expect(infoDisabled.updateMessage).toContain('Please run yarn global add');
+    expect(infoDisabled.updateMessage).toContain('Будь ласка, запустіть yarn global add');
   });
 
   it('should detect global bun installation', () => {
@@ -226,10 +226,10 @@ describe('getInstallationInfo', () => {
     expect(info.packageManager).toBe(PackageManager.BUN);
     expect(info.isGlobal).toBe(true);
     expect(info.updateCommand).toBe('bun add -g @google/gemini-cli@latest');
-    expect(info.updateMessage).toContain('Attempting to automatically update');
+    expect(info.updateMessage).toContain('Спроба автоматичного оновлення...');
 
     const infoDisabled = getInstallationInfo(projectRoot, true);
-    expect(infoDisabled.updateMessage).toContain('Please run bun add');
+    expect(infoDisabled.updateMessage).toContain('Будь ласка, запустіть bun add');
   });
 
   it('should detect local installation and identify yarn from lockfile', () => {
@@ -247,7 +247,7 @@ describe('getInstallationInfo', () => {
 
     expect(info.packageManager).toBe(PackageManager.YARN);
     expect(info.isGlobal).toBe(false);
-    expect(info.updateMessage).toContain('Locally installed');
+    expect(info.updateMessage).toContain('Встановлено локально.');
   });
 
   it('should detect local installation and identify pnpm from lockfile', () => {
@@ -311,9 +311,9 @@ describe('getInstallationInfo', () => {
     expect(info.packageManager).toBe(PackageManager.NPM);
     expect(info.isGlobal).toBe(true);
     expect(info.updateCommand).toBe('npm install -g @google/gemini-cli@latest');
-    expect(info.updateMessage).toContain('Attempting to automatically update');
+    expect(info.updateMessage).toContain('Спроба автоматичного оновлення...');
 
     const infoDisabled = getInstallationInfo(projectRoot, true);
-    expect(infoDisabled.updateMessage).toContain('Please run npm install');
+    expect(infoDisabled.updateMessage).toContain('Будь ласка, запустіть npm install');
   });
 });

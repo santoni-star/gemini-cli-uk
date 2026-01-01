@@ -74,8 +74,8 @@ describe('<StatsDisplay />', () => {
     const { lastFrame } = renderWithMockedStats(zeroMetrics);
     const output = lastFrame();
 
-    expect(output).toContain('Performance');
-    expect(output).toContain('Interaction Summary');
+    expect(output).toContain('Продуктивність');
+    expect(output).toContain('Підсумок взаємодії');
     expect(output).toMatchSnapshot();
   });
 
@@ -166,9 +166,9 @@ describe('<StatsDisplay />', () => {
     const { lastFrame } = renderWithMockedStats(metrics);
     const output = lastFrame();
 
-    expect(output).toContain('Performance');
-    expect(output).toContain('Interaction Summary');
-    expect(output).toContain('User Agreement');
+    expect(output).toContain('Продуктивність');
+    expect(output).toContain('Підсумок взаємодії');
+    expect(output).toContain('Згода користувача');
     expect(output).toContain('gemini-2.5-pro');
     expect(output).toMatchSnapshot();
   });
@@ -207,9 +207,9 @@ describe('<StatsDisplay />', () => {
       const { lastFrame } = renderWithMockedStats(metrics);
       const output = lastFrame();
 
-      expect(output).toContain('Interaction Summary');
-      expect(output).toContain('Success Rate');
-      expect(output).not.toContain('User Agreement');
+      expect(output).toContain('Підсумок взаємодії');
+      expect(output).toContain('Показник успіху');
+      expect(output).not.toContain('Згода користувача');
       expect(output).toMatchSnapshot();
     });
 
@@ -325,7 +325,7 @@ describe('<StatsDisplay />', () => {
       const { lastFrame } = renderWithMockedStats(metrics);
       const output = lastFrame();
 
-      expect(output).toContain('Code Changes:');
+      expect(output).toContain('Зміни в коді:');
       expect(output).toContain('+42');
       expect(output).toContain('-18');
       expect(output).toMatchSnapshot();
@@ -351,7 +351,7 @@ describe('<StatsDisplay />', () => {
       const { lastFrame } = renderWithMockedStats(metrics);
       const output = lastFrame();
 
-      expect(output).not.toContain('Code Changes:');
+      expect(output).not.toContain('Зміни в коді:');
       expect(output).toMatchSnapshot();
     });
   });
@@ -362,7 +362,7 @@ describe('<StatsDisplay />', () => {
     it('renders the default title when no title prop is provided', () => {
       const { lastFrame } = renderWithMockedStats(zeroMetrics);
       const output = lastFrame();
-      expect(output).toContain('Session Stats');
+      expect(output).toContain('Статистика сесії');
       expect(output).not.toContain('Agent powering down');
       expect(output).toMatchSnapshot();
     });
@@ -444,9 +444,9 @@ describe('<StatsDisplay />', () => {
       );
       const output = lastFrame();
 
-      expect(output).toContain('Usage left');
+      expect(output).toContain('Залишок ліміту');
       expect(output).toContain('75.0%');
-      expect(output).toContain('(Resets in 1h 30m)');
+      expect(output).toContain('(Скидання через 1г 30хв)');
       expect(output).toMatchSnapshot();
 
       vi.useRealTimers();
@@ -492,7 +492,7 @@ describe('<StatsDisplay />', () => {
       expect(output).toContain('gemini-2.5-flash');
       expect(output).toContain('-'); // for requests
       expect(output).toContain('50.0%');
-      expect(output).toContain('(Resets in 2h)');
+      expect(output).toContain('(Скидання через 2г)');
       expect(output).toMatchSnapshot();
 
       vi.useRealTimers();

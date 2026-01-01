@@ -73,7 +73,7 @@ describe('<LoadingIndicator />', () => {
     const output = lastFrame();
     expect(output).toContain('MockRespondingSpinner');
     expect(output).toContain('Loading...');
-    expect(output).toContain('(esc to cancel, 5s)');
+    expect(output).toContain('(esc — скасувати, 5с)');
   });
 
   it('should render spinner (static), phrase but no time/cancel when streamingState is WaitingForConfirmation', () => {
@@ -114,7 +114,7 @@ describe('<LoadingIndicator />', () => {
       <LoadingIndicator {...props} />,
       StreamingState.Responding,
     );
-    expect(lastFrame()).toContain('(esc to cancel, 1m)');
+    expect(lastFrame()).toContain('(esc — скасувати, 1хв)');
     unmount();
   });
 
@@ -127,7 +127,7 @@ describe('<LoadingIndicator />', () => {
       <LoadingIndicator {...props} />,
       StreamingState.Responding,
     );
-    expect(lastFrame()).toContain('(esc to cancel, 2m 5s)');
+    expect(lastFrame()).toContain('(esc — скасувати, 2хв 5с)');
     unmount();
   });
 
@@ -160,7 +160,7 @@ describe('<LoadingIndicator />', () => {
     let output = lastFrame();
     expect(output).toContain('MockRespondingSpinner');
     expect(output).toContain('Now Responding');
-    expect(output).toContain('(esc to cancel, 2s)');
+    expect(output).toContain('(esc — скасувати, 2с)');
 
     // Transition to WaitingForConfirmation
     rerender(
@@ -174,8 +174,8 @@ describe('<LoadingIndicator />', () => {
     output = lastFrame();
     expect(output).toContain('⠏');
     expect(output).toContain('Please Confirm');
-    expect(output).not.toContain('(esc to cancel)');
-    expect(output).not.toContain(', 15s');
+    expect(output).not.toContain('(esc — скасувати)');
+    expect(output).not.toContain(', 15с');
 
     // Transition back to Idle
     rerender(
@@ -272,7 +272,7 @@ describe('<LoadingIndicator />', () => {
       // Check for single line output
       expect(output?.includes('\n')).toBe(false);
       expect(output).toContain('Loading...');
-      expect(output).toContain('(esc to cancel, 5s)');
+      expect(output).toContain('(esc — скасувати, 5с)');
       expect(output).toContain('Right');
       unmount();
     });
@@ -295,8 +295,8 @@ describe('<LoadingIndicator />', () => {
       expect(lines).toHaveLength(3);
       if (lines) {
         expect(lines[0]).toContain('Loading...');
-        expect(lines[0]).not.toContain('(esc to cancel, 5s)');
-        expect(lines[1]).toContain('(esc to cancel, 5s)');
+        expect(lines[0]).not.toContain('(esc — скасувати, 5с)');
+        expect(lines[1]).toContain('(esc — скасувати, 5с)');
         expect(lines[2]).toContain('Right');
       }
       unmount();

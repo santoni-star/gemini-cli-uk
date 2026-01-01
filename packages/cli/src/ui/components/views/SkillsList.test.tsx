@@ -22,13 +22,13 @@ describe('SkillsList Component', () => {
     );
     const output = lastFrame();
 
-    expect(output).toContain('Available Agent Skills:');
+    expect(output).toContain('Доступні навички агента:');
     expect(output).toContain('skill1');
     expect(output).toContain('description 1');
     expect(output).toContain('skill3');
     expect(output).toContain('description 3');
 
-    expect(output).toContain('Disabled Skills:');
+    expect(output).toContain('Вимкнені навички:');
     expect(output).toContain('skill2');
     expect(output).toContain('description 2');
 
@@ -57,7 +57,7 @@ describe('SkillsList Component', () => {
     );
     const output = lastFrame();
 
-    expect(output).toContain('No skills available');
+    expect(output).toContain('Немає доступних навичок');
 
     unmount();
   });
@@ -69,8 +69,8 @@ describe('SkillsList Component', () => {
     );
     const output = lastFrame();
 
-    expect(output).toContain('Available Agent Skills:');
-    expect(output).not.toContain('Disabled Skills:');
+    expect(output).toContain('Доступні навички агента:');
+    expect(output).not.toContain('Вимкнені навички:');
 
     unmount();
   });
@@ -82,8 +82,8 @@ describe('SkillsList Component', () => {
     );
     const output = lastFrame();
 
-    expect(output).not.toContain('Available Agent Skills:');
-    expect(output).toContain('Disabled Skills:');
+    expect(output).not.toContain('Доступні навички агента:');
+    expect(output).toContain('Вимкнені навички:');
 
     unmount();
   });
