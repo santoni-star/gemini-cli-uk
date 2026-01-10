@@ -1,6 +1,6 @@
 {
   "name": "@santoni/gemini-ua",
-  "version": "0.24.0-ua.5",
+  "version": "0.24.0-ua.6",
   "engines": {
     "node": ">=20.0.0"
   },
@@ -23,7 +23,6 @@
     "generate": "node scripts/generate-git-commit-info.js",
     "build": "node scripts/build.js",
     "bundle": "npm run generate && node esbuild.config.js && node scripts/copy_bundle_assets.js",
-    "prepare": "husky",
     "postinstall": "node -e \"try { require('husky').install() } catch (e) {}\""
   },
   "overrides": {
